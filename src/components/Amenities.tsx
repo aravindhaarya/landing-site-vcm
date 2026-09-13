@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Sparkles, Check } from 'lucide-react';
+import React from 'react';
+import { Sparkles, CheckCircle } from 'lucide-react';
 import { AMENITIES } from '../data/banquetData';
-import { Amenity } from '../types';
+import { MahalAmenity } from '../types';
 
 export const Amenities: React.FC = () => {
   return (
@@ -9,58 +9,49 @@ export const Amenities: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#F1EBE4] text-[#4A1C40] text-xs uppercase tracking-widest font-bold mb-3 border border-[#C5A059]/30">
+        <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#F9F8F4] text-[#4A1C40] text-xs uppercase tracking-widest font-bold border border-[#C5A059]/40">
             <Sparkles className="w-3.5 h-3.5 text-[#C5A059]" />
-            <span>Grand Palatial Standards</span>
+            <span>Comprehensive Hall Features</span>
           </div>
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-[#4A1C40] font-normal mb-3">
-            Every Luxury Included As Standard
+          <h2 className="font-serif text-3xl sm:text-4xl text-[#4A1C40] font-bold">
+            Amenities
           </h2>
-          <p className="text-base text-[#666666] font-serif italic">
-            From porte-cochère valet and private green rooms to commercial finishing kitchens and high-fidelity sound.
+          <p className="text-xs sm:text-sm text-[#666666]">
+            Every comfort meticulously arranged for flawless celebrations and guest delight.
           </p>
         </div>
 
-        {/* Amenities Cards Grid with theme border and gold accents */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {AMENITIES.map((amenity: Amenity) => (
+        {/* 17 Amenities Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {AMENITIES.map((amenity: MahalAmenity, index: number) => (
             <div
               key={amenity.id}
-              className="bg-[#F9F8F4] p-6 border border-[#E8E2D8] hover:border-[#C5A059] transition-all shadow-xs hover:shadow-md flex flex-col justify-between"
-              style={{
-                borderTopLeftRadius: '24px',
-                borderBottomRightRadius: '24px',
-                borderTopRightRadius: '4px',
-                borderBottomLeftRadius: '4px',
-              }}
+              className="bg-[#F9F8F4] p-5 border border-[#E8E2D8] hover:border-[#C5A059] transition-all shadow-xs hover:shadow-md flex items-start gap-4 rounded-xl group"
             >
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  <div className="w-10 h-10 rounded-full bg-[#4A1C40] text-[#C5A059] flex items-center justify-center shadow-xs">
-                    <Sparkles className="w-4 h-4" />
-                  </div>
-                  {amenity.badge && (
-                    <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[#FFFFFF] border border-[#C5A059] text-[#4A1C40]">
-                      {amenity.badge}
-                    </span>
-                  )}
-                </div>
+              {/* Icon Image */}
+              <div className="w-12 h-12 shrink-0 rounded-lg bg-white border border-[#C5A059]/40 flex items-center justify-center p-2 group-hover:scale-105 transition-transform shadow-2xs">
+                <img
+                  src={amenity.iconImg}
+                  alt={amenity.title}
+                  referrerPolicy="no-referrer"
+                  className="w-8 h-8 object-contain"
+                  onError={(e) => {
+                    // Fallback to check icon if image is not reachable
+                    (e.target as HTMLImageElement).style.display = 'none';
+                  }}
+                />
+              </div>
 
-                <h3 className="font-serif text-lg font-bold text-[#4A1C40] mb-2">
+              {/* Title / Description */}
+              <div className="space-y-1">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[10px] font-bold text-[#C5A059]">#{index + 1}</span>
+                </div>
+                <h3 className="text-xs sm:text-sm font-semibold text-[#333333] leading-relaxed group-hover:text-[#4A1C40] transition-colors">
                   {amenity.title}
                 </h3>
-
-                <p className="text-xs text-[#666666] leading-relaxed mb-4">
-                  {amenity.description}
-                </p>
               </div>
-
-              <div className="pt-3 border-t border-[#E8E2D8] flex items-center gap-1.5 text-xs text-[#555]">
-                <Check className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />
-                <span>Included in all private hall reservations</span>
-              </div>
-
             </div>
           ))}
         </div>

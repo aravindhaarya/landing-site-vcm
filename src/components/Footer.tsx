@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Heart, MapPin, Phone, Mail, Clock, ArrowRight, Download, Sparkles, Check } from 'lucide-react';
+import React from 'react';
+import { MapPin, Phone, Calendar, ArrowRight, ExternalLink, ShieldCheck } from 'lucide-react';
 import { VENUE_INFO } from '../data/banquetData';
 
 interface FooterProps {
@@ -7,108 +7,127 @@ interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
-  const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [newsletterSuccess, setNewsletterSuccess] = useState(false);
-  const [brochureDownloaded, setBrochureDownloaded] = useState(false);
-
-  const handleNewsletter = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newsletterEmail || !newsletterEmail.includes('@')) return;
-    setNewsletterSuccess(true);
-    setTimeout(() => {
-      setNewsletterEmail('');
-      setNewsletterSuccess(false);
-    }, 4500);
-  };
-
-  const handleDownloadBrochure = () => {
-    setBrochureDownloaded(true);
-    setTimeout(() => setBrochureDownloaded(false), 4000);
-  };
-
   return (
     <footer id="contact" className="bg-[#1F1B24] border-t-4 border-[#C5A059] text-[#CCCCCC] text-xs">
       
-      {/* Top CTA Banner inspired by theme */}
-      <div className="border-b border-white/10 py-12 bg-[#2B2330]">
+      {/* Top Banner with Direct Call Now */}
+      <div className="border-b border-white/10 py-10 bg-[#2B2330]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <div className="flex items-center gap-2 text-[#C5A059] text-xs uppercase tracking-widest font-bold mb-2">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Begin Your Journey of Elegance</span>
+              <ShieldCheck className="w-4 h-4" />
+              <span>Auspicious Celebrations • Dedicated Service</span>
             </div>
-            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-white font-normal">
-              Schedule Your Private Walkthrough &amp; Tasting
+            <h2 className="font-serif text-2xl sm:text-3xl text-white font-bold">
+              Book Varathambal Chockalingam Kalyana Mahal
             </h2>
-            <p className="text-neutral-300 text-xs sm:text-sm mt-1 max-w-xl font-serif italic">
-              Experience the crystal ballrooms in person with an escorted champagne tour from our estate director.
+            <p className="text-neutral-300 text-xs sm:text-sm mt-1 max-w-xl">
+              Accommodating 450+ guests with 150 dining, 8 AC rooms, and modern amenities in Madipakkam, Chennai.
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <button
-              onClick={() => onOpenBooking()}
-              className="px-6 py-3.5 bg-[#4A1C40] text-white font-bold text-xs uppercase tracking-wider hover:bg-[#34122c] border border-[#C5A059] shadow-lg cursor-pointer transition-all flex items-center gap-2"
-              style={{
-                borderTopLeftRadius: '16px',
-                borderBottomRightRadius: '16px',
-              }}
-            >
-              <span>Reserve Available Dates</span>
-              <ArrowRight className="w-4 h-4 text-[#C5A059]" />
-            </button>
-
             <a
-              href={`tel:${VENUE_INFO.phone.replace(/[^0-9+]/g, '')}`}
-              className="px-5 py-3.5 border border-[#C5A059]/60 text-white hover:bg-white/5 text-xs uppercase tracking-wider font-semibold flex items-center gap-2 transition-all rounded-lg"
+              id="footer-call-now-btn"
+              href={VENUE_INFO.telLink}
+              className="px-6 py-3.5 bg-[#C5A059] text-[#4A1C40] font-bold text-xs uppercase tracking-wider hover:bg-[#b58f48] shadow-md flex items-center gap-2 rounded-full transition-all"
             >
-              <Phone className="w-3.5 h-3.5 text-[#C5A059]" />
-              <span>{VENUE_INFO.phone}</span>
+              <Phone className="w-4 h-4 fill-[#4A1C40]" />
+              <span>Call Now: {VENUE_INFO.phone}</span>
             </a>
+
+            <button
+              onClick={onOpenBooking}
+              className="px-6 py-3.5 bg-[#4A1C40] text-white font-bold text-xs uppercase tracking-wider hover:bg-[#34122c] border border-[#C5A059] shadow-md cursor-pointer transition-all flex items-center gap-2 rounded-full"
+            >
+              <Calendar className="w-4 h-4 text-[#C5A059]" />
+              <span>Request Form</span>
+            </button>
           </div>
         </div>
       </div>
 
-      {/* Main Footer Links & Information */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+      {/* Main Footer Info */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           
-          {/* Col 1: Brand & Bio */}
-          <div className="space-y-4">
+          {/* Col 1: Venue Info */}
+          <div className="md:col-span-6 space-y-4">
             <div className="flex items-center gap-3">
               <div
-                className="w-10 h-10 bg-[#4A1C40] border-2 border-[#C5A059] flex items-center justify-center text-[#C5A059]"
+                className="w-10 h-10 bg-[#4A1C40] border-2 border-[#C5A059] flex items-center justify-center text-[#C5A059] font-serif font-bold text-lg"
                 style={{
                   borderTopLeftRadius: '12px',
                   borderBottomRightRadius: '12px',
                 }}
               >
-                <Heart className="w-5 h-5 fill-[#C5A059]" />
+                V
               </div>
               <div>
                 <span className="font-serif text-lg text-white font-bold block">
-                  Banquet Wedding Hall
+                  Varathambal Chockalingam Kalyana Mahal
                 </span>
                 <span className="text-[10px] tracking-widest text-[#C5A059] uppercase block font-semibold">
-                  The Grand Éclat Venue
+                  Madipakkam, Chennai, Tamil Nadu
                 </span>
               </div>
             </div>
 
-            <p className="text-neutral-400 text-xs leading-relaxed">
-              Tailored for wedding venues, banquet halls, marriage halls, and premium event spaces that seek to create a captivating online presence.
+            <p className="text-neutral-400 text-xs leading-relaxed max-w-md">
+              Varathambal Chockalingam Kalyana Mahal is an ideal venue for weddings and social gatherings, accommodating over 450 guests comfortably with modern amenities, professional staff, and ample parking.
             </p>
 
-            <div className="pt-2 text-[11px] text-neutral-400 space-y-1">
-              <div>Est. 2012 • Northern California</div>
-              <div>34,000 Sq. Ft. Total Ballroom &amp; Garden Estate</div>
+            <div className="pt-2 flex flex-wrap gap-2 text-[11px] text-neutral-300">
+              <span className="bg-white/10 px-2.5 py-1 rounded">450+ Seating Capacity</span>
+              <span className="bg-white/10 px-2.5 py-1 rounded">150 Dining</span>
+              <span className="bg-white/10 px-2.5 py-1 rounded">8 AC Rooms</span>
+              <span className="bg-white/10 px-2.5 py-1 rounded">Cars &amp; Bikes Parking</span>
             </div>
           </div>
 
-          {/* Col 2: Coordinates & Hours */}
-          <div className="space-y-3">
-            <h4 className="font-serif text-sm uppercase tracking-wider text-white font-bold border-b border-[#C5A059]/30 pb-2">
-              Estate Coordinates
+          {/* Col 2: Quick Links */}
+          <div className="md:col-span-3 space-y-3">
+            <h4 className="font-serif text-xs uppercase tracking-wider text-white font-bold border-b border-[#C5A059]/30 pb-2">
+              Quick Navigation
+            </h4>
+            <ul className="space-y-2 text-xs">
+              <li>
+                <a href="#hero" className="hover:text-[#C5A059] transition-colors flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
+                  <span>Home</span>
+                </a>
+              </li>
+              <li>
+                <a href="#about-us" className="hover:text-[#C5A059] transition-colors flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
+                  <span>About Us</span>
+                </a>
+              </li>
+              <li>
+                <a href="#facilities" className="hover:text-[#C5A059] transition-colors flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
+                  <span>Facilities</span>
+                </a>
+              </li>
+              <li>
+                <a href="#amenities" className="hover:text-[#C5A059] transition-colors flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
+                  <span>Amenities (17 Features)</span>
+                </a>
+              </li>
+              <li>
+                <a href="#moments" className="hover:text-[#C5A059] transition-colors flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
+                  <span>Mahal Moments</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Col 3: Address & Direct Contact */}
+          <div className="md:col-span-3 space-y-3">
+            <h4 className="font-serif text-xs uppercase tracking-wider text-white font-bold border-b border-[#C5A059]/30 pb-2">
+              Contact &amp; Location
             </h4>
             
             <div className="flex items-start gap-2.5 text-xs text-neutral-300">
@@ -116,109 +135,40 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
               <span>{VENUE_INFO.address}</span>
             </div>
 
-            <div className="flex items-start gap-2.5 text-xs text-neutral-300">
-              <Clock className="w-4 h-4 text-[#C5A059] shrink-0 mt-0.5" />
-              <span>{VENUE_INFO.hours}</span>
-            </div>
-
             <div className="flex items-center gap-2.5 text-xs text-neutral-300">
               <Phone className="w-4 h-4 text-[#C5A059] shrink-0" />
-              <span>{VENUE_INFO.phone}</span>
+              <a href={VENUE_INFO.telLink} className="hover:text-[#C5A059] font-bold">
+                {VENUE_INFO.phone}
+              </a>
             </div>
-
-            <div className="flex items-center gap-2.5 text-xs text-neutral-300">
-              <Mail className="w-4 h-4 text-[#C5A059] shrink-0" />
-              <span>{VENUE_INFO.email}</span>
-            </div>
-          </div>
-
-          {/* Col 3: Navigation Links */}
-          <div className="space-y-3">
-            <h4 className="font-serif text-sm uppercase tracking-wider text-white font-bold border-b border-[#C5A059]/30 pb-2">
-              Explore Estate
-            </h4>
-            <ul className="space-y-2 text-xs">
-              <li>
-                <a href="#hero" className="hover:text-[#C5A059] transition-colors flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
-                  <span>Grand Entrance &amp; Grounds</span>
-                </a>
-              </li>
-              <li>
-                <a href="#about-story" className="hover:text-[#C5A059] transition-colors flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
-                  <span>Heritage &amp; Hospitality Story</span>
-                </a>
-              </li>
-              <li>
-                <a href="#gallery" className="hover:text-[#C5A059] transition-colors flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
-                  <span>Curated Photo Gallery</span>
-                </a>
-              </li>
-              <li>
-                <a href="#reviews" className="hover:text-[#C5A059] transition-colors flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
-                  <span>Client Testimonials &amp; Awards</span>
-                </a>
-              </li>
-            </ul>
 
             <div className="pt-2">
-              <button
-                onClick={handleDownloadBrochure}
-                className="inline-flex items-center gap-2 text-xs font-bold text-[#C5A059] hover:underline cursor-pointer"
+              <a
+                href={VENUE_INFO.googleMapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#C5A059] hover:underline"
               >
-                <Download className="w-3.5 h-3.5" />
-                <span>{brochureDownloaded ? '✓ 2026 Lookbook Downloaded' : 'Download 2026 Lookbook PDF'}</span>
-              </button>
+                <span>Get Directions on Google Maps</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
             </div>
-          </div>
-
-          {/* Col 4: Newsletter & Direct Inquiry */}
-          <div className="space-y-3">
-            <h4 className="font-serif text-sm uppercase tracking-wider text-white font-bold border-b border-[#C5A059]/30 pb-2">
-              Private Invitations
-            </h4>
-            <p className="text-neutral-400 text-xs leading-relaxed">
-              Subscribe to receive exclusive date release announcements and invitations to seasonal bridal showcases.
-            </p>
-
-            <form onSubmit={handleNewsletter} className="space-y-2">
-              <input
-                type="email"
-                value={newsletterEmail}
-                onChange={(e) => setNewsletterEmail(e.target.value)}
-                placeholder="Enter your email"
-                className="w-full bg-[#2B2330] border border-white/20 focus:border-[#C5A059] text-xs text-white px-3 py-2.5 rounded focus:outline-none"
-                required
-              />
-              <button
-                type="submit"
-                className="w-full py-2.5 bg-[#4A1C40] hover:bg-[#381530] text-white text-xs font-bold uppercase tracking-wider border border-[#C5A059] rounded cursor-pointer transition-all"
-              >
-                {newsletterSuccess ? 'Thank You for Subscribing' : 'Subscribe for Updates'}
-              </button>
-            </form>
           </div>
 
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-white/10 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-neutral-400">
+        {/* Bottom copyright */}
+        <div className="pt-10 mt-10 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-[11px] text-neutral-400 gap-4">
           <div>
-            &copy; {new Date().getFullYear()} Banquet Wedding Hall – The Grand Éclat. All rights reserved.
+            &copy; {new Date().getFullYear()} Varathambal Chockalingam Kalyana Mahal. All rights reserved.
           </div>
-          <div className="flex items-center gap-6">
-            <button onClick={() => onOpenBooking()} className="hover:text-[#C5A059] cursor-pointer">
-              Schedule Tasting
-            </button>
-            <a href="#hero" className="hover:text-[#C5A059]">
-              Back to Top
+          <div className="flex items-center gap-2">
+            <span>Call Now: </span>
+            <a href={VENUE_INFO.telLink} className="text-[#C5A059] font-bold hover:underline">
+              {VENUE_INFO.phone}
             </a>
           </div>
         </div>
-
       </div>
     </footer>
   );

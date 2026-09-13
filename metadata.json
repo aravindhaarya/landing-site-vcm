@@ -1,6 +1,7 @@
 {
-  "name": "Banquet Wedding Hall",
-  "description": "Exquisitely designed wedding venue and banquet hall landing website inspired by Banquet Wedding Hall with top announcement bar, petal/arch aesthetics, spaces showcase, package calculator, and instant booking reservation.",
+  "name": "Varathambal Chockalingam Kalyana Mahal",
+  "description": "Varathambal Chockalingam Kalyana Mahal is an ideal venue in Madipakkam, Chennai for weddings and social gatherings, accommodating over 450 guests comfortably with 150 dining, 8 rooms, and modern amenities.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
+

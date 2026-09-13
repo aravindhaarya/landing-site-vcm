@@ -19,11 +19,11 @@ export const FAQAccordion: React.FC = () => {
             <HelpCircle className="w-3.5 h-3.5 text-[#C5A059]" />
             <span>Essential Answers</span>
           </div>
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-[#4A1C40] font-normal mb-3">
+          <h2 className="font-serif text-3xl sm:text-4xl text-[#4A1C40] font-bold mb-3">
             Frequently Asked Questions
           </h2>
-          <p className="text-base text-[#666666] font-serif italic">
-            Clear guidelines regarding date holds, outside caterers, sound curfews, bridal suites, and deposit structures.
+          <p className="text-xs sm:text-sm text-[#666666]">
+            Clear details regarding seating capacity, dining hall, rooms, parking, air-conditioning, and specialized packages.
           </p>
         </div>
 

@@ -1,298 +1,264 @@
 import React, { useState } from 'react';
-import { motion } from 'motion/react';
-import { Calendar, Sparkles, Check, ChevronRight, Users, ShieldCheck, Star } from 'lucide-react';
-import { HALLS, VENUE_INFO } from '../data/banquetData';
+import { Phone, Calendar, Check, Send, Sparkles, MapPin, CheckCircle2 } from 'lucide-react';
+import { VENUE_INFO, EVENT_TYPES } from '../data/banquetData';
 
 interface HeroProps {
-  onOpenBooking: (hallId?: string, eventType?: string, guests?: number) => void;
-  onViewGallery: () => void;
+  onOpenBooking: (eventType?: string) => void;
 }
 
-export const Hero: React.FC<HeroProps> = ({
-  onOpenBooking,
-  onViewGallery,
-}) => {
-  const [selectedHall, setSelectedHall] = useState(HALLS[0].id);
-  const [selectedEventType, setSelectedEventType] = useState('Wedding Reception');
-  const [selectedGuests, setSelectedGuests] = useState('250-450');
+export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
+  const [selectedEvent, setSelectedEvent] = useState('Wedding');
+  const [submitted, setSubmitted] = useState(false);
+  const [guestCount, setGuestCount] = useState('300 - 450');
+  const [clientPhone, setClientPhone] = useState('');
 
-  const handleQuickCheck = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const guestMap: Record<string, number> = {
-      '50-100': 75,
-      '100-250': 180,
-      '250-450': 350,
-      '450-850': 600,
-      '850+': 850,
-    };
-    onOpenBooking(selectedHall, selectedEventType, guestMap[selectedGuests] || 250);
+    setSubmitted(true);
   };
 
   return (
-    <section id="hero" className="relative bg-[#F9F8F4] overflow-hidden pt-8 pb-20 border-b border-[#F1EBE4]">
-      {/* Subtle organic background swirls / watermark */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#C5A059]/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#4A1C40]/5 rounded-full blur-3xl pointer-events-none" />
+    <section id="hero" className="relative bg-[#F9F8F4] pt-8 pb-16 overflow-hidden border-b border-[#F1EBE4]">
+      {/* Subtle decorative background glow */}
+      <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-[#C5A059]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[450px] h-[450px] bg-[#4A1C40]/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Main 2-Column Banner: Text on Left, Arch Image Collage on Right */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center mb-16">
-          {/* Left Column: Heading, Subheading, Buttons */}
-          <div className="lg:col-span-6 xl:col-span-7 space-y-6 text-left">
-            {/* Tag badge with wedding icon */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          
+          {/* Left Column: Heading, Subheading, Key Highlights, Call Now */}
+          <div className="lg:col-span-7 space-y-6 text-left">
+            
+            {/* Tag Badge */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FFFFFF] border border-[#C5A059]/50 shadow-xs">
               <Sparkles className="w-3.5 h-3.5 text-[#C5A059]" />
-              <span className="text-xs uppercase tracking-[0.2em] text-[#4A1C40] font-bold font-sans">
-                Luxury Wedding &amp; Event Spaces
+              <span className="text-xs font-semibold tracking-wider text-[#4A1C40] uppercase">
+                Premier Kalyana Mahal in Madipakkam, Chennai
               </span>
             </div>
 
-            {/* Main Display Heading verbatim from Banquet Wedding Hall theme */}
-            <h1 className="font-serif text-4xl sm:text-5xl xl:text-6xl text-[#4A1C40] font-normal leading-[1.15] tracking-tight">
-              Celebrate in Style at{' '}
-              <span className="italic text-[#C5A059] block sm:inline font-serif">
-                The Grand Éclat
-              </span>
-            </h1>
-
-            {/* Subtext verbatim from Banquet Wedding Hall theme */}
-            <p className="text-base sm:text-xl text-[#555555] font-serif italic font-normal leading-relaxed max-w-xl">
-              The perfect venue for your weddings, parties, and corporate events.
-            </p>
-
-            <p className="text-sm text-[#666666] leading-relaxed max-w-lg">
-              Surrounded by manicured estates, 24-foot crystal chandeliers, and white-glove hospitality. Aura Grand Palais offers an idyllic sanctuary where unforgettable moments unfold.
-            </p>
-
-            {/* Action Buttons styled with the signature asymmetric petal corners */}
-            <div className="flex flex-wrap items-center gap-4 pt-2">
-              <button
-                onClick={() => onOpenBooking()}
-                className="px-8 py-3.5 bg-[#4A1C40] text-[#FFFFFF] text-xs uppercase tracking-widest font-bold hover:bg-[#35132d] transition-all shadow-md hover:shadow-lg cursor-pointer flex items-center gap-2"
-                style={{
-                  borderTopLeftRadius: '25px',
-                  borderBottomRightRadius: '25px',
-                  borderTopRightRadius: '0px',
-                  borderBottomLeftRadius: '0px',
-                  border: '2px solid #C5A059',
-                }}
-              >
-                <span>Plan Your Visit</span>
-                <ChevronRight className="w-4 h-4 text-[#C5A059]" />
-              </button>
-
-              <button
-                onClick={onViewGallery}
-                className="px-7 py-3.5 bg-[#FFFFFF] text-[#4A1C40] text-xs uppercase tracking-widest font-bold hover:bg-[#F1EBE4] transition-all shadow-xs border border-[#C5A059] cursor-pointer flex items-center gap-2.5"
-                style={{
-                  borderTopLeftRadius: '25px',
-                  borderBottomRightRadius: '25px',
-                  borderTopRightRadius: '0px',
-                  borderBottomLeftRadius: '0px',
-                }}
-              >
-                <span>View Photo Gallery</span>
-                <ChevronRight className="w-4 h-4 text-[#C5A059]" />
-              </button>
-            </div>
-
-            {/* Quick highlight points */}
-            <div className="pt-4 flex flex-wrap items-center gap-6 text-xs text-[#555555] font-medium">
-              <div className="flex items-center gap-1.5">
-                <Check className="w-4 h-4 text-[#C5A059]" />
-                <span>Up to 1,600 Estate Capacity</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <Check className="w-4 h-4 text-[#C5A059]" />
-                <span>Complimentary 48-Hour Date Hold</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <Check className="w-4 h-4 text-[#C5A059]" />
-                <span>Outside Catering Approved</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column: Signature 3-Image Collage with Theme Arch Borders */}
-          <div className="lg:col-span-6 xl:col-span-5 relative">
-            <div className="grid grid-cols-2 gap-4 items-center">
-              {/* Left tall card with Arch Top-Right & Bottom-Left */}
-              <div className="space-y-4">
-                <div
-                  className="overflow-hidden border-4 border-[#C5A059] shadow-xl relative group"
-                  style={{
-                    borderTopRightRadius: '55px',
-                    borderBottomLeftRadius: '55px',
-                    borderTopLeftRadius: '0px',
-                    borderBottomRightRadius: '0px',
-                  }}
-                >
-                  <img
-                    src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80"
-                    alt="Wedding ceremony floral altar"
-                    className="w-full h-72 object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#4A1C40]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end text-white">
-                    <span className="text-xs font-serif italic">Ceremony Sanctuary</span>
-                  </div>
-                </div>
-
-                {/* Floating mini stat card */}
-                <div
-                  className="bg-[#FFFFFF] p-4 border border-[#C5A059]/40 shadow-md text-center"
-                  style={{
-                    borderTopLeftRadius: '20px',
-                    borderBottomRightRadius: '20px',
-                  }}
-                >
-                  <div className="flex justify-center text-[#C5A059] mb-1">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-3.5 h-3.5 fill-[#C5A059]" />
-                    ))}
-                  </div>
-                  <div className="font-serif text-lg font-bold text-[#4A1C40]">4.98 / 5.0 Rating</div>
-                  <div className="text-[11px] text-[#777777]">380+ Verified Celebrations</div>
-                </div>
-              </div>
-
-              {/* Right stacked cards with alternating arch shapes */}
-              <div className="space-y-4">
-                <div
-                  className="overflow-hidden border-4 border-[#4A1C40] shadow-xl relative group"
-                  style={{
-                    borderTopLeftRadius: '55px',
-                    borderBottomRightRadius: '55px',
-                    borderTopRightRadius: '0px',
-                    borderBottomLeftRadius: '0px',
-                  }}
-                >
-                  <img
-                    src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=800&q=80"
-                    alt="Imperial ballroom table setting"
-                    className="w-full h-52 object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                </div>
-
-                <div
-                  className="overflow-hidden border-4 border-[#C5A059] shadow-xl relative group"
-                  style={{
-                    borderTopRightRadius: '40px',
-                    borderBottomLeftRadius: '40px',
-                    borderTopLeftRadius: '0px',
-                    borderBottomRightRadius: '0px',
-                  }}
-                >
-                  <img
-                    src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=800&q=80"
-                    alt="Luxury banquet dinner lighting"
-                    className="w-full h-44 object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Feature Booking Bar verbatim inspired by theme: "Reserve Your Date - Availability is limited — secure your special day today." */}
-        <div
-          className="bg-[#FFFFFF] border-2 border-[#C5A059] shadow-xl p-6 sm:p-8"
-          style={{
-            borderTopLeftRadius: '32px',
-            borderBottomRightRadius: '32px',
-            borderTopRightRadius: '8px',
-            borderBottomLeftRadius: '8px',
-          }}
-        >
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#F1EBE4]">
+            {/* Main Title */}
             <div>
-              <div className="flex items-center gap-2 text-[#C5A059] font-bold text-xs uppercase tracking-widest mb-1">
-                <Calendar className="w-4 h-4" />
-                <span>Instant Availability Check</span>
-              </div>
-              <h2 className="font-serif text-2xl sm:text-3xl text-[#4A1C40] font-normal">
-                Reserve Your Date
-              </h2>
-              <p className="text-xs sm:text-sm text-[#666666] italic font-serif">
-                Availability is limited — secure your special day today.
+              <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#4A1C40] tracking-tight leading-tight">
+                Varathambal Chockalingam Kalyana Mahal
+              </h1>
+              <p className="mt-3 text-base sm:text-lg text-[#555555] font-normal leading-relaxed">
+                An ideal venue for grand weddings and social gatherings, accommodating over 450 guests comfortably with customizable seating, 150 dining, 8 AC rooms, and modern amenities.
               </p>
             </div>
 
-            <div className="flex items-center gap-2 text-xs font-semibold text-[#4A1C40] bg-[#F9F8F4] px-4 py-2 border border-[#C5A059]/30 rounded-full">
-              <Sparkles className="w-3.5 h-3.5 text-[#C5A059]" />
-              <span>Autumn &amp; Spring 2026/2027 Calendar Open</span>
+            {/* Quick Feature Highlights as per content */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-1">
+              <div className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs">
+                <div className="text-xs font-bold text-[#4A1C40]">450 Seating</div>
+                <div className="text-[11px] text-[#777777]">Main Air-Conditioned Hall</div>
+              </div>
+              <div className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs">
+                <div className="text-xs font-bold text-[#4A1C40]">150 Dining</div>
+                <div className="text-[11px] text-[#777777]">Dedicated Dining Space</div>
+              </div>
+              <div className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs">
+                <div className="text-xs font-bold text-[#4A1C40]">8 AC Rooms</div>
+                <div className="text-[11px] text-[#777777]">Bride &amp; Groom Suites</div>
+              </div>
+              <div className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs">
+                <div className="text-xs font-bold text-[#4A1C40]">Cars + Valet</div>
+                <div className="text-[11px] text-[#777777]">Bikes Can Be Parked</div>
+              </div>
+              <div className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs">
+                <div className="text-xs font-bold text-[#4A1C40]">100% AC Mahal</div>
+                <div className="text-[11px] text-[#777777]">Party Hall &amp; Dining</div>
+              </div>
+              <div className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs">
+                <div className="text-xs font-bold text-[#4A1C40]">Brahmin Package</div>
+                <div className="text-[11px] text-[#777777]">Specialized 2½ Days</div>
+              </div>
+            </div>
+
+            {/* Prominent Action & Call Now row */}
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              <a
+                id="hero-call-now-btn"
+                href={VENUE_INFO.telLink}
+                className="px-7 py-3.5 bg-[#C5A059] text-[#4A1C40] text-xs uppercase tracking-widest font-bold hover:bg-[#b58f48] transition-all shadow-md hover:shadow-lg flex items-center gap-2"
+                style={{
+                  borderTopLeftRadius: '22px',
+                  borderBottomRightRadius: '22px',
+                }}
+              >
+                <Phone className="w-4 h-4 fill-[#4A1C40]" />
+                <span>Call Now: {VENUE_INFO.phone}</span>
+              </a>
+
+              <button
+                onClick={() => onOpenBooking(selectedEvent)}
+                className="px-7 py-3.5 bg-[#4A1C40] text-[#FFFFFF] text-xs uppercase tracking-widest font-bold hover:bg-[#34122c] transition-all shadow-md hover:shadow-lg cursor-pointer flex items-center gap-2"
+                style={{
+                  borderTopRightRadius: '22px',
+                  borderBottomLeftRadius: '22px',
+                }}
+              >
+                <Calendar className="w-4 h-4 text-[#C5A059]" />
+                <span>Book / Check Dates</span>
+              </button>
+            </div>
+
+            {/* Address snippet */}
+            <div className="pt-2 flex items-start gap-2 text-xs text-[#666666]">
+              <MapPin className="w-4 h-4 text-[#C5A059] shrink-0 mt-0.5" />
+              <span>
+                {VENUE_INFO.address}
+              </span>
             </div>
           </div>
 
-          {/* Form Controls */}
-          <form onSubmit={handleQuickCheck} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 pt-6 items-end">
-            <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-[#4A1C40] mb-2">
-                Preferred Hall
-              </label>
-              <select
-                value={selectedHall}
-                onChange={(e) => setSelectedHall(e.target.value)}
-                className="w-full bg-[#F9F8F4] border border-[#DDD] focus:border-[#C5A059] text-sm text-[#333] px-3.5 py-3 rounded focus:outline-none cursor-pointer"
-              >
-                {HALLS.map((h) => (
-                  <option key={h.id} value={h.id}>
-                    {h.name} ({h.capacityMax} max)
-                  </option>
-                ))}
-              </select>
-            </div>
+          {/* Right Column: Embedded Request Form (as explicitly given in user content) */}
+          <div className="lg:col-span-5">
+            <div
+              className="bg-[#FFFFFF] border-2 border-[#C5A059] p-6 sm:p-8 shadow-xl relative"
+              style={{
+                borderTopLeftRadius: '28px',
+                borderBottomRightRadius: '28px',
+              }}
+            >
+              {/* Header of Request Form */}
+              <div className="border-b border-[#F1EBE4] pb-4 mb-5">
+                <div className="inline-block px-3 py-1 bg-[#4A1C40] text-[#C5A059] text-[10px] font-bold uppercase tracking-widest rounded-full mb-2">
+                  Instant Inquiry
+                </div>
+                <h2 className="font-serif text-2xl font-bold text-[#4A1C40]">
+                  Request Form
+                </h2>
+                <p className="text-xs text-[#666666] mt-1">
+                  Select your event and submit to check hall availability immediately.
+                </p>
+              </div>
 
-            <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-[#4A1C40] mb-2">
-                Event Category
-              </label>
-              <select
-                value={selectedEventType}
-                onChange={(e) => setSelectedEventType(e.target.value)}
-                className="w-full bg-[#F9F8F4] border border-[#DDD] focus:border-[#C5A059] text-sm text-[#333] px-3.5 py-3 rounded focus:outline-none cursor-pointer"
-              >
-                <option value="Wedding Reception">Wedding Reception</option>
-                <option value="Nikah / Sangeet / Baraat">Nikah / Sangeet / Cultural</option>
-                <option value="Gala / Charity Ball">Gala / Charity Ball</option>
-                <option value="Anniversary / Birthday">Milestone Anniversary</option>
-                <option value="Corporate Banquet">Corporate Summit / Gala</option>
-              </select>
-            </div>
+              {submitted ? (
+                <div className="text-center py-8 space-y-4">
+                  <div className="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
+                    <CheckCircle2 className="w-8 h-8" />
+                  </div>
+                  <div>
+                    <h3 className="font-serif text-xl font-bold text-[#4A1C40]">
+                      Request Received!
+                    </h3>
+                    <p className="text-xs text-[#666666] mt-1.5 max-w-xs mx-auto">
+                      Thank you for inquiring about your <strong>{selectedEvent}</strong>. Our booking manager will call you shortly on your provided contact.
+                    </p>
+                  </div>
+                  <div className="pt-2">
+                    <a
+                      href={VENUE_INFO.telLink}
+                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#C5A059] text-[#4A1C40] text-xs font-bold uppercase tracking-wider rounded-full shadow-xs"
+                    >
+                      <Phone className="w-3.5 h-3.5 fill-[#4A1C40]" />
+                      <span>Call Now: {VENUE_INFO.phone}</span>
+                    </a>
+                  </div>
+                  <button
+                    onClick={() => setSubmitted(false)}
+                    className="text-xs text-[#777777] underline hover:text-[#4A1C40] block mx-auto pt-2 cursor-pointer"
+                  >
+                    Submit another request
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-[#4A1C40] mb-1.5">
+                      Select your event <span className="text-red-500">*</span>
+                    </label>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {EVENT_TYPES.map((ev) => (
+                        <label
+                          key={ev}
+                          className={`flex items-center gap-2 px-3 py-2 rounded border text-xs font-medium cursor-pointer transition-colors ${
+                            selectedEvent === ev
+                              ? 'bg-[#4A1C40] text-[#FFFFFF] border-[#4A1C40]'
+                              : 'bg-[#F9F8F4] text-[#333333] border-[#E5E0D8] hover:border-[#C5A059]'
+                          }`}
+                        >
+                          <input
+                            type="radio"
+                            name="eventType"
+                            value={ev}
+                            checked={selectedEvent === ev}
+                            onChange={() => setSelectedEvent(ev)}
+                            className="sr-only"
+                          />
+                          <span className={`w-3.5 h-3.5 rounded-full border flex items-center justify-center ${
+                            selectedEvent === ev ? 'border-white bg-[#C5A059]' : 'border-[#999999]'
+                          }`}>
+                            {selectedEvent === ev && <span className="w-1.5 h-1.5 bg-white rounded-full" />}
+                          </span>
+                          <span>{ev}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
 
-            <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-[#4A1C40] mb-2">
-                Estimated Guests
-              </label>
-              <select
-                value={selectedGuests}
-                onChange={(e) => setSelectedGuests(e.target.value)}
-                className="w-full bg-[#F9F8F4] border border-[#DDD] focus:border-[#C5A059] text-sm text-[#333] px-3.5 py-3 rounded focus:outline-none cursor-pointer"
-              >
-                <option value="50-100">Intimate: 50 – 100 Guests</option>
-                <option value="100-250">Classic: 100 – 250 Guests</option>
-                <option value="250-450">Grand: 250 – 450 Guests</option>
-                <option value="450-850">Royal: 450 – 850 Guests</option>
-                <option value="850+">Full Estate: 850+ Guests</option>
-              </select>
-            </div>
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-[#4A1C40] mb-1">
+                      Expected Guests
+                    </label>
+                    <select
+                      value={guestCount}
+                      onChange={(e) => setGuestCount(e.target.value)}
+                      className="w-full px-3 py-2 text-xs border border-[#E5E0D8] rounded bg-[#F9F8F4] text-[#333333] focus:outline-hidden focus:border-[#C5A059]"
+                    >
+                      <option value="Up to 150">Up to 150 Guests (Dining capacity)</option>
+                      <option value="150 - 300">150 - 300 Guests</option>
+                      <option value="300 - 450">300 - 450 Guests (Full Seating)</option>
+                      <option value="450+">450+ Guests</option>
+                    </select>
+                  </div>
 
-            <div>
-              <button
-                type="submit"
-                className="w-full py-3.5 bg-[#4A1C40] text-[#FFFFFF] text-xs font-bold uppercase tracking-widest hover:bg-[#33112b] transition-all shadow-md cursor-pointer flex items-center justify-center gap-2"
-                style={{
-                  borderTopLeftRadius: '18px',
-                  borderBottomRightRadius: '18px',
-                  border: '1px solid #C5A059',
-                }}
-              >
-                <span>Check Dates &amp; Quote</span>
-                <ChevronRight className="w-4 h-4 text-[#C5A059]" />
-              </button>
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-[#4A1C40] mb-1">
+                      Your Phone / Contact Number <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="tel"
+                      required
+                      placeholder="e.g. +91 94441 39077"
+                      value={clientPhone}
+                      onChange={(e) => setClientPhone(e.target.value)}
+                      className="w-full px-3 py-2 text-xs border border-[#E5E0D8] rounded bg-[#F9F8F4] text-[#333333] focus:outline-hidden focus:border-[#C5A059]"
+                    />
+                  </div>
+
+                  {/* Submit Button matching user content */}
+                  <button
+                    type="submit"
+                    id="hero-request-submit-btn"
+                    className="w-full py-3.5 bg-[#4A1C40] hover:bg-[#34122c] text-white text-xs font-bold uppercase tracking-widest shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
+                    style={{
+                      borderTopLeftRadius: '16px',
+                      borderBottomRightRadius: '16px',
+                    }}
+                  >
+                    <Send className="w-3.5 h-3.5 text-[#C5A059]" />
+                    <span>Submit Request</span>
+                  </button>
+
+                  {/* Direct Call action inside the form */}
+                  <div className="pt-2 text-center border-t border-[#F1EBE4]">
+                    <span className="text-[11px] text-[#777777]">Need instant booking support? </span>
+                    <a
+                      href={VENUE_INFO.telLink}
+                      className="text-[11px] font-bold text-[#4A1C40] hover:text-[#C5A059] inline-flex items-center gap-1"
+                    >
+                      <Phone className="w-3 h-3 text-[#C5A059]" />
+                      <span>Call Now: {VENUE_INFO.phone}</span>
+                    </a>
+                  </div>
+                </form>
+              )}
             </div>
-          </form>
+          </div>
+
         </div>
-
       </div>
     </section>
   );
