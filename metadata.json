@@ -1,0 +1,6 @@
+{
+  "name": "Banquet Wedding Hall",
+  "description": "Exquisitely designed wedding venue and banquet hall landing website inspired by Banquet Wedding Hall with top announcement bar, petal/arch aesthetics, spaces showcase, package calculator, and instant booking reservation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-cormorant: 'Cormorant Garamond', Georgia, serif;
+    --font-sans: 'Lato', system-ui, -apple-system, sans-serif;
+    --font-bebas: 'Bebas Neue', Impact, sans-serif;
+    
+    /* Theme color palette from Banquet Wedding Hall (wp-themes.com) */
+    --color-accent: #4A1C40;      /* Signature deep plum / burgundy accent */
+    --color-secaccent: #C5A059;   /* Warm antique gold */
+    --color-cream: #F9F8F4;       /* Main soft warm background */
+    --color-altcream: #F1EBE4;    /* Secondary background card */
+    --color-dark: #1F1B24;        /* Deep charcoal for readable text */
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-cream);
+    color: #2b2b2b;
+  }
+
+  h1, h2, h3, .font-serif {
+    font-family: var(--font-serif);
+  }
+
+  .font-cormorant {
+    font-family: var(--font-cormorant);
+  }
+
+  .font-bebas {
+    font-family: var(--font-bebas);
+  }
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F1EBE4;
+}
+::-webkit-scrollbar-thumb {
+  background: #C5A059;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #4A1C40;
+}
+
+/* Signature Banquet Wedding Hall Arch & Petal Shapes */
+.shape-arch-tl-br {
+  border-top-left-radius: 28px;
+  border-bottom-right-radius: 28px;
+}
+
+.shape-arch-tr-bl {
+  border-top-right-radius: 50px;
+  border-bottom-left-radius: 50px;
+}
+
+.shape-arch-pill {
+  border-top-left-radius: 28px;
+  border-bottom-right-radius: 28px;
+  border-top-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+/* Gold border accent */
+.theme-gold-border {
+  border-color: #C5A059;
+}
+
+.theme-plum-border {
+  border-color: #4A1C40;
+}
+
+/* Plum & Gold Gradients */
+.plum-gold-gradient {
+  background: linear-gradient(135deg, #4A1C40 0%, #34122c 100%);
+}
+
+.gold-gradient {
+  background: linear-gradient(135deg, #C5A059 0%, #b38b44 100%);
+}
+
