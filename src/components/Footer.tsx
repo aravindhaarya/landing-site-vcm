@@ -132,34 +132,34 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
             </div>
           </div>
 
-          {/* Col 3: Grand Spaces Navigation */}
+          {/* Col 3: Navigation Links */}
           <div className="space-y-3">
             <h4 className="font-serif text-sm uppercase tracking-wider text-white font-bold border-b border-[#C5A059]/30 pb-2">
-              Our Ballrooms
+              Explore Estate
             </h4>
             <ul className="space-y-2 text-xs">
               <li>
-                <a href="#halls" className="hover:text-[#C5A059] transition-colors flex items-center gap-2">
+                <a href="#hero" className="hover:text-[#C5A059] transition-colors flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
-                  <span>The Grand Imperial Ballroom (850 guests)</span>
+                  <span>Grand Entrance &amp; Grounds</span>
                 </a>
               </li>
               <li>
-                <a href="#halls" className="hover:text-[#C5A059] transition-colors flex items-center gap-2">
+                <a href="#about-story" className="hover:text-[#C5A059] transition-colors flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
-                  <span>The Crystal Pavilion &amp; Courtyard (420 guests)</span>
+                  <span>Heritage &amp; Hospitality Story</span>
                 </a>
               </li>
               <li>
-                <a href="#halls" className="hover:text-[#C5A059] transition-colors flex items-center gap-2">
+                <a href="#gallery" className="hover:text-[#C5A059] transition-colors flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
-                  <span>The Versailles Glasshouse (220 guests)</span>
+                  <span>Curated Photo Gallery</span>
                 </a>
               </li>
               <li>
-                <a href="#halls" className="hover:text-[#C5A059] transition-colors flex items-center gap-2">
+                <a href="#reviews" className="hover:text-[#C5A059] transition-colors flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
-                  <span>The Sovereign Executive Salon (90 guests)</span>
+                  <span>Client Testimonials &amp; Awards</span>
                 </a>
               </li>
             </ul>

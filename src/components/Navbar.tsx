@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, Mail, Clock, Calendar, Menu, X, ChevronRight, Compass, Sparkles, Heart } from 'lucide-react';
+import { Phone, Mail, Calendar, Menu, X, ChevronRight, Heart } from 'lucide-react';
 import { VENUE_INFO } from '../data/banquetData';
 
 interface NavbarProps {
   onOpenBooking: (hallId?: string) => void;
-  onOpenTour: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, onOpenTour }) => {
+export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -22,10 +21,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, onOpenTour }) => 
   const navLinks = [
     { name: 'Home', href: '#hero' },
     { name: 'About Us', href: '#about-story' },
-    { name: 'Our Spaces', href: '#halls' },
     { name: 'Gallery', href: '#gallery' },
-    { name: 'Services', href: '#amenities' },
-    { name: 'Packages & Pricing', href: '#calculator' },
     { name: 'Testimonials', href: '#reviews' },
     { name: 'Contact', href: '#contact' },
   ];
@@ -126,18 +122,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, onOpenTour }) => 
 
             {/* Desktop Actions */}
             <div className="hidden sm:flex items-center gap-3">
-              <button
-                onClick={onOpenTour}
-                className="hidden md:flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider px-4 py-2.5 text-[#4A1C40] bg-[#F1EBE4] hover:bg-[#C5A059]/20 transition-all cursor-pointer"
-                style={{
-                  borderTopLeftRadius: '18px',
-                  borderBottomRightRadius: '18px',
-                }}
-              >
-                <Compass className="w-3.5 h-3.5 text-[#C5A059]" />
-                <span>Virtual Tour</span>
-              </button>
-
               {/* Theme Signature Asymmetric Leaf Button */}
               <button
                 id="nav-contact-us-btn"
@@ -218,17 +202,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, onOpenTour }) => 
             </div>
 
             <div className="pt-6 border-t border-[#F1EBE4] space-y-3">
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenTour();
-                }}
-                className="w-full py-3 px-4 rounded border border-[#C5A059] text-sm font-bold text-[#4A1C40] bg-[#F9F8F4] flex items-center justify-center gap-2"
-              >
-                <Compass className="w-4 h-4 text-[#C5A059]" />
-                <span>360° Virtual Tour</span>
-              </button>
-
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);

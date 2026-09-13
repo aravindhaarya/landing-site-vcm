@@ -4,10 +4,9 @@ import { VENUE_INFO } from '../data/banquetData';
 
 interface AboutStoryProps {
   onOpenBooking: () => void;
-  onOpenTour: () => void;
 }
 
-export const AboutStory: React.FC<AboutStoryProps> = ({ onOpenBooking, onOpenTour }) => {
+export const AboutStory: React.FC<AboutStoryProps> = ({ onOpenBooking }) => {
   return (
     <section id="about-story" className="py-20 bg-[#FFFFFF] border-b border-[#F1EBE4] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -152,14 +151,6 @@ export const AboutStory: React.FC<AboutStoryProps> = ({ onOpenBooking, onOpenTou
                 }}
               >
                 Schedule Private Walkthrough
-              </button>
-
-              <button
-                onClick={onOpenTour}
-                className="text-xs font-bold uppercase tracking-wider text-[#4A1C40] hover:text-[#C5A059] flex items-center gap-1 cursor-pointer transition-colors"
-              >
-                <span>View Virtual Tour</span>
-                <ArrowRight className="w-4 h-4" />
               </button>
             </div>
           </div>

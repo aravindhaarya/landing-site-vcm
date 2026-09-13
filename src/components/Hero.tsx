@@ -1,19 +1,15 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { Calendar, Play, Sparkles, Check, ChevronRight, Heart, Users, ShieldCheck, Star } from 'lucide-react';
+import { Calendar, Sparkles, Check, ChevronRight, Users, ShieldCheck, Star } from 'lucide-react';
 import { HALLS, VENUE_INFO } from '../data/banquetData';
 
 interface HeroProps {
   onOpenBooking: (hallId?: string, eventType?: string, guests?: number) => void;
-  onOpenTour: () => void;
-  onExploreHalls: () => void;
   onViewGallery: () => void;
 }
 
 export const Hero: React.FC<HeroProps> = ({
   onOpenBooking,
-  onOpenTour,
-  onExploreHalls,
   onViewGallery,
 }) => {
   const [selectedHall, setSelectedHall] = useState(HALLS[0].id);
@@ -41,7 +37,6 @@ export const Hero: React.FC<HeroProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Main 2-Column Banner: Text on Left, Arch Image Collage on Right */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center mb-16">
-          
           {/* Left Column: Heading, Subheading, Buttons */}
           <div className="lg:col-span-6 xl:col-span-7 space-y-6 text-left">
             {/* Tag badge with wedding icon */}
@@ -87,7 +82,7 @@ export const Hero: React.FC<HeroProps> = ({
               </button>
 
               <button
-                onClick={onOpenTour}
+                onClick={onViewGallery}
                 className="px-7 py-3.5 bg-[#FFFFFF] text-[#4A1C40] text-xs uppercase tracking-widest font-bold hover:bg-[#F1EBE4] transition-all shadow-xs border border-[#C5A059] cursor-pointer flex items-center gap-2.5"
                 style={{
                   borderTopLeftRadius: '25px',
@@ -96,10 +91,8 @@ export const Hero: React.FC<HeroProps> = ({
                   borderBottomLeftRadius: '0px',
                 }}
               >
-                <div className="w-6 h-6 rounded-full bg-[#C5A059] text-white flex items-center justify-center">
-                  <Play className="w-3 h-3 fill-white translate-x-0.5" />
-                </div>
-                <span>Take Video Tour</span>
+                <span>View Photo Gallery</span>
+                <ChevronRight className="w-4 h-4 text-[#C5A059]" />
               </button>
             </div>
 
@@ -123,7 +116,6 @@ export const Hero: React.FC<HeroProps> = ({
           {/* Right Column: Signature 3-Image Collage with Theme Arch Borders */}
           <div className="lg:col-span-6 xl:col-span-5 relative">
             <div className="grid grid-cols-2 gap-4 items-center">
-              
               {/* Left tall card with Arch Top-Right & Bottom-Left */}
               <div className="space-y-4">
                 <div
@@ -197,25 +189,8 @@ export const Hero: React.FC<HeroProps> = ({
                   />
                 </div>
               </div>
-
-            </div>
-
-            {/* Decorative Gold Seal Badge */}
-            <div
-              className="absolute -bottom-6 -left-6 bg-[#C5A059] text-[#4A1C40] p-4 shadow-xl hidden sm:flex items-center gap-3 border-2 border-white"
-              style={{
-                borderTopLeftRadius: '25px',
-                borderBottomRightRadius: '25px',
-              }}
-            >
-              <Heart className="w-6 h-6 fill-[#4A1C40]" />
-              <div>
-                <div className="font-bebas text-lg leading-tight tracking-wider">PREMIER VENUE</div>
-                <div className="text-[10px] font-bold uppercase tracking-wider text-white">Northern California</div>
-              </div>
             </div>
           </div>
-
         </div>
 
         {/* Feature Booking Bar verbatim inspired by theme: "Reserve Your Date - Availability is limited — secure your special day today." */}
