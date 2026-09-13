@@ -101,9 +101,9 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
 
             {/* Main Title */}
             <motion.div variants={itemVariants} className="transform-gpu will-change-transform">
-              <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#4A1C40] tracking-tight leading-tight">
+              <p id="hero-title" className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#4A1C40] tracking-tight leading-tight">
                 Varathambal Chockalingam Kalyana Mahal
-              </h1>
+              </p>
               <p id="hero-tagline" className="mt-3 text-base sm:text-lg text-[#555555] font-normal leading-relaxed">
                 The Perfect Destination for all your occasions.
               </p>
