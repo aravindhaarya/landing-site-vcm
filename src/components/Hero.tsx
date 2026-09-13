@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { motion, useScroll, useTransform, type Variants } from 'motion/react';
+import React, { useState } from 'react';
+import { motion, type Variants } from 'motion/react';
 import { Phone, Calendar, Sparkles, MapPin, CheckCircle2, ShieldCheck, ArrowRight, Award, Clock } from 'lucide-react';
 import { VENUE_INFO, EVENT_TYPES, MOMENTS_GALLERY } from '../data/banquetData';
 
@@ -12,46 +12,46 @@ const containerVariants: Variants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.15,
+      staggerChildren: 0.08,
+      delayChildren: 0.1,
     },
   },
 };
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 22 },
+  hidden: { opacity: 0, y: 18 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.6,
+      duration: 0.5,
       ease: [0.22, 1, 0.36, 1],
     },
   },
 };
 
 const gridItemVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.94, y: 12 },
+  hidden: { opacity: 0, scale: 0.96, y: 10 },
   visible: {
     opacity: 1,
     scale: 1,
     y: 0,
     transition: {
-      duration: 0.45,
+      duration: 0.4,
       ease: [0.22, 1, 0.36, 1],
     },
   },
 };
 
 const rightCardVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.95, y: 28 },
+  hidden: { opacity: 0, scale: 0.96, y: 20 },
   visible: {
     opacity: 1,
     scale: 1,
     y: 0,
     transition: {
-      duration: 0.75,
-      delay: 0.25,
+      duration: 0.6,
+      delay: 0.15,
       ease: [0.22, 1, 0.36, 1],
     },
   },
@@ -59,52 +59,40 @@ const rightCardVariants: Variants = {
 
 export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
   const [selectedEvent, setSelectedEvent] = useState('Wedding');
-  const heroRef = useRef<HTMLElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ['start start', 'end start'],
-  });
-
-  const bgParallax1 = useTransform(scrollYProgress, [0, 1], [0, 90]);
-  const bgParallax2 = useTransform(scrollYProgress, [0, 1], [0, -60]);
-  const bgRotate = useTransform(scrollYProgress, [0, 1], [0, 12]);
-  const bgOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0.4]);
 
   return (
-    <section ref={heroRef} id="hero" className="relative bg-[#F9F8F4] pt-8 pb-16 overflow-hidden">
-      {/* Subtle decorative parallax background glow and pattern */}
-      <motion.div
-        style={{ y: bgParallax1, opacity: bgOpacity }}
-        className="absolute top-0 right-0 w-[450px] h-[450px] bg-[#C5A059]/10 rounded-full blur-3xl pointer-events-none"
+    <section id="hero" className="relative bg-[#F9F8F4] pt-8 pb-16 overflow-hidden">
+      {/* GPU-accelerated decorative background ambient glows */}
+      <div
+        className="absolute top-0 right-0 w-[420px] h-[420px] bg-[#C5A059]/10 rounded-full blur-3xl pointer-events-none transform-gpu will-change-transform"
+        aria-hidden="true"
       />
-      <motion.div
-        style={{ y: bgParallax2, opacity: bgOpacity }}
-        className="absolute bottom-0 left-0 w-[450px] h-[450px] bg-[#4A1C40]/5 rounded-full blur-3xl pointer-events-none"
+      <div
+        className="absolute bottom-0 left-0 w-[420px] h-[420px] bg-[#4A1C40]/5 rounded-full blur-3xl pointer-events-none transform-gpu will-change-transform"
+        aria-hidden="true"
       />
 
-      {/* Auspicious geometric watermark with subtle parallax rotation */}
-      <motion.div
-        style={{ y: bgParallax1, rotate: bgRotate, opacity: bgOpacity }}
-        className="absolute -right-20 top-24 w-96 h-96 border border-[#C5A059]/15 rounded-full pointer-events-none hidden lg:block"
+      {/* Auspicious geometric watermark - GPU accelerated */}
+      <div
+        className="absolute -right-20 top-24 w-96 h-96 border border-[#C5A059]/15 rounded-full pointer-events-none hidden lg:block transform-gpu will-change-transform"
         aria-hidden="true"
       >
         <div className="absolute inset-8 border border-dashed border-[#C5A059]/20 rounded-full" />
         <div className="absolute inset-16 border border-[#4A1C40]/10 rotate-45" />
-      </motion.div>
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* Left Column: Heading, Subheading, Key Highlights, Call Now */}
           <motion.div
-            className="lg:col-span-7 space-y-6 text-left"
+            className="lg:col-span-7 space-y-6 text-left transform-gpu will-change-transform"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
           >
             {/* Tag Badge */}
-            <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FFFFFF] border border-[#C5A059]/50 shadow-xs">
+            <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FFFFFF] border border-[#C5A059]/50 shadow-xs transform-gpu will-change-transform">
               <Sparkles className="w-3.5 h-3.5 text-[#C5A059]" />
               <span className="text-xs font-semibold tracking-wider text-[#4A1C40] uppercase">
                 Premier Kalyana Mahal in Madipakkam, Chennai
@@ -112,54 +100,54 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
             </motion.div>
 
             {/* Main Title */}
-            <motion.div variants={itemVariants}>
+            <motion.div variants={itemVariants} className="transform-gpu will-change-transform">
               <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#4A1C40] tracking-tight leading-tight">
                 Varathambal Chockalingam Kalyana Mahal
               </h1>
-              <p className="mt-3 text-base sm:text-lg text-[#555555] font-normal leading-relaxed">
-                An ideal venue for grand weddings and social gatherings, accommodating over 450 guests comfortably with customizable seating, 150 dining, 8 AC rooms, and modern amenities.
+              <p id="hero-tagline" className="mt-3 text-base sm:text-lg text-[#555555] font-normal leading-relaxed">
+                The Perfect Destination for all your occasions.
               </p>
             </motion.div>
 
             {/* Quick Feature Highlights as per content */}
             <motion.div
               variants={itemVariants}
-              className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-1"
+              className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-1 transform-gpu will-change-transform"
             >
-              <motion.div variants={gridItemVariants} className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors">
+              <motion.div variants={gridItemVariants} className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors transform-gpu will-change-transform">
                 <div className="text-xs font-bold text-[#4A1C40]">450 Seating</div>
                 <div className="text-[11px] text-[#777777]">Main Air-Conditioned Hall</div>
               </motion.div>
-              <motion.div variants={gridItemVariants} className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors">
+              <motion.div variants={gridItemVariants} className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors transform-gpu will-change-transform">
                 <div className="text-xs font-bold text-[#4A1C40]">150 Dining</div>
                 <div className="text-[11px] text-[#777777]">Dedicated Dining Space</div>
               </motion.div>
-              <motion.div variants={gridItemVariants} className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors">
+              <motion.div variants={gridItemVariants} className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors transform-gpu will-change-transform">
                 <div className="text-xs font-bold text-[#4A1C40]">8 AC Rooms</div>
                 <div className="text-[11px] text-[#777777]">Bride &amp; Groom Suites</div>
               </motion.div>
-              <motion.div variants={gridItemVariants} className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors">
+              <motion.div variants={gridItemVariants} className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors transform-gpu will-change-transform">
                 <div className="text-xs font-bold text-[#4A1C40]">Cars + Valet</div>
                 <div className="text-[11px] text-[#777777]">Bikes Can Be Parked</div>
               </motion.div>
-              <motion.div variants={gridItemVariants} className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors">
+              <motion.div variants={gridItemVariants} className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors transform-gpu will-change-transform">
                 <div className="text-xs font-bold text-[#4A1C40]">100% AC Mahal</div>
                 <div className="text-[11px] text-[#777777]">Party Hall &amp; Dining</div>
               </motion.div>
-              <motion.div variants={gridItemVariants} className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors">
+              <motion.div variants={gridItemVariants} className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors transform-gpu will-change-transform">
                 <div className="text-xs font-bold text-[#4A1C40]">Brahmin Package</div>
                 <div className="text-[11px] text-[#777777]">Specialized 2½ Days</div>
               </motion.div>
             </motion.div>
 
             {/* Prominent Action & Call Now row */}
-            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-4 pt-2">
+            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-4 pt-2 transform-gpu will-change-transform">
               <motion.a
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 id="hero-call-now-btn"
                 href={VENUE_INFO.telLink}
-                className="px-7 py-3.5 bg-[#C5A059] text-[#4A1C40] text-xs uppercase tracking-widest font-bold hover:bg-[#b58f48] transition-all shadow-md hover:shadow-lg flex items-center gap-2"
+                className="px-7 py-3.5 bg-[#C5A059] text-[#4A1C40] text-xs uppercase tracking-widest font-bold hover:bg-[#b58f48] transition-all shadow-md hover:shadow-lg flex items-center gap-2 transform-gpu will-change-transform"
                 style={{
                   borderTopLeftRadius: '22px',
                   borderBottomRightRadius: '22px',
@@ -173,7 +161,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => onOpenBooking(selectedEvent)}
-                className="px-7 py-3.5 bg-[#4A1C40] text-[#FFFFFF] text-xs uppercase tracking-widest font-bold hover:bg-[#34122c] transition-all shadow-md hover:shadow-lg cursor-pointer flex items-center gap-2"
+                className="px-7 py-3.5 bg-[#4A1C40] text-[#FFFFFF] text-xs uppercase tracking-widest font-bold hover:bg-[#34122c] transition-all shadow-md hover:shadow-lg cursor-pointer flex items-center gap-2 transform-gpu will-change-transform"
                 style={{
                   borderTopRightRadius: '22px',
                   borderBottomLeftRadius: '22px',
@@ -185,7 +173,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
             </motion.div>
 
             {/* Address snippet */}
-            <motion.div variants={itemVariants} className="pt-2 flex items-start gap-2 text-xs text-[#666666]">
+            <motion.div variants={itemVariants} className="pt-2 flex items-start gap-2 text-xs text-[#666666] transform-gpu will-change-transform">
               <MapPin className="w-4 h-4 text-[#C5A059] shrink-0 mt-0.5" />
               <span>
                 {VENUE_INFO.address}
@@ -200,7 +188,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
               variants={rightCardVariants}
               initial="hidden"
               animate="visible"
-              className="relative bg-[#FFFFFF] border-2 border-[#C5A059] p-4 sm:p-5 shadow-2xl space-y-4"
+              className="relative bg-[#FFFFFF] border-2 border-[#C5A059] p-4 sm:p-5 shadow-2xl space-y-4 transform-gpu will-change-transform"
               style={{
                 borderTopLeftRadius: '32px',
                 borderBottomRightRadius: '32px',

@@ -73,8 +73,8 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
               </div>
             </div>
 
-            <p className="text-neutral-400 text-xs leading-relaxed max-w-md">
-              Varathambal Chockalingam Kalyana Mahal is an ideal venue for weddings and social gatherings, accommodating over 450 guests comfortably with modern amenities, professional staff, and ample parking.
+            <p id="footer-venue-description" className="text-neutral-400 text-xs leading-relaxed max-w-md">
+              An ideal venue for weddings and social gatherings, accommodating over 450 guests comfortably with modern amenities, professional staff, and ample parking.
             </p>
 
             <div className="pt-2 flex flex-wrap gap-2 text-[11px] text-neutral-300">

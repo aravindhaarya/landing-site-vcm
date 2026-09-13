@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform, type Variants } from 'motion/react';
+import React from 'react';
+import { motion, type Variants } from 'motion/react';
 import { Phone, Calendar, ArrowRight, ShieldCheck } from 'lucide-react';
 import { VENUE_INFO, FACILITIES } from '../data/banquetData';
 import { SectionDivider } from './SectionDivider';
@@ -13,19 +13,19 @@ const containerVariants: Variants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.1,
+      staggerChildren: 0.1,
+      delayChildren: 0.08,
     },
   },
 };
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 22 },
+  hidden: { opacity: 0, y: 16 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.6,
+      duration: 0.5,
       ease: [0.22, 1, 0.36, 1],
     },
   },
@@ -36,50 +36,39 @@ const gridContainerVariants: Variants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.15,
+      staggerChildren: 0.06,
+      delayChildren: 0.1,
     },
   },
 };
 
 const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 24, scale: 0.96 },
+  hidden: { opacity: 0, y: 18, scale: 0.97 },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
     transition: {
-      duration: 0.5,
+      duration: 0.45,
       ease: [0.22, 1, 0.36, 1],
     },
   },
 };
 
 export const AboutStory: React.FC<AboutStoryProps> = ({ onOpenBooking }) => {
-  const aboutRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: aboutRef,
-    offset: ['start end', 'end start'],
-  });
-
-  const decorY = useTransform(scrollYProgress, [0, 1], [-35, 35]);
-  const decorRotate = useTransform(scrollYProgress, [0, 1], [-5, 5]);
-
   return (
     <div className="space-y-0">
       {/* About Us Section */}
-      <section ref={aboutRef} id="about-us" className="py-20 bg-[#FFFFFF] relative overflow-hidden">
-        {/* Parallax background subtle accent */}
-        <motion.div
-          style={{ y: decorY, rotate: decorRotate }}
-          className="absolute -top-16 -left-16 w-80 h-80 rounded-full border border-[#C5A059]/15 pointer-events-none"
+      <section id="about-us" className="py-20 bg-[#FFFFFF] relative overflow-hidden">
+        {/* Hardware-accelerated background accent */}
+        <div
+          className="absolute -top-16 -left-16 w-80 h-80 rounded-full border border-[#C5A059]/15 pointer-events-none transform-gpu will-change-transform"
           aria-hidden="true"
         >
           <div className="absolute inset-6 rounded-full border border-dashed border-[#C5A059]/20" />
-        </motion.div>
-        <motion.div
-          style={{ y: decorY }}
-          className="absolute top-1/2 -right-20 w-72 h-72 rounded-full bg-[#C5A059]/5 blur-3xl pointer-events-none"
+        </div>
+        <div
+          className="absolute top-1/2 -right-20 w-72 h-72 rounded-full bg-[#C5A059]/5 blur-3xl pointer-events-none transform-gpu will-change-transform"
           aria-hidden="true"
         />
 
@@ -88,11 +77,11 @@ export const AboutStory: React.FC<AboutStoryProps> = ({ onOpenBooking }) => {
             
             {/* Left: About Us Photo from attached content */}
             <motion.div
-              className="lg:col-span-5 relative"
-              initial={{ opacity: 0, x: -35 }}
+              className="lg:col-span-5 relative transform-gpu will-change-transform"
+              initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             >
               <div
                 className="relative overflow-hidden border-4 border-[#C5A059] shadow-xl group"
@@ -232,7 +221,7 @@ export const AboutStory: React.FC<AboutStoryProps> = ({ onOpenBooking }) => {
                 key={fac.id}
                 variants={cardVariants}
                 whileHover={{ y: -3, transition: { duration: 0.2 } }}
-                className="bg-[#FFFFFF] p-3.5 sm:p-4.5 border border-[#E5E0D8] hover:border-[#C5A059] transition-all hover:shadow-md text-center flex flex-col items-center justify-between space-y-2.5 sm:space-y-3 group cursor-default"
+                className="bg-[#FFFFFF] p-3.5 sm:p-4.5 border border-[#E5E0D8] hover:border-[#C5A059] transition-all hover:shadow-md text-center flex flex-col items-center justify-between space-y-2.5 sm:space-y-3 group cursor-default transform-gpu will-change-transform"
                 style={{
                   borderTopLeftRadius: '16px',
                   borderBottomRightRadius: '16px',

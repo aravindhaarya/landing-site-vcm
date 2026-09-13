@@ -1,29 +1,19 @@
-import React, { useState, useRef } from 'react';
-import { motion, useScroll, useTransform } from 'motion/react';
+import React, { useState } from 'react';
 import { ChevronDown, HelpCircle } from 'lucide-react';
 import { FAQS } from '../data/banquetData';
 
 export const FAQAccordion: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
-  const faqRef = useRef<HTMLElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: faqRef,
-    offset: ['start end', 'end start'],
-  });
-
-  const decorY = useTransform(scrollYProgress, [0, 1], [-30, 30]);
 
   const toggle = (idx: number) => {
     setOpenIndex(openIndex === idx ? null : idx);
   };
 
   return (
-    <section ref={faqRef} id="faq" className="py-16 sm:py-20 bg-[#FFFFFF] relative overflow-hidden">
-      {/* Subtle decorative parallax accents */}
-      <motion.div
-        style={{ y: decorY }}
-        className="absolute -top-10 -left-10 w-72 h-72 rounded-full bg-[#C5A059]/6 blur-2xl pointer-events-none"
+    <section id="faq" className="py-16 sm:py-20 bg-[#FFFFFF] relative overflow-hidden">
+      {/* GPU-accelerated static decorative ambient accent */}
+      <div
+        className="absolute -top-10 -left-10 w-72 h-72 rounded-full bg-[#C5A059]/6 blur-2xl pointer-events-none transform-gpu will-change-transform"
         aria-hidden="true"
       />
 

@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { motion, useScroll, useTransform } from 'motion/react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Maximize2, X, ChevronLeft, ChevronRight, Phone, Calendar, Sparkles } from 'lucide-react';
 import { MOMENTS_GALLERY, VENUE_INFO } from '../data/banquetData';
 
@@ -9,15 +9,6 @@ interface PhotoGalleryProps {
 
 export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ onOpenBooking }) => {
   const [activeLightboxIndex, setActiveLightboxIndex] = useState<number | null>(null);
-  const galleryRef = useRef<HTMLElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: galleryRef,
-    offset: ['start end', 'end start'],
-  });
-
-  const parallaxY = useTransform(scrollYProgress, [0, 1], [-40, 40]);
-  const parallaxRotate = useTransform(scrollYProgress, [0, 1], [-6, 6]);
 
   const handleNext = () => {
     if (activeLightboxIndex === null) return;
@@ -30,16 +21,14 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ onOpenBooking }) => 
   };
 
   return (
-    <section ref={galleryRef} id="moments" className="py-16 sm:py-20 bg-[#F9F8F4] relative overflow-hidden">
-      {/* Subtle parallax ambient background accents */}
-      <motion.div
-        style={{ y: parallaxY, rotate: parallaxRotate }}
-        className="absolute -top-12 -right-12 w-96 h-96 rounded-full border border-[#C5A059]/15 pointer-events-none"
+    <section id="moments" className="py-16 sm:py-20 bg-[#F9F8F4] relative overflow-hidden">
+      {/* GPU-accelerated static ambient background accents */}
+      <div
+        className="absolute -top-12 -right-12 w-96 h-96 rounded-full border border-[#C5A059]/15 pointer-events-none transform-gpu will-change-transform"
         aria-hidden="true"
       />
-      <motion.div
-        style={{ y: parallaxY }}
-        className="absolute bottom-10 left-0 w-80 h-80 bg-[#C5A059]/8 rounded-full blur-3xl pointer-events-none"
+      <div
+        className="absolute bottom-10 left-0 w-80 h-80 bg-[#C5A059]/8 rounded-full blur-3xl pointer-events-none transform-gpu will-change-transform"
         aria-hidden="true"
       />
 
@@ -51,8 +40,8 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ onOpenBooking }) => 
             <Sparkles className="w-3.5 h-3.5 text-[#C5A059]" />
             <span>Celebration Showcase</span>
           </div>
-          <h2 className="font-serif text-3xl sm:text-4xl text-[#4A1C40] font-bold">
-            Varathambal Chockalingam Kalyana Mahal Moments
+          <h2 id="moments-heading" className="font-serif text-3xl sm:text-4xl text-[#4A1C40] font-bold">
+            Moments
           </h2>
           <p className="text-xs sm:text-sm text-[#666666]">
             Glimpses of auspicious weddings, vibrant celebrations, and cherished family gatherings at our mahal.
@@ -64,7 +53,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ onOpenBooking }) => 
           {MOMENTS_GALLERY.map((item, index) => (
             <div
               key={item.id}
-              className="group relative overflow-hidden bg-[#F9F8F4] border-2 border-[#E5E0D8] hover:border-[#C5A059] shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer"
+              className="group relative overflow-hidden bg-[#F9F8F4] border-2 border-[#E5E0D8] hover:border-[#C5A059] shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer transform-gpu will-change-transform"
               style={{
                 borderTopLeftRadius: index % 2 === 0 ? '30px' : '0px',
                 borderBottomRightRadius: index % 2 === 0 ? '30px' : '0px',
