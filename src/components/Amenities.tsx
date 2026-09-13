@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import React, { useState, useRef } from 'react';
+import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import { Sparkles, ChevronDown, ChevronUp, ArrowDown, Building2, Radio, UserCheck, ShieldCheck } from 'lucide-react';
 import { AMENITIES } from '../data/banquetData';
 import { MahalAmenity } from '../types';
@@ -40,6 +40,14 @@ const PRIMARY_HIGHLIGHT_IDS = ['a-4', 'a-5', 'a-6', 'a-8', 'a-1', 'a-3'];
 export const Amenities: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<AmenityCategory>('all');
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
+  const amenitiesRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: amenitiesRef,
+    offset: ['start end', 'end start'],
+  });
+
+  const decorY = useTransform(scrollYProgress, [0, 1], [-30, 30]);
 
   // Filter amenities according to category
   const filteredAmenities = AMENITIES.filter((amenity) => {
@@ -54,8 +62,15 @@ export const Amenities: React.FC = () => {
       : filteredAmenities;
 
   return (
-    <section id="amenities" className="py-10 sm:py-14 bg-[#FFFFFF] border-b border-[#F1EBE4] relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section ref={amenitiesRef} id="amenities" className="py-10 sm:py-14 bg-[#FFFFFF] relative overflow-hidden">
+      {/* Subtle parallax ambient background glow */}
+      <motion.div
+        style={{ y: decorY }}
+        className="absolute -top-16 -right-16 w-80 h-80 rounded-full bg-[#C5A059]/5 blur-3xl pointer-events-none"
+        aria-hidden="true"
+      />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header - Streamlined for smooth scrolling */}
         <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8 space-y-2">

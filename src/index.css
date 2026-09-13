@@ -15,6 +15,10 @@
     --color-dark: #1F1B24;        /* Deep charcoal for readable text */
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     font-family: var(--font-sans);
     background-color: var(--color-cream);

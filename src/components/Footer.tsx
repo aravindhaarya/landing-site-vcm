@@ -8,7 +8,7 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
   return (
-    <footer id="contact" className="bg-[#1F1B24] border-t-4 border-[#C5A059] text-[#CCCCCC] text-xs">
+    <footer id="contact" className="bg-[#1F1B24] text-[#CCCCCC] text-xs relative">
       
       {/* Top Banner with Direct Call Now */}
       <div className="border-b border-white/10 py-10 bg-[#2B2330]">

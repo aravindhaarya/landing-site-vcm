@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import { Maximize2, X, ChevronLeft, ChevronRight, Phone, Calendar, Sparkles } from 'lucide-react';
 import { MOMENTS_GALLERY, VENUE_INFO } from '../data/banquetData';
 
@@ -8,6 +9,15 @@ interface PhotoGalleryProps {
 
 export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ onOpenBooking }) => {
   const [activeLightboxIndex, setActiveLightboxIndex] = useState<number | null>(null);
+  const galleryRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: galleryRef,
+    offset: ['start end', 'end start'],
+  });
+
+  const parallaxY = useTransform(scrollYProgress, [0, 1], [-40, 40]);
+  const parallaxRotate = useTransform(scrollYProgress, [0, 1], [-6, 6]);
 
   const handleNext = () => {
     if (activeLightboxIndex === null) return;
@@ -20,8 +30,20 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ onOpenBooking }) => 
   };
 
   return (
-    <section id="moments" className="py-20 bg-[#FFFFFF] border-b border-[#F1EBE4] relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section ref={galleryRef} id="moments" className="py-16 sm:py-20 bg-[#F9F8F4] relative overflow-hidden">
+      {/* Subtle parallax ambient background accents */}
+      <motion.div
+        style={{ y: parallaxY, rotate: parallaxRotate }}
+        className="absolute -top-12 -right-12 w-96 h-96 rounded-full border border-[#C5A059]/15 pointer-events-none"
+        aria-hidden="true"
+      />
+      <motion.div
+        style={{ y: parallaxY }}
+        className="absolute bottom-10 left-0 w-80 h-80 bg-[#C5A059]/8 rounded-full blur-3xl pointer-events-none"
+        aria-hidden="true"
+      />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header verbatim matching user content */}
         <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">

@@ -1,7 +1,8 @@
-import React from 'react';
-import { motion, type Variants } from 'motion/react';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform, type Variants } from 'motion/react';
 import { Phone, Calendar, ArrowRight, ShieldCheck } from 'lucide-react';
 import { VENUE_INFO, FACILITIES } from '../data/banquetData';
+import { SectionDivider } from './SectionDivider';
 
 interface AboutStoryProps {
   onOpenBooking: () => void;
@@ -55,11 +56,34 @@ const cardVariants: Variants = {
 };
 
 export const AboutStory: React.FC<AboutStoryProps> = ({ onOpenBooking }) => {
+  const aboutRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: aboutRef,
+    offset: ['start end', 'end start'],
+  });
+
+  const decorY = useTransform(scrollYProgress, [0, 1], [-35, 35]);
+  const decorRotate = useTransform(scrollYProgress, [0, 1], [-5, 5]);
+
   return (
     <div className="space-y-0">
       {/* About Us Section */}
-      <section id="about-us" className="py-20 bg-[#FFFFFF] border-b border-[#F1EBE4] relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section ref={aboutRef} id="about-us" className="py-20 bg-[#FFFFFF] relative overflow-hidden">
+        {/* Parallax background subtle accent */}
+        <motion.div
+          style={{ y: decorY, rotate: decorRotate }}
+          className="absolute -top-16 -left-16 w-80 h-80 rounded-full border border-[#C5A059]/15 pointer-events-none"
+          aria-hidden="true"
+        >
+          <div className="absolute inset-6 rounded-full border border-dashed border-[#C5A059]/20" />
+        </motion.div>
+        <motion.div
+          style={{ y: decorY }}
+          className="absolute top-1/2 -right-20 w-72 h-72 rounded-full bg-[#C5A059]/5 blur-3xl pointer-events-none"
+          aria-hidden="true"
+        />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             {/* Left: About Us Photo from attached content */}
@@ -163,8 +187,18 @@ export const AboutStory: React.FC<AboutStoryProps> = ({ onOpenBooking }) => {
         </div>
       </section>
 
+      {/* Subtle skewed & parallax boundary transition from About Us (#FFFFFF) to Facilities (#F9F8F4) */}
+      <SectionDivider
+        fromBg="#FFFFFF"
+        toBg="#F9F8F4"
+        slope="down-left"
+        height={50}
+        withOrnament={true}
+        ornamentText="Facilities"
+      />
+
       {/* Facilities Section directly matching user content */}
-      <section id="facilities" className="py-10 sm:py-14 bg-[#F9F8F4] border-b border-[#F1EBE4]">
+      <section id="facilities" className="py-10 sm:py-14 bg-[#F9F8F4] relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <motion.div

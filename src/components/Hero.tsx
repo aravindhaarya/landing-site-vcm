@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion, type Variants } from 'motion/react';
+import React, { useState, useRef } from 'react';
+import { motion, useScroll, useTransform, type Variants } from 'motion/react';
 import { Phone, Calendar, Sparkles, MapPin, CheckCircle2, ShieldCheck, ArrowRight, Award, Clock } from 'lucide-react';
 import { VENUE_INFO, EVENT_TYPES, MOMENTS_GALLERY } from '../data/banquetData';
 
@@ -59,22 +59,39 @@ const rightCardVariants: Variants = {
 
 export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
   const [selectedEvent, setSelectedEvent] = useState('Wedding');
+  const heroRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ['start start', 'end start'],
+  });
+
+  const bgParallax1 = useTransform(scrollYProgress, [0, 1], [0, 90]);
+  const bgParallax2 = useTransform(scrollYProgress, [0, 1], [0, -60]);
+  const bgRotate = useTransform(scrollYProgress, [0, 1], [0, 12]);
+  const bgOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0.4]);
 
   return (
-    <section id="hero" className="relative bg-[#F9F8F4] pt-8 pb-16 overflow-hidden border-b border-[#F1EBE4]">
-      {/* Subtle decorative background glow */}
+    <section ref={heroRef} id="hero" className="relative bg-[#F9F8F4] pt-8 pb-16 overflow-hidden">
+      {/* Subtle decorative parallax background glow and pattern */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.2, ease: "easeOut" }}
+        style={{ y: bgParallax1, opacity: bgOpacity }}
         className="absolute top-0 right-0 w-[450px] h-[450px] bg-[#C5A059]/10 rounded-full blur-3xl pointer-events-none"
       />
       <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.2, delay: 0.2, ease: "easeOut" }}
+        style={{ y: bgParallax2, opacity: bgOpacity }}
         className="absolute bottom-0 left-0 w-[450px] h-[450px] bg-[#4A1C40]/5 rounded-full blur-3xl pointer-events-none"
       />
+
+      {/* Auspicious geometric watermark with subtle parallax rotation */}
+      <motion.div
+        style={{ y: bgParallax1, rotate: bgRotate, opacity: bgOpacity }}
+        className="absolute -right-20 top-24 w-96 h-96 border border-[#C5A059]/15 rounded-full pointer-events-none hidden lg:block"
+        aria-hidden="true"
+      >
+        <div className="absolute inset-8 border border-dashed border-[#C5A059]/20 rounded-full" />
+        <div className="absolute inset-16 border border-[#4A1C40]/10 rotate-45" />
+      </motion.div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">

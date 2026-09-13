@@ -1,17 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import { ChevronDown, HelpCircle } from 'lucide-react';
 import { FAQS } from '../data/banquetData';
 
 export const FAQAccordion: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const faqRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: faqRef,
+    offset: ['start end', 'end start'],
+  });
+
+  const decorY = useTransform(scrollYProgress, [0, 1], [-30, 30]);
 
   const toggle = (idx: number) => {
     setOpenIndex(openIndex === idx ? null : idx);
   };
 
   return (
-    <section id="faq" className="py-20 bg-[#FFFFFF] border-b border-[#F1EBE4] relative">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section ref={faqRef} id="faq" className="py-16 sm:py-20 bg-[#FFFFFF] relative overflow-hidden">
+      {/* Subtle decorative parallax accents */}
+      <motion.div
+        style={{ y: decorY }}
+        className="absolute -top-10 -left-10 w-72 h-72 rounded-full bg-[#C5A059]/6 blur-2xl pointer-events-none"
+        aria-hidden="true"
+      />
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
