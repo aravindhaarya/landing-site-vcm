@@ -135,11 +135,28 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
               <span>{VENUE_INFO.address}</span>
             </div>
 
-            <div className="flex items-center gap-2.5 text-xs text-neutral-300">
-              <Phone className="w-4 h-4 text-[#C5A059] shrink-0" />
-              <a href={VENUE_INFO.telLink} className="hover:text-[#C5A059] font-bold">
-                {VENUE_INFO.phone}
-              </a>
+            <div className="space-y-2 pt-1">
+              <span className="text-[10px] uppercase font-semibold text-[#C5A059] tracking-wider block">
+                Direct Contact Numbers:
+              </span>
+              <div className="flex items-center gap-2.5 text-xs text-neutral-300">
+                <Phone className="w-4 h-4 text-[#C5A059] shrink-0" />
+                <a href={VENUE_INFO.telLink} className="hover:text-[#C5A059] font-bold">
+                  {VENUE_INFO.phone}
+                </a>
+              </div>
+              <div className="flex items-center gap-2.5 text-xs text-neutral-300">
+                <Phone className="w-4 h-4 text-[#C5A059] shrink-0" />
+                <a href="tel:+919600095411" className="hover:text-[#C5A059] font-bold">
+                  +91-9600095411
+                </a>
+              </div>
+              <div className="flex items-center gap-2.5 text-xs text-neutral-300">
+                <Phone className="w-4 h-4 text-[#C5A059] shrink-0" />
+                <a href="tel:+919094912929" className="hover:text-[#C5A059] font-bold">
+                  +91-9094912929
+                </a>
+              </div>
             </div>
 
             <div className="pt-2">

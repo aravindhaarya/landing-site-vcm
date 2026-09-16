@@ -6,6 +6,15 @@ export const VENUE_INFO = {
   phone: "+91-9962621652",
   phoneDisplay: "+91-9962621652",
   telLink: "tel:+919962621652",
+  additionalPhones: [
+    { number: "+91-9600095411", telLink: "tel:+919600095411" },
+    { number: "+91-9094912929", telLink: "tel:+919094912929" }
+  ],
+  allPhones: [
+    { number: "+91-9962621652", telLink: "tel:+919962621652", label: "Primary" },
+    { number: "+91-9600095411", telLink: "tel:+919600095411", label: "Support" },
+    { number: "+91-9094912929", telLink: "tel:+919094912929", label: "Inquiry" }
+  ],
   address: "X59R+H25, junction, koot road, Defence Colony, Madipakkam, Moovarasampettai, Tamil Nadu 600091",
   landmark: "Defence Colony, Madipakkam, Moovarasampettai, Chennai",
   googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=X59R%2BH25%2C+junction%2C+koot+road%2C+Defence+Colony%2C+Madipakkam%2C+Moovarasampettai%2C+Tamil+Nadu+600091",
