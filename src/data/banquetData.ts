@@ -3,9 +3,9 @@ import { Facility, MahalAmenity, GalleryItem } from '../types';
 export const VENUE_INFO = {
   name: "Varathambal Chockalingam Kalyana Mahal",
   tagline: "Premier Wedding & Social Gathering Venue",
-  phone: "+91-9444139077",
-  phoneDisplay: "+91-9444139077",
-  telLink: "tel:+919444139077",
+  phone: "+91-9962621652",
+  phoneDisplay: "+91-9962621652",
+  telLink: "tel:+919962621652",
   address: "X59R+H25, junction, koot road, Defence Colony, Madipakkam, Moovarasampettai, Tamil Nadu 600091",
   landmark: "Defence Colony, Madipakkam, Moovarasampettai, Chennai",
   googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=X59R%2BH25%2C+junction%2C+koot+road%2C+Defence+Colony%2C+Madipakkam%2C+Moovarasampettai%2C+Tamil+Nadu+600091",

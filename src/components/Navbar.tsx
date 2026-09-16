@@ -121,7 +121,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
                 title={`Call ${VENUE_INFO.phone}`}
               >
                 <Phone className="w-3.5 h-3.5 text-[#C5A059]" />
-                <span>+91-9444139077</span>
+                <span>{VENUE_INFO.phone}</span>
               </a>
               <a
                 href={VENUE_INFO.telLink}
@@ -224,7 +224,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
                 className="w-full py-2.5 px-4 bg-[#C5A059] text-[#4A1C40] font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 rounded shadow-xs"
               >
                 <Phone className="w-4 h-4" />
-                <span>Call: +91-9444139077</span>
+                <span>Call: {VENUE_INFO.phone}</span>
               </a>
 
               <button
