@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, type Variants } from 'motion/react';
 import { Phone, Calendar, Sparkles, MapPin, CheckCircle2, ShieldCheck, ArrowRight, Award, Clock } from 'lucide-react';
-import { VENUE_INFO, EVENT_TYPES, MOMENTS_GALLERY } from '../data/banquetData';
+import { VENUE_INFO, EVENT_TYPES } from '../data/banquetData';
 
 interface HeroProps {
   onOpenBooking: (eventType?: string) => void;
@@ -194,78 +194,14 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
                 borderBottomRightRadius: '32px',
               }}
             >
-              {/* Main Visual Photo Collage Block */}
-              <div className="relative">
-                {/* Primary Grand Mandapam Showcase Image */}
-                <div
-                  className="relative overflow-hidden border-2 border-[#C5A059]/80 shadow-md group"
-                  style={{
-                    borderTopLeftRadius: '24px',
-                    borderBottomRightRadius: '24px',
-                  }}
-                >
-                  <img
-                    src={MOMENTS_GALLERY[0]?.image || VENUE_INFO.aboutImage}
-                    alt="Varathambal Chockalingam Kalyana Mahal Stage"
-                    referrerPolicy="no-referrer"
-                    className="w-full h-64 sm:h-72 object-cover transition-transform duration-700 group-hover:scale-105"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80";
-                    }}
-                  />
-                  {/* Subtle Gradient Scrim */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#4A1C40]/90 via-[#4A1C40]/25 to-transparent" />
-
-                  {/* Top-Left Floating Badge */}
-                  <div className="absolute top-3 left-3 bg-[#4A1C40]/90 backdrop-blur-xs text-[#C5A059] px-3 py-1 rounded-full border border-[#C5A059]/60 shadow-sm flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider">
-                    <Sparkles className="w-3 h-3 text-[#C5A059]" />
-                    <span>Grand Mandapam</span>
-                  </div>
-
-                  {/* Top-Right AC Badge */}
-                  <div className="absolute top-3 right-3 bg-white/95 text-[#4A1C40] px-2.5 py-1 rounded-full border border-[#C5A059]/50 shadow-sm flex items-center gap-1 text-[11px] font-bold">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                    <span>100% AC Mahal</span>
-                  </div>
-
-                  {/* Bottom Image Caption Overlay */}
-                  <div className="absolute bottom-3 left-3 right-3 text-white">
-                    <div className="font-serif text-sm sm:text-base font-bold text-white drop-shadow-xs">
-                      Grand Wedding &amp; Reception Stage
-                    </div>
-                    <div className="text-[11px] text-[#C5A059] font-medium flex items-center gap-2 mt-0.5">
-                      <span>450+ Guests Seating</span>
-                      <span>•</span>
-                      <span>Madipakkam, Chennai</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Secondary Inset Photo Collage Thumbnail (Dining Hall) */}
-                <motion.div
-                  initial={{ opacity: 0, y: 15, scale: 0.9 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{ delay: 0.6, duration: 0.5, ease: "easeOut" }}
-                  className="absolute -bottom-4 right-3 w-32 sm:w-36 overflow-hidden border-2 border-[#C5A059] shadow-xl bg-white hidden sm:block group"
-                  style={{
-                    borderTopRightRadius: '16px',
-                    borderBottomLeftRadius: '16px',
-                  }}
-                >
-                  <img
-                    src={MOMENTS_GALLERY[3]?.image || "https://lakshmihall.com/assets/laks-img/image-four.webp"}
-                    alt="150 Dining Hall"
-                    referrerPolicy="no-referrer"
-                    className="w-full h-20 object-cover transition-transform duration-500 group-hover:scale-110"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1545232979-8bf68ee9b1af?auto=format&fit=crop&w=400&q=80";
-                    }}
-                  />
-                  <div className="bg-[#4A1C40] py-1 px-2 text-center text-[10px] font-bold text-[#C5A059] tracking-wider uppercase">
-                    150 Dining Hall
-                  </div>
-                </motion.div>
-              </div>
+              {/* Blank Photo Frame */}
+              <div
+                className="w-full h-56 sm:h-64 bg-[#F9F8F4] border-2 border-dashed border-[#C5A059]/40"
+                style={{
+                  borderTopLeftRadius: '24px',
+                  borderBottomRightRadius: '24px',
+                }}
+              />
 
               {/* Interactive Quick Date Check & Availability Element */}
               <div className="pt-2 border-t border-[#F1EBE4] space-y-3">

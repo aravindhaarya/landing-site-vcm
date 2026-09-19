@@ -34,6 +34,14 @@ const CATEGORIES: { id: AmenityCategory; label: string; icon: React.FC<{ classNa
   { id: 'safety', label: 'Safety & Parking', icon: ShieldCheck, count: 4 },
 ];
 
+const AMENITY_CATEGORY_ICON: Record<AmenityCategory, React.FC<{ className?: string }>> = {
+  all: Sparkles,
+  hall: Building2,
+  tech: Radio,
+  services: UserCheck,
+  safety: ShieldCheck,
+};
+
 // Curated 6 primary highlight IDs for the initial collapsed view
 const PRIMARY_HIGHLIGHT_IDS = ['a-4', 'a-5', 'a-6', 'a-8', 'a-1', 'a-3'];
 
@@ -131,17 +139,13 @@ export const Amenities: React.FC = () => {
                   key={amenity.id}
                   className="bg-[#F9F8F4] p-3 sm:p-3.5 border border-[#E8E2D8] hover:border-[#C5A059] transition-all shadow-2xs hover:shadow-sm flex items-start gap-2.5 sm:gap-3.5 rounded-xl group transform-gpu will-change-transform"
                 >
-                  {/* Icon Image */}
-                  <div className="w-9 h-9 sm:w-10 sm:h-10 shrink-0 rounded-lg bg-white border border-[#C5A059]/40 flex items-center justify-center p-1.5 group-hover:scale-105 transition-transform shadow-2xs">
-                    <img
-                      src={amenity.iconImg}
-                      alt={amenity.title}
-                      referrerPolicy="no-referrer"
-                      className="w-6 h-6 sm:w-7 sm:h-7 object-contain"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).style.display = 'none';
-                      }}
-                    />
+                  {/* Icon */}
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 shrink-0 rounded-lg bg-white border border-[#C5A059]/40 flex items-center justify-center p-1.5 group-hover:scale-105 transition-transform shadow-2xs text-[#4A1C40]">
+                    {(() => {
+                      const category = CATEGORY_MAP[amenity.id] || 'all';
+                      const CategoryIcon = AMENITY_CATEGORY_ICON[category] || Sparkles;
+                      return <CategoryIcon className="w-4 h-4 sm:w-5 sm:h-5 text-[#4A1C40]" />;
+                    })()}
                   </div>
 
                   {/* Title */}

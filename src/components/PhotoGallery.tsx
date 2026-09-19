@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { Maximize2, X, ChevronLeft, ChevronRight, Phone, Calendar, Sparkles } from 'lucide-react';
+import React from 'react';
+import { Phone, Calendar, Sparkles } from 'lucide-react';
 import { MOMENTS_GALLERY, VENUE_INFO } from '../data/banquetData';
 
 interface PhotoGalleryProps {
@@ -8,18 +7,6 @@ interface PhotoGalleryProps {
 }
 
 export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ onOpenBooking }) => {
-  const [activeLightboxIndex, setActiveLightboxIndex] = useState<number | null>(null);
-
-  const handleNext = () => {
-    if (activeLightboxIndex === null) return;
-    setActiveLightboxIndex((activeLightboxIndex + 1) % MOMENTS_GALLERY.length);
-  };
-
-  const handlePrev = () => {
-    if (activeLightboxIndex === null) return;
-    setActiveLightboxIndex((activeLightboxIndex - 1 + MOMENTS_GALLERY.length) % MOMENTS_GALLERY.length);
-  };
-
   return (
     <section id="moments" className="py-16 sm:py-20 bg-[#F9F8F4] relative overflow-hidden">
       {/* GPU-accelerated static ambient background accents */}
@@ -48,54 +35,37 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ onOpenBooking }) => 
           </p>
         </div>
 
-        {/* 6 Moments Image Grid */}
+        {/* 6 Moments Grid - Blank Photo Frames */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {MOMENTS_GALLERY.map((item, index) => (
             <div
               key={item.id}
-              className="group relative overflow-hidden bg-[#F9F8F4] border-2 border-[#E5E0D8] hover:border-[#C5A059] shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer transform-gpu will-change-transform"
+              className="bg-[#FFFFFF] border-2 border-[#E5E0D8] p-4 shadow-2xs space-y-3"
               style={{
                 borderTopLeftRadius: index % 2 === 0 ? '30px' : '0px',
                 borderBottomRightRadius: index % 2 === 0 ? '30px' : '0px',
                 borderTopRightRadius: index % 2 !== 0 ? '30px' : '0px',
                 borderBottomLeftRadius: index % 2 !== 0 ? '30px' : '0px',
               }}
-              onClick={() => setActiveLightboxIndex(index)}
             >
-              <div className="aspect-4/3 overflow-hidden bg-neutral-100">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  onError={(e) => {
-                    // Fallback to high quality wedding hall placeholder
-                    (e.target as HTMLImageElement).src = `https://images.unsplash.com/photo-${
-                      index === 0 ? '1519741497674-611481863552' :
-                      index === 1 ? '1519167758481-83f550bb49b3' :
-                      index === 2 ? '1511795409834-ef04bbd61622' :
-                      index === 3 ? '1545232979-8bf68ee9b1af' :
-                      index === 4 ? '1464366400600-7168b8af9bc3' : '1532712938310-34cb3982ef74'
-                    }?auto=format&fit=crop&w=800&q=80`;
-                  }}
-                />
-              </div>
+              {/* Blank Photo Area */}
+              <div
+                className="aspect-4/3 bg-[#F9F8F4] border-2 border-dashed border-[#C5A059]/35"
+                style={{
+                  borderTopLeftRadius: index % 2 === 0 ? '20px' : '0px',
+                  borderBottomRightRadius: index % 2 === 0 ? '20px' : '0px',
+                  borderTopRightRadius: index % 2 !== 0 ? '20px' : '0px',
+                  borderBottomLeftRadius: index % 2 !== 0 ? '20px' : '0px',
+                }}
+              />
 
-              {/* Hover overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#4A1C40]/85 via-[#4A1C40]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5 text-white">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="font-serif text-sm font-bold text-white">
-                      Varathambal Chockalingam Kalyana Mahal
-                    </h3>
-                    <p className="text-[11px] text-[#C5A059]">
-                      {item.caption || 'Special Celebration Moment'}
-                    </p>
-                  </div>
-                  <div className="w-8 h-8 rounded-full bg-[#C5A059] text-[#4A1C40] flex items-center justify-center shadow-md">
-                    <Maximize2 className="w-4 h-4" />
-                  </div>
-                </div>
+              <div className="space-y-1">
+                <h3 className="font-serif text-sm font-bold text-[#4A1C40]">
+                  {item.title}
+                </h3>
+                <p className="text-[11px] text-[#C5A059] font-medium">
+                  {item.caption}
+                </p>
               </div>
             </div>
           ))}
@@ -121,52 +91,6 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ onOpenBooking }) => 
         </div>
 
       </div>
-
-      {/* Lightbox Modal */}
-      {activeLightboxIndex !== null && (
-        <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4">
-          <button
-            onClick={() => setActiveLightboxIndex(null)}
-            className="absolute top-5 right-5 text-white/80 hover:text-white p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors z-10"
-            aria-label="Close"
-          >
-            <X className="w-6 h-6" />
-          </button>
-
-          <button
-            onClick={handlePrev}
-            className="absolute left-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
-            aria-label="Previous image"
-          >
-            <ChevronLeft className="w-6 h-6" />
-          </button>
-
-          <button
-            onClick={handleNext}
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
-            aria-label="Next image"
-          >
-            <ChevronRight className="w-6 h-6" />
-          </button>
-
-          <div className="max-w-4xl max-h-[85vh] flex flex-col items-center">
-            <img
-              src={MOMENTS_GALLERY[activeLightboxIndex].image}
-              alt={MOMENTS_GALLERY[activeLightboxIndex].title}
-              referrerPolicy="no-referrer"
-              className="max-w-full max-h-[70vh] object-contain rounded-lg border-2 border-[#C5A059]"
-            />
-            <div className="mt-4 text-center text-white">
-              <h3 className="font-serif text-lg font-bold">
-                Varathambal Chockalingam Kalyana Mahal Moments
-              </h3>
-              <p className="text-xs text-[#C5A059]">
-                {MOMENTS_GALLERY[activeLightboxIndex].caption} ({activeLightboxIndex + 1} of {MOMENTS_GALLERY.length})
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   );
 };

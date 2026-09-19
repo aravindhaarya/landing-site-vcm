@@ -1,12 +1,23 @@
 import React from 'react';
 import { motion, type Variants } from 'motion/react';
-import { Phone, Calendar, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Phone, Calendar, ArrowRight, ShieldCheck, Users, UtensilsCrossed, BedDouble, Car, Bike, Wind, Sparkles, ChevronsUp } from 'lucide-react';
 import { VENUE_INFO, FACILITIES } from '../data/banquetData';
 import { SectionDivider } from './SectionDivider';
 
 interface AboutStoryProps {
   onOpenBooking: () => void;
 }
+
+const FACILITY_ICON_MAP: Record<string, React.FC<{ className?: string }>> = {
+  'f-seating': Users,
+  'f-dining': UtensilsCrossed,
+  'f-rooms': BedDouble,
+  'f-cars-valet': Car,
+  'f-bikes': Bike,
+  'f-ac': Wind,
+  'f-brahmin-package': Sparkles,
+  'f-lift': ChevronsUp,
+};
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -75,7 +86,7 @@ export const AboutStory: React.FC<AboutStoryProps> = ({ onOpenBooking }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
-            {/* Left: About Us Photo from attached content */}
+            {/* Left: Blank Photo Frame */}
             <motion.div
               className="lg:col-span-5 relative transform-gpu will-change-transform"
               initial={{ opacity: 0, x: -30 }}
@@ -84,28 +95,12 @@ export const AboutStory: React.FC<AboutStoryProps> = ({ onOpenBooking }) => {
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             >
               <div
-                className="relative overflow-hidden border-4 border-[#C5A059] shadow-xl group"
+                className="w-full h-[360px] sm:h-[400px] bg-[#F9F8F4] border-4 border-dashed border-[#C5A059]/50 shadow-sm"
                 style={{
                   borderTopRightRadius: '60px',
                   borderBottomLeftRadius: '60px',
                 }}
-              >
-                <img
-                  src={VENUE_INFO.aboutImage}
-                  alt={VENUE_INFO.aboutImageAlt}
-                  referrerPolicy="no-referrer"
-                  className="w-full h-[400px] object-cover transition-transform duration-700 group-hover:scale-105"
-                  onError={(e) => {
-                    // graceful fallback if external webp fails to load
-                    (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=80";
-                  }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#4A1C40]/80 via-transparent to-transparent opacity-80" />
-                <div className="absolute bottom-5 left-5 right-5 text-white">
-                  <div className="font-serif text-lg font-bold">Varathambal Chockalingam Kalyana Mahal</div>
-                  <div className="text-xs text-[#C5A059] font-medium">Madipakkam, Chennai</div>
-                </div>
-              </div>
+              />
 
               {/* Verified Badge */}
               <motion.div
@@ -227,16 +222,11 @@ export const AboutStory: React.FC<AboutStoryProps> = ({ onOpenBooking }) => {
                   borderBottomRightRadius: '16px',
                 }}
               >
-                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#F9F8F4] border border-[#C5A059]/40 flex items-center justify-center p-2.5 group-hover:scale-105 transition-transform shadow-2xs">
-                  <img
-                    src={fac.iconImg}
-                    alt={fac.title}
-                    referrerPolicy="no-referrer"
-                    className="w-7 h-7 sm:w-8 sm:h-8 object-contain"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).style.display = 'none';
-                    }}
-                  />
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#F9F8F4] border border-[#C5A059]/40 flex items-center justify-center p-2.5 group-hover:scale-105 transition-transform shadow-2xs text-[#4A1C40]">
+                  {(() => {
+                    const Icon = FACILITY_ICON_MAP[fac.id] || Sparkles;
+                    return <Icon className="w-6 h-6 sm:w-7 sm:h-7 text-[#4A1C40]" />;
+                  })()}
                 </div>
 
                 <div className="space-y-1 w-full">
