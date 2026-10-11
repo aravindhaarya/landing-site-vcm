@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, Calendar, Sparkles } from 'lucide-react';
+import { Phone, Calendar, Sparkles, Image as ImageIcon, Camera } from 'lucide-react';
 import { MOMENTS_GALLERY, VENUE_INFO } from '../data/banquetData';
 
 interface PhotoGalleryProps {
@@ -21,7 +21,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ onOpenBooking }) => 
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Section Header verbatim matching user content */}
+        {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#F9F8F4] text-[#4A1C40] text-xs uppercase tracking-widest font-bold border border-[#C5A059]/40">
             <Sparkles className="w-3.5 h-3.5 text-[#C5A059]" />
@@ -35,12 +35,12 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ onOpenBooking }) => 
           </p>
         </div>
 
-        {/* 6 Moments Grid - Blank Photo Frames */}
+        {/* 6 Moments Grid - Clean Photo Reference Frames */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {MOMENTS_GALLERY.map((item, index) => (
             <div
               key={item.id}
-              className="bg-[#FFFFFF] border-2 border-[#E5E0D8] p-4 shadow-2xs space-y-3"
+              className="bg-[#FFFFFF] border-2 border-[#E5E0D8] hover:border-[#C5A059] p-4 shadow-2xs space-y-3 transition-colors group"
               style={{
                 borderTopLeftRadius: index % 2 === 0 ? '30px' : '0px',
                 borderBottomRightRadius: index % 2 === 0 ? '30px' : '0px',
@@ -48,9 +48,9 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ onOpenBooking }) => 
                 borderBottomLeftRadius: index % 2 !== 0 ? '30px' : '0px',
               }}
             >
-              {/* Photo Area */}
+              {/* Photo Area: Clean Reference Frame without generated images */}
               <div
-                className="aspect-4/3 bg-[#F9F8F4] overflow-hidden border border-[#E5E0D8]"
+                className="aspect-4/3 bg-gradient-to-br from-[#FAF7F2] to-[#F1ECE1] overflow-hidden border-2 border-dashed border-[#C5A059]/40 flex flex-col items-center justify-center p-4 text-center relative group-hover:border-[#C5A059] transition-colors"
                 style={{
                   borderTopLeftRadius: index % 2 === 0 ? '20px' : '0px',
                   borderBottomRightRadius: index % 2 === 0 ? '20px' : '0px',
@@ -58,16 +58,15 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ onOpenBooking }) => 
                   borderBottomLeftRadius: index % 2 !== 0 ? '20px' : '0px',
                 }}
               >
-                {item.image ? (
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                  />
-                ) : (
-                  <div className="w-full h-full border-2 border-dashed border-[#C5A059]/35" />
-                )}
+                <div className="w-12 h-12 rounded-full bg-white shadow-xs border border-[#C5A059]/40 flex items-center justify-center text-[#4A1C40] mb-2 group-hover:scale-105 transition-transform">
+                  <Camera className="w-5 h-5 text-[#C5A059]" />
+                </div>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#4A1C40]">
+                  Photo Reference #{index + 1}
+                </span>
+                <span className="text-[10px] text-[#888888] mt-0.5">
+                  Reference images will be updated here
+                </span>
               </div>
 
               <div className="space-y-1">

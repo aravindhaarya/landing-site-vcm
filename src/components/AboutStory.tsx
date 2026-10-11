@@ -86,7 +86,7 @@ export const AboutStory: React.FC<AboutStoryProps> = ({ onOpenBooking }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
-            {/* Left: Blank Photo Frame */}
+            {/* Left: Venue Architecture Showcase / Photo Frame */}
             <motion.div
               className="lg:col-span-5 relative transform-gpu will-change-transform"
               initial={{ opacity: 0, x: -30 }}
@@ -95,22 +95,57 @@ export const AboutStory: React.FC<AboutStoryProps> = ({ onOpenBooking }) => {
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             >
               <div
-                className="w-full h-[360px] sm:h-[400px] bg-[#F9F8F4] border-4 border-[#C5A059] shadow-xl overflow-hidden relative"
+                className="w-full min-h-[360px] sm:min-h-[400px] bg-gradient-to-br from-[#FAF7F2] via-[#FFFFFF] to-[#F5EFE6] border-3 border-[#C5A059] shadow-xl overflow-hidden relative flex flex-col justify-between p-6 sm:p-8"
                 style={{
                   borderTopRightRadius: '60px',
                   borderBottomLeftRadius: '60px',
                 }}
               >
-                {VENUE_INFO.aboutImage ? (
-                  <img
-                    src={VENUE_INFO.aboutImage}
-                    alt={VENUE_INFO.aboutImageAlt}
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <div className="w-full h-full border-2 border-dashed border-[#C5A059]/50" />
-                )}
+                {/* Traditional Auspicious Corner Motifs */}
+                <div className="absolute top-3 left-3 w-8 h-8 border-t-2 border-l-2 border-[#C5A059]/60 pointer-events-none" />
+                <div className="absolute top-3 right-3 w-8 h-8 border-t-2 border-r-2 border-[#C5A059]/60 pointer-events-none" />
+                <div className="absolute bottom-3 left-3 w-8 h-8 border-b-2 border-l-2 border-[#C5A059]/60 pointer-events-none" />
+                <div className="absolute bottom-3 right-3 w-8 h-8 border-b-2 border-r-2 border-[#C5A059]/60 pointer-events-none" />
+
+                {/* Top Badge */}
+                <div className="flex items-center justify-between">
+                  <div className="w-10 h-10 rounded-full bg-[#4A1C40] border border-[#C5A059] flex items-center justify-center text-[#C5A059] font-serif font-bold text-lg shadow-xs">
+                    V
+                  </div>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-[#4A1C40] bg-[#C5A059]/15 border border-[#C5A059]/40 px-2.5 py-1 rounded-full">
+                    Madipakkam, Chennai
+                  </span>
+                </div>
+
+                {/* Center Content Placeholder */}
+                <div className="my-auto py-6 text-center space-y-3">
+                  <div className="w-16 h-16 mx-auto rounded-full bg-[#4A1C40]/5 border-2 border-dashed border-[#C5A059] flex items-center justify-center">
+                    <Sparkles className="w-7 h-7 text-[#C5A059]" />
+                  </div>
+                  <div className="space-y-1">
+                    <h3 className="font-serif font-bold text-lg sm:text-xl text-[#4A1C40]">
+                      Varathambal Chockalingam
+                    </h3>
+                    <p className="text-xs font-semibold uppercase tracking-wider text-[#C5A059]">
+                      Kalyana Mahal • Grand Hall &amp; Stage
+                    </p>
+                  </div>
+                  <p className="text-[11px] text-[#777777] max-w-xs mx-auto leading-relaxed">
+                    Spacious air-conditioned celebration hall with 450 seating, 150 dining, and 8 AC suites.
+                  </p>
+                </div>
+
+                {/* Bottom Highlight Pills */}
+                <div className="grid grid-cols-2 gap-2 pt-3 border-t border-[#E5E0D8]">
+                  <div className="bg-white/80 p-2 rounded-lg border border-[#C5A059]/30 text-center">
+                    <div className="text-[11px] font-bold text-[#4A1C40]">450+ Seating</div>
+                    <div className="text-[9px] text-[#777777]">Main AC Hall</div>
+                  </div>
+                  <div className="bg-white/80 p-2 rounded-lg border border-[#C5A059]/30 text-center">
+                    <div className="text-[11px] font-bold text-[#4A1C40]">150 Dining</div>
+                    <div className="text-[9px] text-[#777777]">Traditional Feast</div>
+                  </div>
+                </div>
               </div>
 
               {/* Verified Badge */}
@@ -119,7 +154,7 @@ export const AboutStory: React.FC<AboutStoryProps> = ({ onOpenBooking }) => {
                 whileInView={{ opacity: 1, scale: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.35, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute -bottom-4 -right-4 bg-[#4A1C40] text-white p-3.5 border-2 border-[#C5A059] shadow-lg hidden sm:flex items-center gap-2.5"
+                className="absolute -bottom-4 -right-4 bg-[#4A1C40] text-white p-3.5 border-2 border-[#C5A059] shadow-lg hidden sm:flex items-center gap-2.5 z-10"
                 style={{
                   borderTopLeftRadius: '16px',
                   borderBottomRightRadius: '16px',
