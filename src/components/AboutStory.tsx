@@ -95,12 +95,23 @@ export const AboutStory: React.FC<AboutStoryProps> = ({ onOpenBooking }) => {
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             >
               <div
-                className="w-full h-[360px] sm:h-[400px] bg-[#F9F8F4] border-4 border-dashed border-[#C5A059]/50 shadow-sm"
+                className="w-full h-[360px] sm:h-[400px] bg-[#F9F8F4] border-4 border-[#C5A059] shadow-xl overflow-hidden relative"
                 style={{
                   borderTopRightRadius: '60px',
                   borderBottomLeftRadius: '60px',
                 }}
-              />
+              >
+                {VENUE_INFO.aboutImage ? (
+                  <img
+                    src={VENUE_INFO.aboutImage}
+                    alt={VENUE_INFO.aboutImageAlt}
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full border-2 border-dashed border-[#C5A059]/50" />
+                )}
+              </div>
 
               {/* Verified Badge */}
               <motion.div

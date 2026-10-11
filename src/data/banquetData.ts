@@ -23,9 +23,10 @@ export const VENUE_INFO = {
   googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=X59R%2BH25%2C+junction%2C+koot+road%2C+Defence+Colony%2C+Madipakkam%2C+Moovarasampettai%2C+Tamil+Nadu+600091",
   aboutHeading: "Book Varathambal Chockalingam Kalyana Mahal for Your Dream Celebration",
   aboutText: "Varathambal Chockalingam Kalyana Mahal is an ideal venue for weddings and social gatherings, accommodating over 450 guests comfortably. With a spacious, elegant layout, it offers customizable seating arrangements to suit your event's needs. The hall is equipped with modern amenities and provides a blend of comfort and style, ensuring a memorable experience for all. Known for its professional staff and attention to detail, Varathambal Chockalingam Kalyana Mahal guarantees smooth event execution. Conveniently located with ample parking, it ensures easy access for guests. Varathambal Chockalingam Kalyana Mahal ambiance and excellent service make it a top choice for unforgettable celebrations.",
-  aboutImage: "",
-  aboutImageAlt: "Varathambal Chockalingam Kalyana Mahal",
-  heroImage: ""
+  aboutImage: "/src/assets/images/mahal_hall_walkthrough_1791710040298.jpg",
+  aboutImageAlt: "Varathambal Chockalingam Kalyana Mahal Grand Hall",
+  heroImage: "/src/assets/images/mahal_stage_close_1791710052584.jpg",
+  heroVideo: "/hero-background.mp4"
 };
 
 export const EVENT_TYPES = [
@@ -178,38 +179,38 @@ export const AMENITIES: MahalAmenity[] = [
 export const MOMENTS_GALLERY: GalleryItem[] = [
   {
     id: "moment-1",
-    title: "Varathambal Chockalingam Kalyana Mahal Moments",
-    image: "",
+    title: "Varathambal Chockalingam Kalyana Mahal Stage",
+    image: "/src/assets/images/mahal_stage_close_1791710052584.jpg",
     caption: "Grand Mandapam & Stage Decoration"
   },
   {
     id: "moment-2",
-    title: "Varathambal Chockalingam Kalyana Mahal Moments",
-    image: "",
-    caption: "Traditional Ceremony & Illumination"
-  },
-  {
-    id: "moment-3",
-    title: "Varathambal Chockalingam Kalyana Mahal Moments",
-    image: "",
+    title: "Varathambal Chockalingam Kalyana Mahal Grand Hall",
+    image: "/src/assets/images/mahal_hall_walkthrough_1791710040298.jpg",
     caption: "Spacious Seating & Party Hall Ambiance"
   },
   {
+    id: "moment-3",
+    title: "Varathambal Chockalingam Kalyana Mahal Reception Setup",
+    image: "/src/assets/images/mahal_stage_close_1791710052584.jpg",
+    caption: "Traditional Ceremony & Illumination"
+  },
+  {
     id: "moment-4",
-    title: "Varathambal Chockalingam Kalyana Mahal Moments",
-    image: "",
-    caption: "Elegant Dining & Banquet Setup"
+    title: "Varathambal Chockalingam Kalyana Mahal Central Aisle",
+    image: "/src/assets/images/mahal_hall_walkthrough_1791710040298.jpg",
+    caption: "Aisle View Leading to Stage"
   },
   {
     id: "moment-5",
-    title: "Varathambal Chockalingam Kalyana Mahal Moments",
-    image: "",
+    title: "Varathambal Chockalingam Kalyana Mahal Floral Backdrops",
+    image: "/src/assets/images/mahal_stage_close_1791710052584.jpg",
     caption: "Celebration Stage & Floral Backdrops"
   },
   {
     id: "moment-6",
-    title: "Varathambal Chockalingam Kalyana Mahal Moments",
-    image: "",
+    title: "Varathambal Chockalingam Kalyana Mahal Festivities",
+    image: "/src/assets/images/mahal_hall_walkthrough_1791710040298.jpg",
     caption: "Traditional Festivities & Wedding Moments"
   }
 ];

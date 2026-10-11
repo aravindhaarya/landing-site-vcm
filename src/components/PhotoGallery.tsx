@@ -48,16 +48,27 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ onOpenBooking }) => 
                 borderBottomLeftRadius: index % 2 !== 0 ? '30px' : '0px',
               }}
             >
-              {/* Blank Photo Area */}
+              {/* Photo Area */}
               <div
-                className="aspect-4/3 bg-[#F9F8F4] border-2 border-dashed border-[#C5A059]/35"
+                className="aspect-4/3 bg-[#F9F8F4] overflow-hidden border border-[#E5E0D8]"
                 style={{
                   borderTopLeftRadius: index % 2 === 0 ? '20px' : '0px',
                   borderBottomRightRadius: index % 2 === 0 ? '20px' : '0px',
                   borderTopRightRadius: index % 2 !== 0 ? '20px' : '0px',
                   borderBottomLeftRadius: index % 2 !== 0 ? '20px' : '0px',
                 }}
-              />
+              >
+                {item.image ? (
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  />
+                ) : (
+                  <div className="w-full h-full border-2 border-dashed border-[#C5A059]/35" />
+                )}
+              </div>
 
               <div className="space-y-1">
                 <h3 className="font-serif text-sm font-bold text-[#4A1C40]">
