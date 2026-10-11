@@ -1,6 +1,8 @@
 import React from 'react';
 import { MapPin, Phone, Calendar, ArrowRight, ExternalLink, ShieldCheck } from 'lucide-react';
 import { VENUE_INFO } from '../data/banquetData';
+import { WhatsAppIcon } from './WhatsAppIcon';
+import { WHATSAPP_PHONE, WHATSAPP_PHONE_DISPLAY } from '../utils/whatsapp';
 
 interface FooterProps {
   onOpenBooking: () => void;
@@ -33,15 +35,15 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
               className="px-6 py-3.5 bg-[#C5A059] text-[#4A1C40] font-bold text-xs uppercase tracking-wider hover:bg-[#b58f48] shadow-md flex items-center gap-2 rounded-full transition-all"
             >
               <Phone className="w-4 h-4 fill-[#4A1C40]" />
-              <span>Call Now: {VENUE_INFO.phone}</span>
+              <span>Call: {VENUE_INFO.phone}</span>
             </a>
 
             <button
               onClick={onOpenBooking}
               className="px-6 py-3.5 bg-[#4A1C40] text-white font-bold text-xs uppercase tracking-wider hover:bg-[#34122c] border border-[#C5A059] shadow-md cursor-pointer transition-all flex items-center gap-2 rounded-full"
             >
-              <Calendar className="w-4 h-4 text-[#C5A059]" />
-              <span>Request Form</span>
+              <WhatsAppIcon className="w-4 h-4 fill-emerald-400" />
+              <span>Request Form (WhatsApp)</span>
             </button>
           </div>
         </div>
@@ -137,8 +139,19 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
 
             <div className="space-y-2 pt-1">
               <span className="text-[10px] uppercase font-semibold text-[#C5A059] tracking-wider block">
-                Direct Contact Numbers:
+                Direct Contact & WhatsApp:
               </span>
+              <div className="flex items-center gap-2.5 text-xs text-neutral-300">
+                <WhatsAppIcon className="w-4 h-4 fill-emerald-400 shrink-0" />
+                <a
+                  href={`https://wa.me/919962621652?text=${encodeURIComponent('Namaste! I would like to inquire about booking Varathambal Chockalingam Kalyana Mahal.')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-emerald-300 font-bold text-emerald-400"
+                >
+                  WhatsApp: {WHATSAPP_PHONE}
+                </a>
+              </div>
               <div className="flex items-center gap-2.5 text-xs text-neutral-300">
                 <Phone className="w-4 h-4 text-[#C5A059] shrink-0" />
                 <a href={VENUE_INFO.telLink} className="hover:text-[#C5A059] font-bold">

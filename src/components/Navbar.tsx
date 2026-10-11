@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Phone, Calendar, Menu, X, ChevronRight, Sparkles } from 'lucide-react';
 import { VENUE_INFO } from '../data/banquetData';
+import { WhatsAppIcon } from './WhatsAppIcon';
+import { WHATSAPP_PHONE } from '../utils/whatsapp';
 
 interface NavbarProps {
   onOpenBooking: () => void;
@@ -59,10 +61,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
           <div className="flex items-center gap-3 flex-shrink-0">
             <button
               onClick={onOpenBooking}
-              className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs text-[#C5A059] hover:text-white font-semibold transition-colors cursor-pointer whitespace-nowrap"
+              className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs text-emerald-300 hover:text-white font-semibold transition-colors cursor-pointer whitespace-nowrap"
             >
-              <Sparkles className="w-3 h-3 flex-shrink-0" />
-              <span>Request Form / Availability</span>
+              <WhatsAppIcon className="w-3.5 h-3.5 fill-emerald-400" />
+              <span>WhatsApp Request Form ({WHATSAPP_PHONE})</span>
             </button>
           </div>
         </div>
@@ -142,7 +144,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
                   border: '1px solid #C5A059',
                 }}
               >
-                <Calendar className="w-3.5 h-3.5 text-[#C5A059]" />
+                <WhatsAppIcon className="w-3.5 h-3.5 fill-emerald-400" />
                 <span>Request Form</span>
               </button>
             </div>
@@ -154,7 +156,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
                 onClick={onOpenBooking}
                 className="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider px-3 py-1.5 bg-[#4A1C40] hover:bg-[#34122c] text-white rounded shadow-xs border border-[#C5A059] transition-colors cursor-pointer whitespace-nowrap"
               >
-                <Calendar className="w-3.5 h-3.5 text-[#C5A059]" />
+                <WhatsAppIcon className="w-3.5 h-3.5 fill-emerald-400" />
                 <span>Request Form</span>
               </button>
 
@@ -238,8 +240,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
                   borderBottomRightRadius: '14px',
                 }}
               >
-                <Calendar className="w-4 h-4 text-[#C5A059]" />
-                <span>Open Request Form</span>
+                <WhatsAppIcon className="w-4 h-4 fill-emerald-400" />
+                <span>Open Request Form (WhatsApp)</span>
               </button>
             </div>
           </div>

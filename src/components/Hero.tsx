@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { motion, type Variants } from 'motion/react';
-import { Phone, Calendar, Sparkles, MapPin, CheckCircle2, ShieldCheck, ArrowRight, Award, Clock } from 'lucide-react';
+import { Phone, Calendar, Sparkles, MapPin, CheckCircle2, ShieldCheck, ArrowRight, Award, Clock, Send } from 'lucide-react';
 import { VENUE_INFO, EVENT_TYPES } from '../data/banquetData';
+import { WhatsAppIcon } from './WhatsAppIcon';
+import { WHATSAPP_PHONE, getWhatsAppBookingUrl, triggerWhatsAppRedirect } from '../utils/whatsapp';
 
 interface HeroProps {
   onOpenBooking: (eventType?: string) => void;
@@ -59,6 +61,27 @@ const rightCardVariants: Variants = {
 
 export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
   const [selectedEvent, setSelectedEvent] = useState('Wedding');
+  const [heroDate, setHeroDate] = useState('');
+  const [heroName, setHeroName] = useState('');
+  const [heroPhone, setHeroPhone] = useState('');
+
+  const handleHeroQuickSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const ref = 'VCKM-' + Math.floor(100000 + Math.random() * 900000);
+    const targetUrl = getWhatsAppBookingUrl({
+      fullName: heroName || 'Valued Guest',
+      phone: heroPhone || 'Direct Inquiry',
+      eventType: selectedEvent,
+      selectedDate: heroDate,
+      timeSlot: 'Full Day',
+      guestsCount: '300 - 450',
+      roomsCount: '8 Rooms',
+      brahminPackage: selectedEvent === 'Wedding',
+      notes: 'Direct inquiry submitted from website homepage.',
+      referenceId: ref,
+    });
+    triggerWhatsAppRedirect(targetUrl);
+  };
 
   return (
     <section id="hero" className="relative bg-[#F9F8F4] pt-8 pb-16 overflow-hidden">
@@ -84,7 +107,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
-          {/* Left Column: Heading, Subheading, Key Highlights, Call Now */}
+          {/* Left Column: Heading, Subheading, Key Highlights, Call Now & WhatsApp */}
           <motion.div
             className="lg:col-span-7 space-y-6 text-left transform-gpu will-change-transform"
             variants={containerVariants}
@@ -140,40 +163,48 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
               </motion.div>
             </motion.div>
 
-            {/* Prominent Action & Call Now row */}
-            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-4 pt-2 transform-gpu will-change-transform">
+            {/* Prominent Action & Call Now / WhatsApp row */}
+            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-3 sm:gap-4 pt-2 transform-gpu will-change-transform">
               <motion.a
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 id="hero-call-now-btn"
                 href={VENUE_INFO.telLink}
-                className="px-7 py-3.5 bg-[#C5A059] text-[#4A1C40] text-xs uppercase tracking-widest font-bold hover:bg-[#b58f48] transition-all shadow-md hover:shadow-lg flex items-center gap-2 transform-gpu will-change-transform"
+                className="px-6 py-3.5 bg-[#C5A059] text-[#4A1C40] text-xs uppercase tracking-widest font-bold hover:bg-[#b58f48] transition-all shadow-md hover:shadow-lg flex items-center gap-2 transform-gpu will-change-transform"
                 style={{
                   borderTopLeftRadius: '22px',
                   borderBottomRightRadius: '22px',
                 }}
               >
                 <Phone className="w-4 h-4 fill-[#4A1C40]" />
-                <span>Call Now: {VENUE_INFO.phone}</span>
+                <span>Call: {VENUE_INFO.phone}</span>
               </motion.a>
 
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => onOpenBooking(selectedEvent)}
-                className="px-7 py-3.5 bg-[#4A1C40] text-[#FFFFFF] text-xs uppercase tracking-widest font-bold hover:bg-[#34122c] transition-all shadow-md hover:shadow-lg cursor-pointer flex items-center gap-2 transform-gpu will-change-transform"
+                className="px-6 py-3.5 bg-[#4A1C40] text-[#FFFFFF] text-xs uppercase tracking-widest font-bold hover:bg-[#34122c] transition-all shadow-md hover:shadow-lg cursor-pointer flex items-center gap-2 transform-gpu will-change-transform border border-[#C5A059]"
                 style={{
                   borderTopRightRadius: '22px',
                   borderBottomLeftRadius: '22px',
                 }}
               >
-                <Calendar className="w-4 h-4 text-[#C5A059]" />
-                <span>Book / Check Dates</span>
+                <WhatsAppIcon className="w-4 h-4 fill-emerald-400" />
+                <span>Request Form (WhatsApp)</span>
               </motion.button>
             </motion.div>
 
+            {/* Direct WhatsApp info line */}
+            <motion.div variants={itemVariants} className="flex items-center gap-2 text-xs text-emerald-800 bg-emerald-50 py-1.5 px-3 rounded-lg border border-emerald-200/60 w-fit">
+              <WhatsAppIcon className="w-4 h-4 fill-emerald-600 shrink-0" />
+              <span>
+                Prefilled responses redirected instantly to WhatsApp: <strong>{WHATSAPP_PHONE}</strong>
+              </span>
+            </motion.div>
+
             {/* Address snippet */}
-            <motion.div variants={itemVariants} className="pt-2 flex items-start gap-2 text-xs text-[#666666] transform-gpu will-change-transform">
+            <motion.div variants={itemVariants} className="pt-1 flex items-start gap-2 text-xs text-[#666666] transform-gpu will-change-transform">
               <MapPin className="w-4 h-4 text-[#C5A059] shrink-0 mt-0.5" />
               <span>
                 {VENUE_INFO.address}
@@ -181,45 +212,45 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
             </motion.div>
           </motion.div>
 
-          {/* Right Column: Hero Collage & Interactive Element */}
+          {/* Right Column: Hero Interactive Request Form Card */}
           <div className="lg:col-span-5">
             <motion.div
               id="hero-collage-container"
               variants={rightCardVariants}
               initial="hidden"
               animate="visible"
-              className="relative bg-[#FFFFFF] border-2 border-[#C5A059] p-4 sm:p-5 shadow-2xl space-y-4 transform-gpu will-change-transform"
+              className="relative bg-[#FFFFFF] border-2 border-[#C5A059] p-5 sm:p-6 shadow-2xl space-y-4 transform-gpu will-change-transform"
               style={{
                 borderTopLeftRadius: '32px',
                 borderBottomRightRadius: '32px',
               }}
             >
-              {/* Blank Photo Frame */}
-              <div
-                className="w-full h-56 sm:h-64 bg-[#F9F8F4] border-2 border-dashed border-[#C5A059]/40"
-                style={{
-                  borderTopLeftRadius: '24px',
-                  borderBottomRightRadius: '24px',
-                }}
-              />
-
-              {/* Interactive Quick Date Check & Availability Element */}
-              <div className="pt-2 border-t border-[#F1EBE4] space-y-3">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="font-serif text-base font-bold text-[#4A1C40] leading-tight">
-                      Check Date Availability
-                    </h3>
-                    <p className="text-[11px] text-[#666666]">
-                      Select celebration type &amp; inquire instantly
-                    </p>
+              {/* Card Title & WhatsApp Badge */}
+              <div className="flex items-start justify-between gap-3 border-b border-[#F1EBE4] pb-3">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-700">
+                      WhatsApp Connected
+                    </span>
                   </div>
-                  <span className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 bg-[#F9F8F4] text-[#C5A059] border border-[#C5A059]/40 rounded-full">
-                    Instant Quote
-                  </span>
+                  <h3 className="font-serif text-lg font-bold text-[#4A1C40] mt-0.5">
+                    Request Form &amp; Date Inquiry
+                  </h3>
+                  <p className="text-[11px] text-[#666666]">
+                    Prefills and redirects directly to WhatsApp <strong className="text-emerald-700">{WHATSAPP_PHONE}</strong>
+                  </p>
                 </div>
+                <div className="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center shrink-0">
+                  <WhatsAppIcon className="w-6 h-6 fill-emerald-600" />
+                </div>
+              </div>
 
-                {/* Quick Event Category Pills */}
+              {/* Event Type selector pills */}
+              <div className="space-y-1.5">
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-[#4A1C40]">
+                  Select Occasion
+                </label>
                 <div className="flex flex-wrap gap-1.5">
                   {EVENT_TYPES.map((ev) => (
                     <button
@@ -236,53 +267,98 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
                     </button>
                   ))}
                 </div>
+              </div>
 
-                {/* Direct Action Buttons: Inquire & Call Now */}
-                <div className="grid grid-cols-2 gap-2.5 pt-1">
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    type="button"
-                    onClick={() => onOpenBooking(selectedEvent)}
-                    className="py-2.5 px-3 bg-[#4A1C40] hover:bg-[#34122c] text-white text-xs font-bold uppercase tracking-wider shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer"
-                    style={{
-                      borderTopLeftRadius: '14px',
-                      borderBottomRightRadius: '14px',
-                    }}
-                  >
-                    <Calendar className="w-3.5 h-3.5 text-[#C5A059]" />
-                    <span>Inquire {selectedEvent}</span>
-                  </motion.button>
+              {/* Embedded Quick Request Form */}
+              <form onSubmit={handleHeroQuickSubmit} className="space-y-3 pt-1">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  <div>
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-[#4A1C40] mb-1">
+                      Preferred Date
+                    </label>
+                    <input
+                      type="date"
+                      value={heroDate}
+                      onChange={(e) => setHeroDate(e.target.value)}
+                      className="w-full px-2.5 py-1.5 text-xs bg-[#F9F8F4] border border-[#E5E0D8] rounded-lg text-[#333333] focus:outline-hidden focus:border-[#C5A059]"
+                    />
+                  </div>
 
-                  <motion.a
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    href={VENUE_INFO.telLink}
-                    className="py-2.5 px-3 bg-[#C5A059] hover:bg-[#b58f48] text-[#4A1C40] text-xs font-bold uppercase tracking-wider shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-1.5"
-                    style={{
-                      borderTopRightRadius: '14px',
-                      borderBottomLeftRadius: '14px',
-                    }}
-                  >
-                    <Phone className="w-3.5 h-3.5 fill-[#4A1C40]" />
-                    <span>Call Manager</span>
-                  </motion.a>
+                  <div>
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-[#4A1C40] mb-1">
+                      Your Full Name
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. Ramesh"
+                      value={heroName}
+                      onChange={(e) => setHeroName(e.target.value)}
+                      className="w-full px-2.5 py-1.5 text-xs bg-[#F9F8F4] border border-[#E5E0D8] rounded-lg text-[#333333] focus:outline-hidden focus:border-[#C5A059]"
+                    />
+                  </div>
                 </div>
 
-                {/* Venue Trust Highlights Bar */}
-                <div className="pt-2 border-t border-[#F1EBE4] grid grid-cols-3 gap-1 text-center text-[10px] text-[#666666]">
-                  <div className="flex flex-col items-center py-1 bg-[#F9F8F4] rounded border border-[#E5E0D8]/60">
-                    <span className="font-bold text-[#4A1C40]">8 AC Rooms</span>
-                    <span className="text-[9px] text-[#888888]">Included</span>
-                  </div>
-                  <div className="flex flex-col items-center py-1 bg-[#F9F8F4] rounded border border-[#E5E0D8]/60">
-                    <span className="font-bold text-[#4A1C40]">Valet Parking</span>
-                    <span className="text-[9px] text-[#888888]">Cars &amp; Bikes</span>
-                  </div>
-                  <div className="flex flex-col items-center py-1 bg-[#F9F8F4] rounded border border-[#E5E0D8]/60">
-                    <span className="font-bold text-[#4A1C40]">Brahmin Pkg</span>
-                    <span className="text-[9px] text-[#888888]">2½ Days Setup</span>
-                  </div>
+                <div>
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-[#4A1C40] mb-1">
+                    Your WhatsApp Phone Number
+                  </label>
+                  <input
+                    type="tel"
+                    required
+                    placeholder="+91 98765 43210"
+                    value={heroPhone}
+                    onChange={(e) => setHeroPhone(e.target.value)}
+                    className="w-full px-2.5 py-1.5 text-xs bg-[#F9F8F4] border border-[#E5E0D8] rounded-lg text-[#333333] focus:outline-hidden focus:border-[#C5A059]"
+                  />
+                </div>
+
+                {/* Submit & Redirect to WhatsApp Button */}
+                <motion.button
+                  whileHover={{ scale: 1.01 }}
+                  whileTap={{ scale: 0.98 }}
+                  type="submit"
+                  id="hero-whatsapp-submit-btn"
+                  className="w-full py-3 bg-[#25D366] hover:bg-[#20ba59] text-white text-xs font-bold uppercase tracking-wider shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer rounded-xl"
+                >
+                  <WhatsAppIcon className="w-4 h-4 fill-white" />
+                  <span>Send Request to WhatsApp ({WHATSAPP_PHONE})</span>
+                </motion.button>
+              </form>
+
+              {/* Or Open Detailed Form */}
+              <div className="pt-1 flex items-center justify-between text-[11px] border-t border-[#F1EBE4]">
+                <button
+                  type="button"
+                  onClick={() => onOpenBooking(selectedEvent)}
+                  className="text-[#4A1C40] hover:text-[#C5A059] font-bold underline cursor-pointer flex items-center gap-1"
+                >
+                  <Calendar className="w-3.5 h-3.5 text-[#C5A059]" />
+                  <span>Need Rooms or Catering? Detailed Form &rarr;</span>
+                </button>
+
+                <a
+                  href={VENUE_INFO.telLink}
+                  className="text-[#777777] hover:text-[#4A1C40] font-semibold flex items-center gap-1"
+                >
+                  <Phone className="w-3 h-3 text-[#C5A059]" />
+                  <span>Call Us</span>
+                </a>
+              </div>
+
+              {/* Venue Trust Highlights Bar */}
+              <div className="pt-2 border-t border-[#F1EBE4] grid grid-cols-3 gap-1.5 text-center text-[10px] text-[#666666]">
+                <div className="flex flex-col items-center py-1 bg-[#F9F8F4] rounded border border-[#E5E0D8]/60">
+                  <span className="font-bold text-[#4A1C40]">450 Seating</span>
+                  <span className="text-[9px] text-[#888888]">150 Dining</span>
+                </div>
+                <div className="flex flex-col items-center py-1 bg-[#F9F8F4] rounded border border-[#E5E0D8]/60">
+                  <span className="font-bold text-[#4A1C40]">8 AC Rooms</span>
+                  <span className="text-[9px] text-[#888888]">Included</span>
+                </div>
+                <div className="flex flex-col items-center py-1 bg-[#F9F8F4] rounded border border-[#E5E0D8]/60">
+                  <span className="font-bold text-[#4A1C40]">Brahmin Pkg</span>
+                  <span className="text-[9px] text-[#888888]">2½ Days Setup</span>
                 </div>
               </div>
             </motion.div>
@@ -293,4 +369,3 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
     </section>
   );
 };
-

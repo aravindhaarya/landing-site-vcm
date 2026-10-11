@@ -6,6 +6,9 @@ export const VENUE_INFO = {
   phone: "+91-9962621652",
   phoneDisplay: "+91-9962621652",
   telLink: "tel:+919962621652",
+  whatsapp: "+919962621652",
+  whatsappDigits: "919962621652",
+  whatsappUrl: "https://wa.me/919962621652",
   additionalPhones: [
     { number: "+91-9600095411", telLink: "tel:+919600095411" },
     { number: "+91-9094912929", telLink: "tel:+919094912929" }

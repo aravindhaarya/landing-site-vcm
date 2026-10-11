@@ -13,6 +13,7 @@ import { FAQAccordion } from './components/FAQAccordion';
 import { Footer } from './components/Footer';
 import { BookingModal } from './components/BookingModal';
 import { SectionDivider } from './components/SectionDivider';
+import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 
 export default function App() {
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
@@ -105,6 +106,9 @@ export default function App() {
         onClose={() => setBookingModalOpen(false)}
         initialEventType={bookingEventType}
       />
+
+      {/* Floating WhatsApp Quick Action Button */}
+      <FloatingWhatsApp onOpenBooking={handleOpenBooking} />
     </div>
   );
 }
