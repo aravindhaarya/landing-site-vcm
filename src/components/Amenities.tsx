@@ -121,21 +121,17 @@ export const Amenities: React.FC = () => {
         </div>
 
         {/* Compact, High-Density Amenities Cards Grid */}
-        <motion.div
-          layout
-          className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4"
-        >
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           <AnimatePresence mode="popLayout">
             {displayedAmenities.map((amenity: MahalAmenity, index: number) => {
               // Find overall index in full AMENITIES array
               const originalIndex = AMENITIES.findIndex((a) => a.id === amenity.id);
               return (
                 <motion.div
-                  layout
                   initial={{ opacity: 0, scale: 0.96 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.96 }}
-                  transition={{ duration: 0.25 }}
+                  transition={{ duration: 0.2 }}
                   key={amenity.id}
                   className="bg-[#F9F8F4] p-3 sm:p-3.5 border border-[#E8E2D8] hover:border-[#C5A059] transition-all shadow-2xs hover:shadow-sm flex items-start gap-2.5 sm:gap-3.5 rounded-xl group transform-gpu will-change-transform"
                 >
@@ -163,7 +159,7 @@ export const Amenities: React.FC = () => {
               );
             })}
           </AnimatePresence>
-        </motion.div>
+        </div>
 
         {/* View All / Collapse Toggle (When viewing 'All') */}
         {activeCategory === 'all' && (

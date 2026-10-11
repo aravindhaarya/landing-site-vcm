@@ -4,6 +4,7 @@
  */
 
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { AboutStory } from './components/AboutStory';
@@ -14,6 +15,7 @@ import { Footer } from './components/Footer';
 import { BookingModal } from './components/BookingModal';
 import { SectionDivider } from './components/SectionDivider';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
+import { FadeInUp } from './components/FadeInUp';
 
 export default function App() {
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
@@ -25,7 +27,12 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F9F8F4] text-[#2B2B2B] selection:bg-[#4A1C40] selection:text-white font-sans">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
+      className="min-h-screen bg-[#F9F8F4] text-[#2B2B2B] selection:bg-[#4A1C40] selection:text-white font-sans"
+    >
       {/* Sticky Header with Call Now CTA */}
       <Navbar onOpenBooking={() => handleOpenBooking()} />
 
@@ -58,7 +65,9 @@ export default function App() {
         />
 
         {/* 17 Amenities matching attached content */}
-        <Amenities />
+        <FadeInUp>
+          <Amenities />
+        </FadeInUp>
 
         {/* Boundary: Amenities (#FFFFFF) -> Moments Gallery (#F9F8F4) */}
         <SectionDivider
@@ -71,7 +80,9 @@ export default function App() {
         />
 
         {/* Varathambal Chockalingam Kalyana Mahal Moments Gallery */}
-        <PhotoGallery onOpenBooking={() => handleOpenBooking()} />
+        <FadeInUp>
+          <PhotoGallery onOpenBooking={() => handleOpenBooking()} />
+        </FadeInUp>
 
         {/* Boundary: Moments Gallery (#F9F8F4) -> FAQ (#FFFFFF) */}
         <SectionDivider
@@ -84,7 +95,9 @@ export default function App() {
         />
 
         {/* FAQ Accordion */}
-        <FAQAccordion />
+        <FadeInUp>
+          <FAQAccordion />
+        </FadeInUp>
 
         {/* Boundary: FAQ (#FFFFFF) -> Dark Luxury Footer (#2B2330) */}
         <SectionDivider
@@ -98,7 +111,9 @@ export default function App() {
       </main>
 
       {/* Footer with Venue Coordinates, Address & Direct Call */}
-      <Footer onOpenBooking={() => handleOpenBooking()} />
+      <FadeInUp>
+        <Footer onOpenBooking={() => handleOpenBooking()} />
+      </FadeInUp>
 
       {/* Request Form & Booking Inquiry Modal */}
       <BookingModal
@@ -109,6 +124,6 @@ export default function App() {
 
       {/* Floating WhatsApp Quick Action Button */}
       <FloatingWhatsApp onOpenBooking={handleOpenBooking} />
-    </div>
+    </motion.div>
   );
 }

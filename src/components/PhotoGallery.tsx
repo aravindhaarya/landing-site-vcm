@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, Calendar, Sparkles, Image as ImageIcon, Camera } from 'lucide-react';
+import { Phone, Calendar, Sparkles, Camera } from 'lucide-react';
 import { MOMENTS_GALLERY, VENUE_INFO } from '../data/banquetData';
 
 interface PhotoGalleryProps {
@@ -40,7 +40,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ onOpenBooking }) => 
           {MOMENTS_GALLERY.map((item, index) => (
             <div
               key={item.id}
-              className="bg-[#FFFFFF] border-2 border-[#E5E0D8] hover:border-[#C5A059] p-4 shadow-2xs space-y-3 transition-colors group"
+              className="bg-[#FFFFFF] border-2 border-[#E5E0D8] hover:border-[#C5A059] p-4 shadow-2xs space-y-3 transition-colors group transform-gpu"
               style={{
                 borderTopLeftRadius: index % 2 === 0 ? '30px' : '0px',
                 borderBottomRightRadius: index % 2 === 0 ? '30px' : '0px',
