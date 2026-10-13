@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronDown, HelpCircle } from 'lucide-react';
 import { FAQS } from '../data/banquetData';
+import { FadeInUp } from './FadeInUp';
 
 export const FAQAccordion: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -18,7 +19,7 @@ export const FAQAccordion: React.FC = () => {
         aria-hidden="true"
       />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <FadeInUp duration={0.65} yOffset={28} className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
@@ -73,7 +74,7 @@ export const FAQAccordion: React.FC = () => {
           })}
         </div>
 
-      </div>
+      </FadeInUp>
     </section>
   );
 };

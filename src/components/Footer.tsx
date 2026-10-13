@@ -3,6 +3,7 @@ import { MapPin, Phone, Calendar, ArrowRight, ExternalLink, ShieldCheck } from '
 import { VENUE_INFO } from '../data/banquetData';
 import { WhatsAppIcon } from './WhatsAppIcon';
 import { WHATSAPP_PHONE, WHATSAPP_PHONE_DISPLAY } from '../utils/whatsapp';
+import { FadeInUp } from './FadeInUp';
 
 interface FooterProps {
   onOpenBooking: () => void;
@@ -14,7 +15,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
       
       {/* Top Banner with Direct Call Now */}
       <div className="border-b border-white/10 py-10 bg-[#2B2330]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+        <FadeInUp duration={0.65} yOffset={24} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <div className="flex items-center gap-2 text-[#C5A059] text-xs uppercase tracking-widest font-bold mb-2">
               <ShieldCheck className="w-4 h-4" />
@@ -24,7 +25,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
               Book Varathambal Chockalingam Kalyana Mahal
             </h2>
             <p className="text-neutral-300 text-xs sm:text-sm mt-1 max-w-xl">
-              Accommodating 450+ guests with 150 dining, 8 AC rooms, and modern amenities in Madipakkam, Chennai.
+              Accommodating 1000+ seated guests (1500+ floating) with 400+ dining seating, 8 AC rooms, and modern amenities in Madipakkam, Chennai.
             </p>
           </div>
 
@@ -46,11 +47,11 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
               <span>Request Form (WhatsApp)</span>
             </button>
           </div>
-        </div>
+        </FadeInUp>
       </div>
 
       {/* Main Footer Info */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+      <FadeInUp duration={0.65} yOffset={24} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           
           {/* Col 1: Venue Info */}
@@ -76,12 +77,12 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
             </div>
 
             <p id="footer-venue-description" className="text-neutral-400 text-xs leading-relaxed max-w-md">
-              An ideal venue for weddings and social gatherings, accommodating over 450 guests comfortably with modern amenities, professional staff, and ample parking.
+              An ideal venue for weddings and grand social gatherings, accommodating over 1000+ seated guests (1500+ floating) comfortably with 400+ dining, modern amenities, professional staff, and ample parking.
             </p>
 
             <div className="pt-2 flex flex-wrap gap-2 text-[11px] text-neutral-300">
-              <span className="bg-white/10 px-2.5 py-1 rounded">450+ Seating Capacity</span>
-              <span className="bg-white/10 px-2.5 py-1 rounded">150 Dining</span>
+              <span className="bg-white/10 px-2.5 py-1 rounded">1000+ Seated (1500+ Floating)</span>
+              <span className="bg-white/10 px-2.5 py-1 rounded">400+ Dining Seating</span>
               <span className="bg-white/10 px-2.5 py-1 rounded">8 AC Rooms</span>
               <span className="bg-white/10 px-2.5 py-1 rounded">Cars &amp; Bikes Parking</span>
             </div>
@@ -190,7 +191,9 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
         {/* Bottom copyright */}
         <div className="pt-10 mt-10 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-[11px] text-neutral-400 gap-4">
           <div>
-            &copy; {new Date().getFullYear()} Varathambal Chockalingam Kalyana Mahal. All rights reserved.
+            <span>&copy; {new Date().getFullYear()} Varathambal Chockalingam Kalyana Mahal. All rights reserved.</span>
+            <span className="mx-2 hidden sm:inline text-neutral-600">•</span>
+            <span className="block sm:inline mt-1 sm:mt-0 text-[#C5A059]/90">D &amp; D'ed by Atom Freelancers</span>
           </div>
           <div className="flex items-center gap-2">
             <span>Call Now: </span>
@@ -199,7 +202,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
             </a>
           </div>
         </div>
-      </div>
+      </FadeInUp>
     </footer>
   );
 };

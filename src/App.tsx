@@ -30,7 +30,15 @@ export default function App() {
       <Navbar onOpenBooking={() => handleOpenBooking()} />
 
       {/* Main Page Flow with immersive skewed & parallax boundary transitions */}
-      <main>
+      <main
+        className="gpu-stabilized-container relative"
+        style={{
+          transform: 'translateZ(0)',
+          WebkitTransform: 'translateZ(0)',
+          backfaceVisibility: 'hidden',
+          WebkitBackfaceVisibility: 'hidden',
+        }}
+      >
         {/* Hero with Call Now & Embedded Request Form */}
         <Hero onOpenBooking={handleOpenBooking} />
 

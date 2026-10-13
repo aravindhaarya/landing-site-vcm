@@ -1,101 +1,117 @@
-# Scroll Stabilization & 120FPS Performance Optimization
+# Venue Seating Capacity Update (1000+ Seated & 400+ Dining)
 
-Eliminate page-wide scroll jitter and micro-stuttering across Varathambal Chockalingam Kalyana Mahal's landing page by fixing layout reflows, removing compositor thrashing, and optimizing animation performance while preserving global smooth scrolling.
+Update all venue capacity specifications, promotional highlights, facility cards, FAQs, booking form dropdowns, and SEO metadata to reflect **1000+ Seated (1500+ Floating)** in the main air-conditioned hall and **400+ Dining Seating**.
 
 > [!IMPORTANT]
-> Based on your answers:
-> - **Scroll Issue Location**: Entire page during normal scrolling.
-> - **Motion Level**: Optimize animations and eliminate layout shifts for silky-smooth 120fps performance.
-> - **Scroll Physics**: Preserve global smooth scrolling across the entire page.
+> **User Clarifications Confirmed**:
+> - **Seating Highlighting**: "1000+ Seated (1500+ Floating) and 400+ Dining"
+> - **Booking Form Tiers**: "300 to 500, 500 to 800, 800 to 1000, 1000+ guests"
 
 ---
 
-## 1. Overview & Core Concept
+## 1. Overview & Objective
 
-### What It Does
-This optimization overhaul addresses the root architectural causes of scroll jitter and stuttering across the Varathambal Chockalingam Kalyana Mahal website. It stabilizes the layout geometry, eliminates mid-scroll React state re-renders, optimizes compositor layers, and streamlines continuous hero background effects so the entire page glides with zero frame drops at 60fps and 120fps refresh rates.
-
-### Target Audience & Persona
-Couples, families, and event planners browsing the banquet hall features on mobile devices, laptops, and desktop computers with high-refresh displays.
-
-### Key Value Delivered
-- Silky-smooth, jitter-free scrolling from the top hero down to the contact footer.
-- Zero layout jumping or content reflows when the sticky navigation bar activates.
-- Preserved traditional Tamil festive ambiance (Kolams, Diyas, and celebratory aesthetics) with lightweight, GPU-optimized rendering.
-- Seamless booking form access and quick WhatsApp contact points.
+This update aligns the landing page copy, statistics, and booking flows with the venue's grand scale:
+- **Main Air-Conditioned Hall**: Updated from 450 to **1000+ Seating** (with 1500+ floating guest capacity).
+- **Dedicated Dining Hall**: Updated from 150 to **400+ Seating** capacity.
+- **Inquiry Form Options**: Updated guest count selections to accommodate grand weddings and events (300 to 500, 500 to 800, 800 to 1000, and 1000+ guests).
+- **SEO & Schema Metadata**: Updated structured data (`maximumAttendeeCapacity: 1500`) and meta descriptions so search engines and social cards display the accurate venue scale.
 
 ---
 
-## 2. Technical Architecture & Component Mapping
+## 2. Component & Content Mapping
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                       Browser Viewport                      │
-│            Global Smooth Scrolling (CSS + Compositor)       │
-└──────────────────────────────┬──────────────────────────────┘
-                               │
-               ┌───────────────┴───────────────┐
-               ▼                               ▼
-  ┌─────────────────────────┐     ┌─────────────────────────┐
-  │   Sticky Navigation     │     │      Main Content       │
-  │   - Fixed Height (No    │     │   - Stable DOM Geometry │
-  │     layout reflows)     │     │   - Zero mid-scroll     │
-  │   - Passive listener    │     │     state re-renders    │
-  │   - Backdrop opacity    │     │   - Clean compositor    │
-  │     transition only     │     │     layering            │
-  └─────────────────────────┘     └────────────┬────────────┘
-                                               │
-      ┌────────────────────┬───────────────────┼────────────────────┐
-      ▼                    ▼                   ▼                    ▼
-┌─────────────┐    ┌──────────────┐    ┌──────────────┐    ┌──────────────┐
-│    Hero     │    │  About Us &  │    │  Amenities   │    │  Gallery &   │
-│ Background  │    │  Facilities  │    │  & Category  │    │   Footers    │
-│ Lightened   │    │  Viewport-   │    │    Filter    │    │ Hardware-    │
-│ Petals &    │    │  stable      │    │  Stable grid │    │ accelerated  │
-│ SVGs        │    │  reveals     │    │  dimensions  │    │ dividers     │
-└─────────────┘    └──────────────┘    └──────────────┘    └──────────────┘
+┌────────────────────────────────────────────────────────┐
+│               src/data/banquetData.ts                  │
+│  Central single source of truth for venue statistics:  │
+│  - VENUE_INFO (capacity, diningCapacity, descriptions) │
+│  - FACILITIES (1000+ Seating, 400+ Dining)             │
+│  - FAQS (Capacity & seating answers)                   │
+└───────────────────────────┬────────────────────────────┘
+                            │
+       ┌────────────────────┼────────────────────┐
+       ▼                    ▼                    ▼
+┌─────────────┐    ┌──────────────┐    ┌──────────────────┐
+│  Hero.tsx   │    │AboutStory.tsx│    │ BookingModal.tsx │
+│  - Highlights    │- Showcase badge   │ - Guest count    │
+│    1000+ Hall   │  1000+ / 400+    │   tier dropdown  │
+│    400+ Dining  │- Facility cards   │ - Default query  │
+└──────┬──────┘    └──────┬───────┘    └─────────┬────────┘
+       │                  │                      │
+       └──────────────────┼──────────────────────┘
+                          ▼
+               ┌───────────────────────┐
+               │ Footer.tsx & HTML SEO │
+               │ - Top booking banner  │
+               │ - Meta & JSON-LD spec │
+               └───────────────────────┘
 ```
 
 ---
 
-## 3. Key Changes & Implementation Strategy
+## 3. Detailed File Modifications
 
-### A. Fix Sticky Header Layout Reflows (`src/components/Navbar.tsx`)
-- **Problem**: When scrolling past 30px, the header dynamically changes its vertical padding (`py-3.5` to `py-2.5`). Because the element is in the document flow as `sticky top-0`, shrinking its height instantly shifts the vertical position of every section below it by several pixels, causing severe scroll jumping and jitter.
-- **Solution**: Keep the navbar height and padding completely fixed and constant (`h-16` / `py-3`). Only transition GPU-composited visual properties (`box-shadow`, `border-color`, and background transparency `bg-white/95` with `backdrop-blur-md`).
-- **Scroll Listener**: Add `{ passive: true }` to the scroll event listener and guard state updates so `setIsScrolled` only triggers when the boolean state actually transitions.
+### A. Central Banquet Data (`src/data/banquetData.ts`)
+- **`VENUE_INFO`**:
+  - Update `capacity`: `"1000+ Seating (1500+ Floating)"`.
+  - Update `diningCapacity`: `"400+ Dining Seating"`.
+  - Update `heroDescription`: `"Premier air-conditioned marriage hall in Madipakkam accommodating 1000+ seated guests (1500+ floating) with 400+ dining seating, 8 AC rooms, and modern amenities."`
+  - Update `aboutText`: Adjust narrative to describe the grand capacity accommodating 1000+ seated guests, 1500+ floating attendees, and a dedicated 400+ seat dining hall.
+- **`FACILITIES`**:
+  - Update `f-seating`:
+    - `title`: `"1000+ Seating Hall"`
+    - `desc`: `"Grand air-conditioned hall with 1000+ seated capacity and 1500+ floating guests."`
+  - Update `f-dining`:
+    - `title`: `"400+ Dining Hall"`
+    - `desc`: `"Expansive dedicated dining space comfortably seating 400+ guests at a time."`
+- **`FAQS`**:
+  - Update the capacity FAQ item answer: Confirm 1000+ seated capacity in the main hall (up to 1500+ floating guests) and 400+ dining hall seating.
 
-### B. Eliminate Compositor Thrashing & Mid-Scroll Re-renders (`src/components/FadeInUp.tsx`)
-- **Problem**: `FadeInUp` attaches an `onAnimationComplete` handler that invokes `setHasFinished(true)`. During active scrolling, every section entering the viewport triggers a React state re-render. Additionally, toggling `transform: 'none'` and mutating `will-change` from `'opacity, transform'` to `'auto'` on an animated `motion.div` forces the browser compositor to destroy its GPU layers and repaint synchronously on the main thread.
-- **Solution**:
-  - Remove mid-scroll React state mutations (`setHasFinished`) and manual inline transform toggling.
-  - Let Framer Motion natively manage the transform lifecycle once (`once: true`) with pure compositor properties.
-  - Consolidate to lightweight, hardware-accelerated CSS or standard Framer Motion primitives that never force synchronous layer destruction.
+### B. Hero Section (`src/components/Hero.tsx`)
+- Update the quick statistics badge grid:
+  - Feature 1: `"1000+ Seating"` | `"Main AC Hall (1500+ Floating)"`
+  - Feature 2: `"400+ Dining"` | `"Dedicated Dining Seating"`
+- Update the embedded quick inquiry form defaults:
+  - Default guest count parameter updated from `"300 - 450"` to `"500 - 800"` (or user selectable).
+- Update the bottom guarantee badge row to reflect 1000+ Seating / 400+ Dining.
 
-### C. Remove `will-change` Layer Explosion
-- **Problem**: Over 20 static elements across `Hero.tsx`, `AboutStory.tsx`, `Amenities.tsx`, and `SectionDivider.tsx` specify hardcoded `will-change-transform`. Creating dozens of permanent GPU compositor layers exceeds VRAM budgets and causes composite rasterization stalls during scroll passes.
-- **Solution**: Strip static `will-change-transform` declarations from non-animating cards, SVG wedges, and text wrappers. Let the browser naturally manage composition layers.
+### C. About Us & Facilities Section (`src/components/AboutStory.tsx`)
+- In the left venue architecture showcase card:
+  - Update the prominent capacity tag to `"1000+ Seated (1500+ Floating)"`.
+  - Update dining stat highlight to `"400+ Dining"`.
+- Ensure the dynamic facilities list pulls from updated `FACILITIES` with proper visual alignment.
 
-### D. Optimize Hero Festive Background Effects (`src/components/FestiveHeroBackground.tsx`)
-- **Problem**: 12 continuous multi-axis 3D rotating flower petals, 8 pulsating SVG stars with individual Framer Motion timelines, and two 500px rotating SVGs run simultaneously, competing with scroll events on the main and compositor threads.
-- **Solution**:
-  - Consolidate petal animations using pure CSS keyframes with `transform: translate3d(...)` (running 100% off the main thread on the compositor).
-  - Streamline the rotating Kolam mandalas and reduce continuous re-renders.
-  - Simplify heavy stacked `blur-3xl` / `blur-2xl` ambient filters into optimized radial gradients for instant paint speeds.
+### D. Booking Inquiry Modal (`src/components/BookingModal.tsx`)
+- Update the guest count dropdown `<select>` options to match the user's selected choice:
+  - `"300 to 500 Guests"`
+  - `"500 to 800 Guests"`
+  - `"800 to 1000 Guests"`
+  - `"1000+ Guests"`
+- Update WhatsApp message generation payload in `src/utils/whatsapp.ts` if needed to ensure smooth pre-filled message text.
 
-### E. Unify Motion Animation Library Imports
-- **Problem**: Inconsistent imports between `framer-motion` and `motion/react` across components duplicate animation runtime instances and intersection observers.
-- **Solution**: Standardize all motion components to import from `framer-motion` consistently.
+### E. Footer Section (`src/components/Footer.tsx`)
+- Update the top booking banner paragraph:
+  - `"Accommodating 1000+ seated guests (1500+ floating) with 400+ dining seating, 8 AC rooms, and modern amenities in Madipakkam, Chennai."`
+- Update the bottom copyright and venue summary note.
 
-### F. Preserve Global Smooth Scroll Configuration (`src/index.css`)
-- **Verification**: Ensure `html { scroll-behavior: smooth; }` is retained as requested, while pairing it with `overscroll-behavior-y: none` or clean container boundaries to prevent rubber-band stuttering.
+### F. HTML SEO & Structured Data (`index.html`)
+- Update meta tags:
+  - `<meta name="description">`: `"Varathambal Chockalingam Kalyana Mahal is a grand marriage and banquet hall in Madipakkam, Chennai. Perfect for weddings, receptions, and engagements with 1000+ guest seating (1500+ floating), 400+ dining seating, 8 AC rooms, and modern amenities."`
+  - `<meta property="og:description">`: Mirror 1000+ seated / 400+ dining copy.
+  - `<meta name="twitter:description">`: Mirror 1000+ seated / 400+ dining copy.
+- Update Schema.org JSON-LD structured data:
+  - `"maximumAttendeeCapacity": 1500`
+  - `"amenityFeature"`: Update `"Dining Hall 400+ Capacity"` and `"Main Hall 1000+ Seating Capacity"`.
 
 ---
 
-## 4. Verification & Testing Checklist
+## 4. Verification & Testing
 
-- [ ] Smooth scrolling verified across the full page (Hero, About Us, Facilities, Amenities, Moments, FAQ, Footer).
-- [ ] No layout shift when scrolling past the top 30px navbar threshold.
-- [ ] No frame drops or stutter when sections enter the viewport.
-- [ ] Festive background elements (Kolams, Diyas, Petals) remain visually opulent and smooth.
-- [ ] Application compiles with 0 TypeScript and build errors (`compile_applet`).
+- [ ] Verify Hero feature cards display **1000+ Seating (1500+ Floating)** and **400+ Dining**.
+- [ ] Verify Booking inquiry modal contains the new guest tiers (300 to 500, 500 to 800, 800 to 1000, 1000+).
+- [ ] Verify About Story and Facilities cards reflect the updated capacities accurately.
+- [ ] Verify FAQ accordion provides the updated 1000+ / 400+ answers.
+- [ ] Verify Footer call-to-action banner text displays 1000+ / 400+.
+- [ ] Verify `index.html` JSON-LD and meta descriptions are in sync.
+- [ ] Verify build and TypeScript linting with `compile_applet`.

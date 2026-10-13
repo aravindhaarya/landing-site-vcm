@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Sparkles, ChevronDown, ChevronUp, ArrowDown, Building2, Radio, UserCheck, ShieldCheck } from 'lucide-react';
 import { AMENITIES } from '../data/banquetData';
 import { MahalAmenity } from '../types';
+import { FadeInUp } from './FadeInUp';
 
 type AmenityCategory = 'all' | 'hall' | 'tech' | 'services' | 'safety';
 
@@ -69,7 +70,7 @@ export const Amenities: React.FC = () => {
         aria-hidden="true"
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <FadeInUp duration={0.65} yOffset={28} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header - Streamlined for smooth scrolling */}
         <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8 space-y-2">
@@ -195,7 +196,7 @@ export const Amenities: React.FC = () => {
           </a>
         </div>
 
-      </div>
+      </FadeInUp>
     </section>
   );
 };

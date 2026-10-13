@@ -1,6 +1,7 @@
 import React from 'react';
 import { Phone, Calendar, Sparkles, Camera } from 'lucide-react';
 import { MOMENTS_GALLERY, VENUE_INFO } from '../data/banquetData';
+import { FadeInUp } from './FadeInUp';
 
 interface PhotoGalleryProps {
   onOpenBooking: () => void;
@@ -20,7 +21,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ onOpenBooking }) => 
         aria-hidden="true"
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <FadeInUp duration={0.65} yOffset={28} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
@@ -101,7 +102,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ onOpenBooking }) => 
           </button>
         </div>
 
-      </div>
+      </FadeInUp>
     </section>
   );
 };

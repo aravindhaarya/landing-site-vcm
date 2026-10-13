@@ -90,3 +90,11 @@
   background: linear-gradient(135deg, #C5A059 0%, #b38b44 100%);
 }
 
+/* GPU-Accelerated Container Layer for Smooth 120fps Scrolling */
+.gpu-stabilized-container {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+

@@ -22,7 +22,7 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({ onOpenBookin
       eventType: quickEvent,
       selectedDate: quickDate,
       timeSlot: 'Full Day',
-      guestsCount: '300 - 450',
+      guestsCount: '500 to 800',
       roomsCount: '8 Rooms',
       brahminPackage: false,
       notes: 'Quick inquiry from website WhatsApp widget.',

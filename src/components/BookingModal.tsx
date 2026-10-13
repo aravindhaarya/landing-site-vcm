@@ -41,7 +41,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   const [eventType, setEventType] = useState<string>(initialEventType || 'Wedding');
   const [selectedDate, setSelectedDate] = useState<string>('');
   const [timeSlot, setTimeSlot] = useState<string>('Full Day');
-  const [guestsCount, setGuestsCount] = useState<string>('300 - 450');
+  const [guestsCount, setGuestsCount] = useState<string>('500 to 800');
   const [brahminPackage, setBrahminPackage] = useState<boolean>(false);
   const [roomsCount, setRoomsCount] = useState<string>('8 Rooms (All Rooms)');
   const [fullName, setFullName] = useState<string>('');
@@ -404,10 +404,10 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                     onChange={(e) => setGuestsCount(e.target.value)}
                     className="w-full px-3 py-2 text-xs border border-[#E5E0D8] rounded-lg bg-[#F9F8F4] text-[#333333] focus:outline-hidden focus:border-[#C5A059]"
                   >
-                    <option value="Up to 150 (Dining)">Up to 150 (Dining capacity)</option>
-                    <option value="150 - 300 Guests">150 - 300 Guests</option>
-                    <option value="300 - 450 Guests">300 - 450 Guests (Full Seating)</option>
-                    <option value="450+ Guests">450+ Guests</option>
+                    <option value="300 to 500">300 to 500 Guests</option>
+                    <option value="500 to 800">500 to 800 Guests</option>
+                    <option value="800 to 1000">800 to 1000 Guests</option>
+                    <option value="1000+ guests">1000+ Guests (Grand Capacity)</option>
                   </select>
                 </div>
 

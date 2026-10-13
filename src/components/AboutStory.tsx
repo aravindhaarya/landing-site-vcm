@@ -2,6 +2,7 @@ import React from 'react';
 import { Phone, Calendar, ArrowRight, ShieldCheck, Users, UtensilsCrossed, BedDouble, Car, Bike, Wind, Sparkles, ChevronsUp } from 'lucide-react';
 import { VENUE_INFO, FACILITIES } from '../data/banquetData';
 import { SectionDivider } from './SectionDivider';
+import { FadeInUp } from './FadeInUp';
 
 interface AboutStoryProps {
   onOpenBooking: () => void;
@@ -36,7 +37,7 @@ export const AboutStory: React.FC<AboutStoryProps> = ({ onOpenBooking }) => {
           aria-hidden="true"
         />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <FadeInUp duration={0.65} yOffset={28} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             {/* Left: Venue Architecture Showcase / Photo Frame */}
@@ -78,18 +79,18 @@ export const AboutStory: React.FC<AboutStoryProps> = ({ onOpenBooking }) => {
                     </p>
                   </div>
                   <p className="text-[11px] text-[#777777] max-w-xs mx-auto leading-relaxed">
-                    Spacious air-conditioned celebration hall with 450 seating, 150 dining, and 8 AC suites.
+                    Spacious air-conditioned celebration hall with 1000+ seating (1500+ floating), 400+ dining, and 8 AC suites.
                   </p>
                 </div>
 
                 {/* Bottom Highlight Pills */}
                 <div className="grid grid-cols-2 gap-2 pt-3 border-t border-[#E5E0D8]">
                   <div className="bg-white/80 p-2 rounded-lg border border-[#C5A059]/30 text-center">
-                    <div className="text-[11px] font-bold text-[#4A1C40]">450+ Seating</div>
-                    <div className="text-[9px] text-[#777777]">Main AC Hall</div>
+                    <div className="text-[11px] font-bold text-[#4A1C40]">1000+ Seated</div>
+                    <div className="text-[9px] text-[#777777]">1500+ Floating</div>
                   </div>
                   <div className="bg-white/80 p-2 rounded-lg border border-[#C5A059]/30 text-center">
-                    <div className="text-[11px] font-bold text-[#4A1C40]">150 Dining</div>
+                    <div className="text-[11px] font-bold text-[#4A1C40]">400+ Dining</div>
                     <div className="text-[9px] text-[#777777]">Traditional Feast</div>
                   </div>
                 </div>
@@ -105,8 +106,8 @@ export const AboutStory: React.FC<AboutStoryProps> = ({ onOpenBooking }) => {
               >
                 <ShieldCheck className="w-5 h-5 text-[#C5A059]" />
                 <div className="text-left">
-                  <div className="text-xs font-bold leading-tight">450+ Capacity</div>
-                  <div className="text-[10px] text-neutral-300">Air-Conditioned</div>
+                  <div className="text-xs font-bold leading-tight">1000+ Seated</div>
+                  <div className="text-[10px] text-neutral-300">1500+ Floating</div>
                 </div>
               </div>
             </div>
@@ -147,7 +148,7 @@ export const AboutStory: React.FC<AboutStoryProps> = ({ onOpenBooking }) => {
             </div>
 
           </div>
-        </div>
+        </FadeInUp>
       </section>
 
       {/* Subtle skewed & parallax boundary transition from About Us (#FFFFFF) to Facilities (#F9F8F4) */}
@@ -162,7 +163,7 @@ export const AboutStory: React.FC<AboutStoryProps> = ({ onOpenBooking }) => {
 
       {/* Facilities Section directly matching user content */}
       <section id="facilities" className="py-10 sm:py-14 bg-[#F9F8F4] relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <FadeInUp duration={0.65} yOffset={28} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-2xl mx-auto mb-7 sm:mb-9 space-y-2">
             <span className="text-[11px] font-bold uppercase tracking-widest text-[#C5A059] bg-white px-3 py-1 rounded-full border border-[#C5A059]/40 inline-block shadow-2xs">
@@ -218,7 +219,7 @@ export const AboutStory: React.FC<AboutStoryProps> = ({ onOpenBooking }) => {
             </span>
           </div>
 
-        </div>
+        </FadeInUp>
       </section>
     </div>
   );

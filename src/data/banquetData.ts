@@ -21,8 +21,10 @@ export const VENUE_INFO = {
   address: "X59R+H25, junction, koot road, Defence Colony, Madipakkam, Moovarasampettai, Tamil Nadu 600091",
   landmark: "Defence Colony, Madipakkam, Moovarasampettai, Chennai",
   googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=X59R%2BH25%2C+junction%2C+koot+road%2C+Defence+Colony%2C+Madipakkam%2C+Moovarasampettai%2C+Tamil+Nadu+600091",
+  capacity: "1000+ Seated (1500+ Floating)",
+  diningCapacity: "400+ Dining Seating",
   aboutHeading: "Book Varathambal Chockalingam Kalyana Mahal for Your Dream Celebration",
-  aboutText: "Varathambal Chockalingam Kalyana Mahal is an ideal venue for weddings and social gatherings, accommodating over 450 guests comfortably. With a spacious, elegant layout, it offers customizable seating arrangements to suit your event's needs. The hall is equipped with modern amenities and provides a blend of comfort and style, ensuring a memorable experience for all. Known for its professional staff and attention to detail, Varathambal Chockalingam Kalyana Mahal guarantees smooth event execution. Conveniently located with ample parking, it ensures easy access for guests. Varathambal Chockalingam Kalyana Mahal ambiance and excellent service make it a top choice for unforgettable celebrations.",
+  aboutText: "Varathambal Chockalingam Kalyana Mahal is an ideal venue for weddings and grand social gatherings, accommodating over 1000+ seated guests (1500+ floating) comfortably. With an expansive, elegant layout and 400+ dining hall seating capacity, it offers customizable seating arrangements to suit your event's needs. The hall is equipped with modern amenities and provides a blend of comfort and style, ensuring a memorable experience for all. Known for its professional staff and attention to detail, Varathambal Chockalingam Kalyana Mahal guarantees smooth event execution. Conveniently located with ample parking, it ensures easy access for guests. Varathambal Chockalingam Kalyana Mahal ambiance and excellent service make it a top choice for unforgettable celebrations.",
   aboutImage: "",
   aboutImageAlt: "Varathambal Chockalingam Kalyana Mahal Grand Hall",
   heroImage: ""
@@ -39,15 +41,15 @@ export const EVENT_TYPES = [
 export const FACILITIES: Facility[] = [
   {
     id: "f-seating",
-    title: "450 Seating Capacity",
+    title: "1000+ Seating Capacity",
     iconImg: "https://lakshmihall.com/assets/laks-img/seating-capacity.webp",
-    desc: "Spacious hall layout with customizable seating for 450+ guests"
+    desc: "Grand air-conditioned hall with 1000+ seated capacity and 1500+ floating guests"
   },
   {
     id: "f-dining",
-    title: "150 Dining",
+    title: "400+ Dining Seating",
     iconImg: "https://lakshmihall.com/assets/laks-img/dining-table.webp",
-    desc: "Dedicated traditional dining hall with 150 seating capacity"
+    desc: "Dedicated traditional dining hall with 400+ seating capacity"
   },
   {
     id: "f-rooms",
@@ -110,12 +112,12 @@ export const AMENITIES: MahalAmenity[] = [
   },
   {
     id: "a-5",
-    title: "Comfortable Party hall with great ambience having 500 seating capacity",
+    title: "Comfortable Party hall with great ambience having 1000+ seating capacity",
     iconImg: "https://lakshmihall.com/assets/laks-img/comfortable.webp"
   },
   {
     id: "a-6",
-    title: "150 Dining",
+    title: "400+ Dining Seating",
     iconImg: "https://lakshmihall.com/assets/laks-img/dshining.webp"
   },
   {
@@ -217,7 +219,7 @@ export const MOMENTS_GALLERY: GalleryItem[] = [
 export const FAQS = [
   {
     q: "What is the guest seating and dining capacity?",
-    a: "Varathambal Chockalingam Kalyana Mahal comfortably accommodates 450+ guests in the main air-conditioned hall and has a dedicated dining hall with 150 seating capacity."
+    a: "Varathambal Chockalingam Kalyana Mahal comfortably accommodates 1000+ seated guests (up to 1500+ floating attendees) in the main air-conditioned hall, along with an expansive dedicated dining hall featuring 400+ dining seating capacity."
   },
   {
     q: "Are rooms provided for the bride, groom, and family?",

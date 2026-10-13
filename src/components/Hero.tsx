@@ -4,6 +4,7 @@ import { VENUE_INFO, EVENT_TYPES } from '../data/banquetData';
 import { WhatsAppIcon } from './WhatsAppIcon';
 import { WHATSAPP_PHONE, getWhatsAppBookingUrl, triggerWhatsAppRedirect } from '../utils/whatsapp';
 import { FestiveHeroBackground } from './FestiveHeroBackground';
+import { FadeInUp } from './FadeInUp';
 
 interface HeroProps {
   onOpenBooking: (eventType?: string) => void;
@@ -24,7 +25,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
       eventType: selectedEvent,
       selectedDate: heroDate,
       timeSlot: 'Full Day',
-      guestsCount: '300 - 450',
+      guestsCount: '500 to 800',
       roomsCount: '8 Rooms',
       brahminPackage: selectedEvent === 'Wedding',
       notes: 'Direct inquiry submitted from website homepage.',
@@ -38,7 +39,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
       {/* Auspicious South Indian Festive Animated Background with Kolams, Diyas & Petals */}
       <FestiveHeroBackground />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <FadeInUp duration={0.7} yOffset={24} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* Left Column: Heading, Subheading, Key Highlights, Call Now & WhatsApp */}
@@ -68,12 +69,12 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
             {/* Quick Feature Highlights as per content */}
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-1">
               <div className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors">
-                <div className="text-xs font-bold text-[#4A1C40]">450 Seating</div>
-                <div className="text-[11px] text-[#777777]">Main Air-Conditioned Hall</div>
+                <div className="text-xs font-bold text-[#4A1C40]">1000+ Seating</div>
+                <div className="text-[11px] text-[#777777]">Main AC Hall (1500+ Floating)</div>
               </div>
               <div className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors">
-                <div className="text-xs font-bold text-[#4A1C40]">150 Dining</div>
-                <div className="text-[11px] text-[#777777]">Dedicated Dining Space</div>
+                <div className="text-xs font-bold text-[#4A1C40]">400+ Dining</div>
+                <div className="text-[11px] text-[#777777]">Dedicated Dining Seating</div>
               </div>
               <div className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors">
                 <div className="text-xs font-bold text-[#4A1C40]">8 AC Rooms</div>
@@ -278,8 +279,8 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
               {/* Venue Trust Highlights Bar */}
               <div className="pt-2 border-t border-[#F1EBE4] grid grid-cols-3 gap-1.5 text-center text-[10px] text-[#666666]">
                 <div className="flex flex-col items-center py-1 bg-[#F9F8F4] rounded border border-[#E5E0D8]/60">
-                  <span className="font-bold text-[#4A1C40]">450 Seating</span>
-                  <span className="text-[9px] text-[#888888]">150 Dining</span>
+                  <span className="font-bold text-[#4A1C40]">1000+ Seated</span>
+                  <span className="text-[9px] text-[#888888]">400+ Dining</span>
                 </div>
                 <div className="flex flex-col items-center py-1 bg-[#F9F8F4] rounded border border-[#E5E0D8]/60">
                   <span className="font-bold text-[#4A1C40]">8 AC Rooms</span>
@@ -294,7 +295,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
           </div>
 
         </div>
-      </div>
+      </FadeInUp>
     </section>
   );
 };
