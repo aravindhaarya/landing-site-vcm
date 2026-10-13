@@ -72,6 +72,18 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     }
   }, [isSubmitted, redirectCountdown]);
 
+  // Lock background scroll when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -121,7 +133,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/75 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/75 flex items-center justify-center p-3 sm:p-4">
       <div
         className="bg-[#FFFFFF] w-full max-w-2xl rounded-2xl shadow-2xl border-2 border-[#C5A059] overflow-hidden my-6 transition-all"
         role="dialog"

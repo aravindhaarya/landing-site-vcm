@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
 import { Sparkles, ChevronDown, ChevronUp, ArrowDown, Building2, Radio, UserCheck, ShieldCheck } from 'lucide-react';
 import { AMENITIES } from '../data/banquetData';
 import { MahalAmenity } from '../types';
@@ -63,9 +62,10 @@ export const Amenities: React.FC = () => {
 
   return (
     <section id="amenities" className="py-10 sm:py-14 bg-[#FFFFFF] relative overflow-hidden">
-      {/* GPU-accelerated static ambient background glow */}
+      {/* Ambient background glow */}
       <div
-        className="absolute -top-16 -right-16 w-80 h-80 rounded-full bg-[#C5A059]/5 blur-3xl pointer-events-none transform-gpu will-change-transform"
+        className="absolute -top-16 -right-16 w-80 h-80 rounded-full pointer-events-none"
+        style={{ background: 'radial-gradient(circle, rgba(197, 160, 89, 0.08) 0%, transparent 70%)' }}
         aria-hidden="true"
       />
 
@@ -122,43 +122,37 @@ export const Amenities: React.FC = () => {
 
         {/* Compact, High-Density Amenities Cards Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-          <AnimatePresence mode="popLayout">
-            {displayedAmenities.map((amenity: MahalAmenity, index: number) => {
-              // Find overall index in full AMENITIES array
-              const originalIndex = AMENITIES.findIndex((a) => a.id === amenity.id);
-              return (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.96 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.96 }}
-                  transition={{ duration: 0.2 }}
-                  key={amenity.id}
-                  className="bg-[#F9F8F4] p-3 sm:p-3.5 border border-[#E8E2D8] hover:border-[#C5A059] transition-all shadow-2xs hover:shadow-sm flex items-start gap-2.5 sm:gap-3.5 rounded-xl group transform-gpu will-change-transform"
-                >
-                  {/* Icon */}
-                  <div className="w-9 h-9 sm:w-10 sm:h-10 shrink-0 rounded-lg bg-white border border-[#C5A059]/40 flex items-center justify-center p-1.5 group-hover:scale-105 transition-transform shadow-2xs text-[#4A1C40]">
-                    {(() => {
-                      const category = CATEGORY_MAP[amenity.id] || 'all';
-                      const CategoryIcon = AMENITY_CATEGORY_ICON[category] || Sparkles;
-                      return <CategoryIcon className="w-4 h-4 sm:w-5 sm:h-5 text-[#4A1C40]" />;
-                    })()}
-                  </div>
+          {displayedAmenities.map((amenity: MahalAmenity, index: number) => {
+            // Find overall index in full AMENITIES array
+            const originalIndex = AMENITIES.findIndex((a) => a.id === amenity.id);
+            return (
+              <div
+                key={amenity.id}
+                className="bg-[#F9F8F4] p-3 sm:p-3.5 border border-[#E8E2D8] hover:border-[#C5A059] transition-all shadow-2xs hover:shadow-sm flex items-start gap-2.5 sm:gap-3.5 rounded-xl group"
+              >
+                {/* Icon */}
+                <div className="w-9 h-9 sm:w-10 sm:h-10 shrink-0 rounded-lg bg-white border border-[#C5A059]/40 flex items-center justify-center p-1.5 group-hover:scale-105 transition-transform shadow-2xs text-[#4A1C40]">
+                  {(() => {
+                    const category = CATEGORY_MAP[amenity.id] || 'all';
+                    const CategoryIcon = AMENITY_CATEGORY_ICON[category] || Sparkles;
+                    return <CategoryIcon className="w-4 h-4 sm:w-5 sm:h-5 text-[#4A1C40]" />;
+                  })()}
+                </div>
 
-                  {/* Title */}
-                  <div className="space-y-0.5 min-w-0">
-                    <div className="flex items-center gap-1">
-                      <span className="text-[10px] font-bold text-[#C5A059]">
-                        #{originalIndex >= 0 ? originalIndex + 1 : index + 1}
-                      </span>
-                    </div>
-                    <h3 className="text-[11px] sm:text-xs font-semibold text-[#333333] leading-snug group-hover:text-[#4A1C40] transition-colors line-clamp-2 sm:line-clamp-none">
-                      {amenity.title}
-                    </h3>
+                {/* Title */}
+                <div className="space-y-0.5 min-w-0">
+                  <div className="flex items-center gap-1">
+                    <span className="text-[10px] font-bold text-[#C5A059]">
+                      #{originalIndex >= 0 ? originalIndex + 1 : index + 1}
+                    </span>
                   </div>
-                </motion.div>
-              );
-            })}
-          </AnimatePresence>
+                  <h3 className="text-[11px] sm:text-xs font-semibold text-[#333333] leading-snug group-hover:text-[#4A1C40] transition-colors line-clamp-2 sm:line-clamp-none">
+                    {amenity.title}
+                  </h3>
+                </div>
+              </div>
+            );
+          })}
         </div>
 
         {/* View All / Collapse Toggle (When viewing 'All') */}

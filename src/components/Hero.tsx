@@ -1,115 +1,19 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence, type Variants } from 'framer-motion';
-import { Phone, Calendar, Sparkles, MapPin, CheckCircle2, ShieldCheck, ArrowRight, Award, Clock, Send, Play, Pause, Volume2, VolumeX, Video, X } from 'lucide-react';
+import React, { useState } from 'react';
+import { Phone, Calendar, Sparkles, MapPin, CheckCircle2, ShieldCheck, ArrowRight, Award, Clock, Send, Image as ImageIcon } from 'lucide-react';
 import { VENUE_INFO, EVENT_TYPES } from '../data/banquetData';
 import { WhatsAppIcon } from './WhatsAppIcon';
 import { WHATSAPP_PHONE, getWhatsAppBookingUrl, triggerWhatsAppRedirect } from '../utils/whatsapp';
+import { FestiveHeroBackground } from './FestiveHeroBackground';
 
 interface HeroProps {
   onOpenBooking: (eventType?: string) => void;
 }
-
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 18 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: [0.22, 1, 0.36, 1],
-    },
-  },
-};
-
-const gridItemVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.96, y: 10 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    y: 0,
-    transition: {
-      duration: 0.4,
-      ease: [0.22, 1, 0.36, 1],
-    },
-  },
-};
-
-const rightCardVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.96, y: 20 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      delay: 0.15,
-      ease: [0.22, 1, 0.36, 1],
-    },
-  },
-};
 
 export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
   const [selectedEvent, setSelectedEvent] = useState('Wedding');
   const [heroDate, setHeroDate] = useState('');
   const [heroName, setHeroName] = useState('');
   const [heroPhone, setHeroPhone] = useState('');
-
-  // Video playback state
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [isVideoPlaying, setIsVideoPlaying] = useState(true);
-  const [isVideoMuted, setIsVideoMuted] = useState(true);
-  const [showVideoModal, setShowVideoModal] = useState(false);
-
-  // Guarantee browser autoplay works smoothly without blocking
-  useEffect(() => {
-    const vid = videoRef.current;
-    if (!vid) return;
-
-    vid.muted = true;
-    vid.defaultMuted = true;
-    const playPromise = vid.play();
-    if (playPromise !== undefined) {
-      playPromise
-        .then(() => {
-          setIsVideoPlaying(true);
-        })
-        .catch((error) => {
-          console.warn('Hero background video autoplay restricted by browser:', error);
-          setIsVideoPlaying(false);
-        });
-    }
-  }, []);
-
-  const toggleVideoPlay = () => {
-    if (!videoRef.current) return;
-    if (isVideoPlaying) {
-      videoRef.current.pause();
-      setIsVideoPlaying(false);
-    } else {
-      videoRef.current
-        .play()
-        .then(() => setIsVideoPlaying(true))
-        .catch(console.error);
-    }
-  };
-
-  const toggleVideoMute = () => {
-    if (!videoRef.current) return;
-    const nextMuted = !videoRef.current.muted;
-    videoRef.current.muted = nextMuted;
-    setIsVideoMuted(nextMuted);
-  };
 
   const handleHeroQuickSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -130,95 +34,71 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
   };
 
   return (
-    <section id="hero" className="relative bg-[#1F1722] pt-8 pb-16 overflow-hidden">
-      {/* Background Video Layer with Smooth Playback */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-        <video
-          ref={videoRef}
-          autoPlay
-          loop
-          muted={isVideoMuted}
-          playsInline
-          preload="auto"
-          className="w-full h-full object-cover opacity-85 filter brightness-100 contrast-105"
-          onPlay={() => setIsVideoPlaying(true)}
-          onPause={() => setIsVideoPlaying(false)}
-        >
-          <source src={VENUE_INFO.heroVideo} type="video/mp4" />
-        </video>
-        {/* Minimal, transparent gradient overlay so the video is vividly visible */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/10 to-[#F9F8F4]" />
-      </div>
+    <section id="hero" className="relative bg-[#1C091A] pt-8 pb-16 overflow-hidden">
+      {/* Auspicious South Indian Festive Animated Background with Kolams, Diyas & Petals */}
+      <FestiveHeroBackground />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* Left Column: Heading, Subheading, Key Highlights, Call Now & WhatsApp */}
-          <motion.div
-            className="lg:col-span-7 space-y-6 text-left transform-gpu will-change-transform bg-white/85 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-[#C5A059]/40 shadow-xl"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
+          <div
+            className="lg:col-span-7 space-y-6 text-left bg-white/95 p-6 sm:p-8 rounded-3xl border border-[#C5A059]/40 shadow-xl"
           >
             {/* Tag Badge */}
-            <motion.div variants={itemVariants}>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FFFFFF] border border-[#C5A059]/50 shadow-xs transform-gpu will-change-transform">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FFFFFF] border border-[#C5A059]/50 shadow-xs">
                 <Sparkles className="w-3.5 h-3.5 text-[#C5A059]" />
                 <span className="text-xs font-semibold tracking-wider text-[#4A1C40] uppercase">
                   Premier Kalyana Mahal in Madipakkam, Chennai
                 </span>
               </div>
-            </motion.div>
+            </div>
 
             {/* Main Title */}
-            <motion.div variants={itemVariants} className="transform-gpu will-change-transform">
+            <div>
               <p id="hero-title" className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#4A1C40] tracking-tight leading-tight">
                 Varathambal Chockalingam Kalyana Mahal
               </p>
               <p id="hero-tagline" className="mt-3 text-base sm:text-lg text-[#555555] font-normal leading-relaxed">
                 The Perfect Destination for all your occasions.
               </p>
-            </motion.div>
+            </div>
 
             {/* Quick Feature Highlights as per content */}
-            <motion.div
-              variants={itemVariants}
-              className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-1 transform-gpu will-change-transform"
-            >
-              <motion.div variants={gridItemVariants} className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors transform-gpu will-change-transform">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-1">
+              <div className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors">
                 <div className="text-xs font-bold text-[#4A1C40]">450 Seating</div>
                 <div className="text-[11px] text-[#777777]">Main Air-Conditioned Hall</div>
-              </motion.div>
-              <motion.div variants={gridItemVariants} className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors transform-gpu will-change-transform">
+              </div>
+              <div className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors">
                 <div className="text-xs font-bold text-[#4A1C40]">150 Dining</div>
                 <div className="text-[11px] text-[#777777]">Dedicated Dining Space</div>
-              </motion.div>
-              <motion.div variants={gridItemVariants} className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors transform-gpu will-change-transform">
+              </div>
+              <div className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors">
                 <div className="text-xs font-bold text-[#4A1C40]">8 AC Rooms</div>
                 <div className="text-[11px] text-[#777777]">Bride &amp; Groom Suites</div>
-              </motion.div>
-              <motion.div variants={gridItemVariants} className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors transform-gpu will-change-transform">
+              </div>
+              <div className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors">
                 <div className="text-xs font-bold text-[#4A1C40]">Cars + Valet</div>
                 <div className="text-[11px] text-[#777777]">Bikes Can Be Parked</div>
-              </motion.div>
-              <motion.div variants={gridItemVariants} className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors transform-gpu will-change-transform">
+              </div>
+              <div className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors">
                 <div className="text-xs font-bold text-[#4A1C40]">100% AC Mahal</div>
                 <div className="text-[11px] text-[#777777]">Party Hall &amp; Dining</div>
-              </motion.div>
-              <motion.div variants={gridItemVariants} className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors transform-gpu will-change-transform">
+              </div>
+              <div className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors">
                 <div className="text-xs font-bold text-[#4A1C40]">Brahmin Package</div>
                 <div className="text-[11px] text-[#777777]">Specialized 2½ Days</div>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
 
             {/* Prominent Action & Call Now / WhatsApp / Video Tour row */}
-            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-3 sm:gap-4 pt-2 transform-gpu will-change-transform">
-              <motion.a
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-2">
+              <a
                 id="hero-call-now-btn"
                 href={VENUE_INFO.telLink}
-                className="px-6 py-3.5 bg-[#C5A059] text-[#4A1C40] text-xs uppercase tracking-widest font-bold hover:bg-[#b58f48] transition-all shadow-md hover:shadow-lg flex items-center gap-2 transform-gpu will-change-transform"
+                className="px-6 py-3.5 bg-[#C5A059] text-[#4A1C40] text-xs uppercase tracking-widest font-bold hover:bg-[#b58f48] active:scale-[0.98] transition-all shadow-md hover:shadow-lg flex items-center gap-2"
                 style={{
                   borderTopLeftRadius: '22px',
                   borderBottomRightRadius: '22px',
@@ -226,13 +106,11 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
               >
                 <Phone className="w-4 h-4 fill-[#4A1C40]" />
                 <span>Call: {VENUE_INFO.phone}</span>
-              </motion.a>
+              </a>
 
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+              <button
                 onClick={() => onOpenBooking(selectedEvent)}
-                className="px-6 py-3.5 bg-[#4A1C40] text-[#FFFFFF] text-xs uppercase tracking-widest font-bold hover:bg-[#34122c] transition-all shadow-md hover:shadow-lg cursor-pointer flex items-center gap-2 transform-gpu will-change-transform border border-[#C5A059]"
+                className="px-6 py-3.5 bg-[#4A1C40] text-[#FFFFFF] text-xs uppercase tracking-widest font-bold hover:bg-[#34122c] active:scale-[0.98] transition-all shadow-md hover:shadow-lg cursor-pointer flex items-center gap-2 border border-[#C5A059]"
                 style={{
                   borderTopRightRadius: '22px',
                   borderBottomLeftRadius: '22px',
@@ -240,45 +118,39 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
               >
                 <WhatsAppIcon className="w-4 h-4 fill-emerald-400" />
                 <span>Request Form (WhatsApp)</span>
-              </motion.button>
+              </button>
 
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                type="button"
-                onClick={() => setShowVideoModal(true)}
-                className="px-5 py-3.5 bg-white text-[#4A1C40] text-xs uppercase tracking-widest font-bold hover:bg-[#F9F8F4] transition-all shadow-md hover:shadow-lg cursor-pointer flex items-center gap-2 transform-gpu will-change-transform border-2 border-[#C5A059] rounded-full"
+              <a
+                href="#moments"
+                className="px-5 py-3.5 bg-white text-[#4A1C40] text-xs uppercase tracking-widest font-bold hover:bg-[#F9F8F4] active:scale-[0.98] transition-all shadow-md hover:shadow-lg cursor-pointer flex items-center gap-2 border-2 border-[#C5A059] rounded-full"
               >
-                <Play className="w-3.5 h-3.5 fill-[#C5A059] text-[#C5A059]" />
-                <span>Watch Video Tour</span>
-              </motion.button>
-            </motion.div>
+                <Sparkles className="w-3.5 h-3.5 text-[#C5A059]" />
+                <span>View Moments</span>
+              </a>
+            </div>
 
             {/* Direct WhatsApp info line */}
-            <motion.div variants={itemVariants} className="flex items-center gap-2 text-xs text-emerald-800 bg-emerald-50 py-1.5 px-3 rounded-lg border border-emerald-200/60 w-fit">
+            <div className="flex items-center gap-2 text-xs text-emerald-800 bg-emerald-50 py-1.5 px-3 rounded-lg border border-emerald-200/60 w-fit">
               <WhatsAppIcon className="w-4 h-4 fill-emerald-600 shrink-0" />
               <span>
                 Prefilled responses redirected instantly to WhatsApp: <strong>{WHATSAPP_PHONE}</strong>
               </span>
-            </motion.div>
+            </div>
 
             {/* Address snippet */}
-            <motion.div variants={itemVariants} className="pt-1 flex items-start gap-2 text-xs text-[#666666] transform-gpu will-change-transform">
+            <div className="pt-1 flex items-start gap-2 text-xs text-[#666666]">
               <MapPin className="w-4 h-4 text-[#C5A059] shrink-0 mt-0.5" />
               <span>
                 {VENUE_INFO.address}
               </span>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
           {/* Right Column: Hero Interactive Request Form Card */}
           <div className="lg:col-span-5">
-            <motion.div
+            <div
               id="hero-collage-container"
-              variants={rightCardVariants}
-              initial="hidden"
-              animate="visible"
-              className="relative bg-[#FFFFFF] border-2 border-[#C5A059] p-5 sm:p-6 shadow-2xl space-y-4 transform-gpu will-change-transform"
+              className="relative bg-[#FFFFFF] border-2 border-[#C5A059] p-5 sm:p-6 shadow-2xl space-y-4"
               style={{
                 borderTopLeftRadius: '32px',
                 borderBottomRightRadius: '32px',
@@ -373,16 +245,14 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
                 </div>
 
                 {/* Submit & Redirect to WhatsApp Button */}
-                <motion.button
-                  whileHover={{ scale: 1.01 }}
-                  whileTap={{ scale: 0.98 }}
+                <button
                   type="submit"
                   id="hero-whatsapp-submit-btn"
-                  className="w-full py-3 bg-[#25D366] hover:bg-[#20ba59] text-white text-xs font-bold uppercase tracking-wider shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer rounded-xl"
+                  className="w-full py-3 bg-[#25D366] hover:bg-[#20ba59] active:scale-[0.99] text-white text-xs font-bold uppercase tracking-wider shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer rounded-xl"
                 >
                   <WhatsAppIcon className="w-4 h-4 fill-white" />
                   <span>Send Request to WhatsApp ({WHATSAPP_PHONE})</span>
-                </motion.button>
+                </button>
               </form>
 
               {/* Or Open Detailed Form */}
@@ -420,80 +290,11 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
                   <span className="text-[9px] text-[#888888]">2½ Days Setup</span>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
 
         </div>
       </div>
-
-      {/* Video Tour Walkthrough Modal */}
-      <AnimatePresence>
-        {showVideoModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.92, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.92, y: 20 }}
-              className="relative w-full max-w-3xl bg-[#1F1B24] border-2 border-[#C5A059] rounded-2xl overflow-hidden shadow-2xl"
-            >
-              {/* Header */}
-              <div className="bg-[#4A1C40] p-4 flex items-center justify-between border-b border-[#C5A059]/40 text-white">
-                <div className="flex items-center gap-2.5">
-                  <Video className="w-5 h-5 text-[#C5A059]" />
-                  <div>
-                    <h3 className="font-serif font-bold text-sm sm:text-base leading-tight">
-                      Varathambal Chockalingam Kalyana Mahal
-                    </h3>
-                    <p className="text-[11px] text-neutral-300">
-                      Hall Walkthrough &amp; Celebration Ambiance Video
-                    </p>
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setShowVideoModal(false)}
-                  className="p-1.5 rounded-full text-white/80 hover:text-white hover:bg-white/10 cursor-pointer"
-                  aria-label="Close video"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
-
-              {/* Video Player */}
-              <div className="relative aspect-video bg-black flex items-center justify-center">
-                <video
-                  controls
-                  autoPlay
-                  playsInline
-                  className="w-full h-full object-contain"
-                  src={VENUE_INFO.heroVideo}
-                >
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-
-              {/* Footer info & CTA */}
-              <div className="p-4 bg-[#2B2330] flex flex-wrap items-center justify-between gap-3 text-xs border-t border-white/10">
-                <div className="text-neutral-300 text-[11px]">
-                  <span>450+ Seating • 150 Dining • 8 AC Rooms • Madipakkam, Chennai</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setShowVideoModal(false);
-                      onOpenBooking(selectedEvent);
-                    }}
-                    className="px-4 py-2 bg-[#C5A059] text-[#4A1C40] font-bold text-xs uppercase tracking-wider rounded-lg hover:bg-[#b58f48] cursor-pointer"
-                  >
-                    Inquire Booking
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
     </section>
   );
 };

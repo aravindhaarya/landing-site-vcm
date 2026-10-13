@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, HelpCircle } from 'lucide-react';
 import { FAQS } from '../data/banquetData';
 
@@ -12,9 +11,10 @@ export const FAQAccordion: React.FC = () => {
 
   return (
     <section id="faq" className="py-16 sm:py-20 bg-[#FFFFFF] relative overflow-hidden">
-      {/* GPU-accelerated static decorative ambient accent */}
+      {/* Ambient decorative accent */}
       <div
-        className="absolute -top-10 -left-10 w-72 h-72 rounded-full bg-[#C5A059]/6 blur-2xl pointer-events-none transform-gpu will-change-transform"
+        className="absolute -top-10 -left-10 w-72 h-72 rounded-full pointer-events-none"
+        style={{ background: 'radial-gradient(circle, rgba(197, 160, 89, 0.08) 0%, transparent 70%)' }}
         aria-hidden="true"
       />
 
@@ -63,19 +63,11 @@ export const FAQAccordion: React.FC = () => {
                   </div>
                 </button>
 
-                <AnimatePresence>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.22, ease: 'easeInOut' }}
-                      className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-[#555555] leading-relaxed border-t border-[#E8E2D8] bg-[#FFFFFF] overflow-hidden"
-                    >
-                      {faq.a}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                {isOpen && (
+                  <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-[#555555] leading-relaxed border-t border-[#E8E2D8] bg-[#FFFFFF] overflow-hidden">
+                    {faq.a}
+                  </div>
+                )}
               </div>
             );
           })}

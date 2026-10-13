@@ -9,13 +9,14 @@ interface PhotoGalleryProps {
 export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ onOpenBooking }) => {
   return (
     <section id="moments" className="py-16 sm:py-20 bg-[#F9F8F4] relative overflow-hidden">
-      {/* GPU-accelerated static ambient background accents */}
+      {/* Ambient background accents */}
       <div
-        className="absolute -top-12 -right-12 w-96 h-96 rounded-full border border-[#C5A059]/15 pointer-events-none transform-gpu will-change-transform"
+        className="absolute -top-12 -right-12 w-96 h-96 rounded-full border border-[#C5A059]/15 pointer-events-none"
         aria-hidden="true"
       />
       <div
-        className="absolute bottom-10 left-0 w-80 h-80 bg-[#C5A059]/8 rounded-full blur-3xl pointer-events-none transform-gpu will-change-transform"
+        className="absolute bottom-10 left-0 w-80 h-80 rounded-full pointer-events-none"
+        style={{ background: 'radial-gradient(circle, rgba(197, 160, 89, 0.08) 0%, transparent 70%)' }}
         aria-hidden="true"
       />
 
@@ -40,7 +41,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ onOpenBooking }) => 
           {MOMENTS_GALLERY.map((item, index) => (
             <div
               key={item.id}
-              className="bg-[#FFFFFF] border-2 border-[#E5E0D8] hover:border-[#C5A059] p-4 shadow-2xs space-y-3 transition-colors group transform-gpu"
+              className="bg-[#FFFFFF] border-2 border-[#E5E0D8] hover:border-[#C5A059] p-4 shadow-2xs space-y-3 transition-colors group"
               style={{
                 borderTopLeftRadius: index % 2 === 0 ? '30px' : '0px',
                 borderBottomRightRadius: index % 2 === 0 ? '30px' : '0px',

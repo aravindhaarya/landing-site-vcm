@@ -3,11 +3,9 @@
 @layer base {
   :root {
     --font-serif: 'Playfair Display', Georgia, serif;
-    --font-cormorant: 'Cormorant Garamond', Georgia, serif;
     --font-sans: 'Lato', system-ui, -apple-system, sans-serif;
-    --font-bebas: 'Bebas Neue', Impact, sans-serif;
     
-    /* Theme color palette from Banquet Wedding Hall (wp-themes.com) */
+    /* Theme color palette from Banquet Wedding Hall */
     --color-accent: #4A1C40;      /* Signature deep plum / burgundy accent */
     --color-secaccent: #C5A059;   /* Warm antique gold */
     --color-cream: #F9F8F4;       /* Main soft warm background */
@@ -17,24 +15,26 @@
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 
   body {
     font-family: var(--font-sans);
     background-color: var(--color-cream);
     color: #2b2b2b;
+    overflow-x: hidden;
   }
 
   h1, h2, h3, .font-serif {
     font-family: var(--font-serif);
-  }
-
-  .font-cormorant {
-    font-family: var(--font-cormorant);
-  }
-
-  .font-bebas {
-    font-family: var(--font-bebas);
   }
 }
 

@@ -25,8 +25,7 @@ export const VENUE_INFO = {
   aboutText: "Varathambal Chockalingam Kalyana Mahal is an ideal venue for weddings and social gatherings, accommodating over 450 guests comfortably. With a spacious, elegant layout, it offers customizable seating arrangements to suit your event's needs. The hall is equipped with modern amenities and provides a blend of comfort and style, ensuring a memorable experience for all. Known for its professional staff and attention to detail, Varathambal Chockalingam Kalyana Mahal guarantees smooth event execution. Conveniently located with ample parking, it ensures easy access for guests. Varathambal Chockalingam Kalyana Mahal ambiance and excellent service make it a top choice for unforgettable celebrations.",
   aboutImage: "",
   aboutImageAlt: "Varathambal Chockalingam Kalyana Mahal Grand Hall",
-  heroImage: "",
-  heroVideo: "/hero-background.mp4"
+  heroImage: ""
 };
 
 export const EVENT_TYPES = [

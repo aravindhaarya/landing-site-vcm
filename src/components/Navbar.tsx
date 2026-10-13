@@ -9,16 +9,19 @@ interface NavbarProps {
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // Lock background scroll when mobile drawer is open
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 30);
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [mobileMenuOpen]);
 
   const navLinks = [
     { name: 'Home', href: '#hero' },
@@ -70,14 +73,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
         </div>
       </div>
 
-      {/* Main Navigation Bar */}
+      {/* Main Navigation Bar - Solid crisp background with zero GPU filter overhead */}
       <header
         id="main-navbar"
-        className={`sticky top-0 left-0 right-0 z-40 w-full max-w-full overflow-hidden transition-all duration-300 ${
-          isScrolled
-            ? 'bg-[#FFFFFF]/95 backdrop-blur-md shadow-md py-2.5 sm:py-3 border-b border-[#F1EBE4]'
-            : 'bg-[#FFFFFF] py-3 sm:py-3.5 border-b border-[#F1EBE4]'
-        }`}
+        className="sticky top-0 left-0 right-0 z-40 w-full max-w-full overflow-hidden py-3 sm:py-3.5 border-b border-[#E5E0D8] bg-[#FFFFFF] shadow-xs"
       >
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 w-full">
           <div className="flex items-center justify-between gap-2 sm:gap-4 w-full min-w-0">
@@ -184,7 +183,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div
-            className="fixed inset-0 bg-black/60 backdrop-blur-xs"
+            className="fixed inset-0 bg-black/60"
             onClick={() => setMobileMenuOpen(false)}
           />
           <div className="fixed top-0 right-0 bottom-0 w-4/5 max-w-sm bg-[#FFFFFF] border-l-2 border-[#C5A059] p-6 flex flex-col justify-between shadow-2xl overflow-y-auto">

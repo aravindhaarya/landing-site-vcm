@@ -15,8 +15,6 @@ export interface SectionDividerProps {
   /** Optional center ornamental insignia or pill */
   withOrnament?: boolean;
   ornamentText?: string;
-  /** Optional decorative ambient elements */
-  withParallaxParticles?: boolean;
   className?: string;
 }
 
@@ -24,16 +22,15 @@ export const SectionDivider: React.FC<SectionDividerProps> = ({
   fromBg = '#F9F8F4',
   toBg = '#FFFFFF',
   slope = 'down-right',
-  height = 54,
+  height = 42,
   showGoldLine = true,
   withOrnament = false,
   ornamentText,
-  withParallaxParticles = true,
   className = '',
 }) => {
   const isDownRight = slope === 'down-right';
 
-  // Simplified, hardware-optimized polygon points for 1440-width coordinate system
+  // Vector coordinates
   const bottomPolygonPoints = isDownRight
     ? `0,0 1440,${height} 1440,${height} 0,${height}`
     : `0,${height} 1440,0 1440,${height} 0,${height}`;
@@ -47,7 +44,7 @@ export const SectionDivider: React.FC<SectionDividerProps> = ({
 
   return (
     <div
-      className={`relative w-full overflow-hidden select-none pointer-events-none transform-gpu ${className}`}
+      className={`relative w-full overflow-hidden select-none pointer-events-none ${className}`}
       style={{ height: `${height}px`, backgroundColor: toBg }}
       aria-hidden="true"
     >
@@ -57,19 +54,19 @@ export const SectionDivider: React.FC<SectionDividerProps> = ({
         style={{ backgroundColor: fromBg }}
       />
 
-      {/* SVG Angled Boundary Slice - GPU accelerated vector path */}
+      {/* SVG Angled Boundary Slice */}
       <svg
-        className="absolute inset-0 w-full h-full block transform-gpu will-change-transform"
+        className="absolute inset-0 w-full h-full block"
         viewBox={`0 0 1440 ${height}`}
         preserveAspectRatio="none"
       >
         <defs>
           <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#C5A059" stopOpacity="0.2" />
+            <stop offset="0%" stopColor="#C5A059" stopOpacity="0.25" />
             <stop offset="30%" stopColor="#E6CA85" stopOpacity="0.75" />
-            <stop offset="50%" stopColor="#C5A059" stopOpacity="0.95" />
+            <stop offset="50%" stopColor="#C5A059" stopOpacity="0.9" />
             <stop offset="70%" stopColor="#E6CA85" stopOpacity="0.75" />
-            <stop offset="100%" stopColor="#C5A059" stopOpacity="0.2" />
+            <stop offset="100%" stopColor="#C5A059" stopOpacity="0.25" />
           </linearGradient>
         </defs>
 
@@ -92,25 +89,10 @@ export const SectionDivider: React.FC<SectionDividerProps> = ({
         )}
       </svg>
 
-      {/* Lightweight static atmospheric accents with will-change offloaded to GPU */}
-      {withParallaxParticles && (
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {/* Micro gold shimmer accents with GPU hardware acceleration */}
-          <div
-            className="absolute top-1/2 left-[30%] w-1.5 h-1.5 rounded-full bg-[#C5A059] opacity-75 shadow-[0_0_6px_#C5A059] transform-gpu will-change-transform"
-          />
-          <div
-            className="absolute top-1/3 right-[28%] w-1.5 h-1.5 rounded-full bg-[#E6CA85] opacity-75 shadow-[0_0_6px_#E6CA85] transform-gpu will-change-transform"
-          />
-        </div>
-      )}
-
-      {/* Center Diamond / Ornament Crest */}
+      {/* Center Diamond / Ornament Crest without expensive backdrop-filter */}
       {withOrnament && (
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div
-            className="px-3 py-0.5 rounded-full bg-white/95 border border-[#C5A059] shadow-xs flex items-center gap-1.5 backdrop-blur-xs text-[#4A1C40] transform-gpu will-change-transform transition-transform duration-300"
-          >
+          <div className="px-3 py-0.5 rounded-full bg-white border border-[#C5A059] shadow-xs flex items-center gap-1.5 text-[#4A1C40]">
             <div className="w-1.5 h-1.5 rotate-45 bg-[#C5A059]" />
             {ornamentText ? (
               <span className="text-[10px] font-bold uppercase tracking-wider text-[#4A1C40]">
