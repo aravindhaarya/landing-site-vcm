@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   X,
   Calendar as CalendarIcon,
@@ -14,7 +14,8 @@ import {
   Copy,
   ExternalLink,
   ArrowRight,
-  RotateCcw
+  RotateCcw,
+  Loader2
 } from 'lucide-react';
 import { VENUE_INFO, EVENT_TYPES } from '../data/banquetData';
 import { WhatsAppIcon } from './WhatsAppIcon';
@@ -43,17 +44,28 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   const [timeSlot, setTimeSlot] = useState<string>('Full Day');
   const [guestsCount, setGuestsCount] = useState<string>('500 to 800');
   const [brahminPackage, setBrahminPackage] = useState<boolean>(false);
-  const [roomsCount, setRoomsCount] = useState<string>('8 Rooms (All Rooms)');
+  const [roomsCount, setRoomsCount] = useState<string>('11 AC Rooms (All Rooms)');
   const [fullName, setFullName] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [notes, setNotes] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const [referenceId, setReferenceId] = useState<string>('');
   const [whatsappUrl, setWhatsappUrl] = useState<string>('');
   const [prefilledMessage, setPrefilledMessage] = useState<string>('');
   const [copied, setCopied] = useState<boolean>(false);
   const [redirectCountdown, setRedirectCountdown] = useState<number>(3);
+  const loadingTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Compute today's date in YYYY-MM-DD format to prevent past date selection
+  const todayDateString = (() => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  })();
 
   // Sync initialEventType if it updates when opening
   useEffect(() => {
@@ -72,6 +84,15 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     }
   }, [isSubmitted, redirectCountdown]);
 
+  // Clean up loading timer on unmount
+  useEffect(() => {
+    return () => {
+      if (loadingTimerRef.current) {
+        clearTimeout(loadingTimerRef.current);
+      }
+    };
+  }, []);
+
   // Lock background scroll when modal is open
   useEffect(() => {
     if (isOpen) {
@@ -88,33 +109,44 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const ref = 'VCKM-' + Math.floor(100000 + Math.random() * 900000);
-    setReferenceId(ref);
+    if (isLoading) return;
 
-    const inquiryData: BookingInquiryData = {
-      fullName,
-      phone,
-      email,
-      eventType,
-      selectedDate,
-      timeSlot,
-      guestsCount,
-      roomsCount,
-      brahminPackage,
-      notes,
-      referenceId: ref,
-    };
+    setIsLoading(true);
 
-    const targetUrl = getWhatsAppBookingUrl(inquiryData);
-    const formattedText = formatWhatsAppMessage(inquiryData);
+    if (loadingTimerRef.current) {
+      clearTimeout(loadingTimerRef.current);
+    }
 
-    setWhatsappUrl(targetUrl);
-    setPrefilledMessage(formattedText);
-    setIsSubmitted(true);
-    setRedirectCountdown(3);
+    loadingTimerRef.current = setTimeout(() => {
+      const ref = 'VCKM-' + Math.floor(100000 + Math.random() * 900000);
+      setReferenceId(ref);
 
-    // Automatically trigger redirection to WhatsApp
-    triggerWhatsAppRedirect(targetUrl);
+      const inquiryData: BookingInquiryData = {
+        fullName,
+        phone,
+        email,
+        eventType,
+        selectedDate,
+        timeSlot,
+        guestsCount,
+        roomsCount,
+        brahminPackage,
+        notes,
+        referenceId: ref,
+      };
+
+      const targetUrl = getWhatsAppBookingUrl(inquiryData);
+      const formattedText = formatWhatsAppMessage(inquiryData);
+
+      setWhatsappUrl(targetUrl);
+      setPrefilledMessage(formattedText);
+      setIsLoading(false);
+      setIsSubmitted(true);
+      setRedirectCountdown(3);
+
+      // Automatically trigger redirection to WhatsApp
+      triggerWhatsAppRedirect(targetUrl);
+    }, 1500);
   };
 
   const handleCopyMessage = async () => {
@@ -128,8 +160,20 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   };
 
   const handleReset = () => {
+    if (loadingTimerRef.current) {
+      clearTimeout(loadingTimerRef.current);
+    }
+    setIsLoading(false);
     setIsSubmitted(false);
     setCopied(false);
+  };
+
+  const handleClose = () => {
+    if (loadingTimerRef.current) {
+      clearTimeout(loadingTimerRef.current);
+    }
+    setIsLoading(false);
+    onClose();
   };
 
   return (
@@ -160,7 +204,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
             </div>
           </div>
           <button
-            onClick={onClose}
+            onClick={handleClose}
             className="p-1.5 rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
             aria-label="Close"
           >
@@ -295,7 +339,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                   </a>
 
                   <button
-                    onClick={onClose}
+                    onClick={handleClose}
                     className="w-full sm:w-auto px-5 py-2 bg-[#4A1C40] text-white font-bold text-xs uppercase tracking-wider rounded-lg hover:bg-[#34122c] cursor-pointer"
                   >
                     Done
@@ -305,6 +349,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
+              <fieldset disabled={isLoading} className="space-y-4 sm:space-y-5 border-0 p-0 m-0 min-w-0">
               
               {/* WhatsApp Redirection Notice */}
               <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3 flex items-start gap-3">
@@ -370,10 +415,17 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                   </label>
                   <input
                     type="date"
+                    min={todayDateString}
                     value={selectedDate}
-                    onChange={(e) => setSelectedDate(e.target.value)}
-                    className="w-full px-3 py-2 text-xs border border-[#E5E0D8] rounded-lg bg-[#F9F8F4] text-[#333333] focus:outline-hidden focus:border-[#C5A059]"
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      if (!val || val >= todayDateString) {
+                        setSelectedDate(val);
+                      }
+                    }}
+                    className="w-full px-3 py-2 text-xs border border-[#E5E0D8] rounded-lg bg-[#F9F8F4] text-[#333333] focus:outline-hidden focus:border-[#C5A059] cursor-pointer"
                   />
+                  <p className="text-[10px] text-[#777777] mt-1">Past dates cannot be selected</p>
                 </div>
 
                 <div>
@@ -413,7 +465,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-[#4A1C40] mb-1.5">
-                    AC Rooms Needed (8 Available)
+                    AC Rooms Needed (11 Available)
                   </label>
                   <select
                     value={roomsCount}
@@ -421,8 +473,8 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                     className="w-full px-3 py-2 text-xs border border-[#E5E0D8] rounded-lg bg-[#F9F8F4] text-[#333333] focus:outline-hidden focus:border-[#C5A059]"
                   >
                     <option value="2 Rooms (Bride & Groom)">2 Rooms (Bride &amp; Groom Suites)</option>
-                    <option value="4 Rooms">4 Rooms</option>
-                    <option value="8 Rooms (All Rooms)">8 Rooms (All Rooms)</option>
+                    <option value="4 to 6 Rooms">4 to 6 Rooms</option>
+                    <option value="11 AC Rooms (All Rooms)">11 AC Rooms (All Rooms)</option>
                   </select>
                 </div>
               </div>
@@ -495,20 +547,34 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                 <button
                   type="submit"
                   id="modal-request-submit-btn"
-                  className="w-full py-3.5 bg-gradient-to-r from-emerald-600 to-[#4A1C40] hover:from-emerald-700 hover:to-[#34122c] text-white text-xs font-bold uppercase tracking-widest shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 cursor-pointer"
+                  disabled={isLoading}
+                  aria-busy={isLoading}
+                  className={`w-full py-3.5 bg-gradient-to-r from-emerald-600 to-[#4A1C40] hover:from-emerald-700 hover:to-[#34122c] text-white text-xs font-bold uppercase tracking-widest shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 ${
+                    isLoading ? 'opacity-85 cursor-not-allowed' : 'cursor-pointer'
+                  }`}
                   style={{
                     borderTopLeftRadius: '18px',
                     borderBottomRightRadius: '18px',
                   }}
                 >
-                  <WhatsAppIcon className="w-4 h-4 fill-white" />
-                  <span>Send Request to WhatsApp ({WHATSAPP_PHONE})</span>
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin text-white" />
+                      <span>Generating WhatsApp Link...</span>
+                    </>
+                  ) : (
+                    <>
+                      <WhatsAppIcon className="w-4 h-4 fill-white" />
+                      <span>Send Request to WhatsApp ({WHATSAPP_PHONE})</span>
+                    </>
+                  )}
                 </button>
                 <p className="text-[11px] text-center text-[#777777] mt-2">
                   Automatically opens WhatsApp with your prefilled inquiry response to{' '}
                   <strong>{WHATSAPP_PHONE}</strong>
                 </p>
               </div>
+              </fieldset>
 
               {/* Call Now fallback */}
               <div className="text-center pt-1 border-t border-[#F1EBE4]">

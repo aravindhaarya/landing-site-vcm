@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { X, Sparkles, Send, Calendar, Phone, MessageCircle } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { X, Sparkles, Send, Calendar, Phone, MessageCircle, Loader2 } from 'lucide-react';
 import { WhatsAppIcon } from './WhatsAppIcon';
 import { WHATSAPP_PHONE, WHATSAPP_PHONE_DISPLAY, getWhatsAppBookingUrl, triggerWhatsAppRedirect } from '../utils/whatsapp';
 import { VENUE_INFO } from '../data/banquetData';
@@ -13,23 +13,52 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({ onOpenBookin
   const [quickName, setQuickName] = useState('');
   const [quickEvent, setQuickEvent] = useState('Wedding');
   const [quickDate, setQuickDate] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const loadingTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const todayDateString = (() => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  })();
+
+  useEffect(() => {
+    return () => {
+      if (loadingTimerRef.current) {
+        clearTimeout(loadingTimerRef.current);
+      }
+    };
+  }, []);
 
   const handleQuickSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const url = getWhatsAppBookingUrl({
-      fullName: quickName || 'Guest',
-      phone: 'Provided via WhatsApp Chat',
-      eventType: quickEvent,
-      selectedDate: quickDate,
-      timeSlot: 'Full Day',
-      guestsCount: '500 to 800',
-      roomsCount: '8 Rooms',
-      brahminPackage: false,
-      notes: 'Quick inquiry from website WhatsApp widget.',
-      referenceId: 'VCKM-' + Math.floor(100000 + Math.random() * 900000),
-    });
-    triggerWhatsAppRedirect(url);
-    setIsOpen(false);
+    if (isLoading) return;
+
+    setIsLoading(true);
+
+    if (loadingTimerRef.current) {
+      clearTimeout(loadingTimerRef.current);
+    }
+
+    loadingTimerRef.current = setTimeout(() => {
+      const url = getWhatsAppBookingUrl({
+        fullName: quickName || 'Guest',
+        phone: 'Provided via WhatsApp Chat',
+        eventType: quickEvent,
+        selectedDate: quickDate,
+        timeSlot: 'Full Day',
+        guestsCount: '500 to 800',
+        roomsCount: '11 AC Rooms',
+        brahminPackage: false,
+        notes: 'Quick inquiry from website WhatsApp widget.',
+        referenceId: 'VCKM-' + Math.floor(100000 + Math.random() * 900000),
+      });
+      setIsLoading(false);
+      triggerWhatsAppRedirect(url);
+      setIsOpen(false);
+    }, 1500);
   };
 
   const handleDirectChat = () => {
@@ -76,58 +105,79 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({ onOpenBookin
             </div>
 
             <form onSubmit={handleQuickSubmit} className="space-y-2">
-              <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-[#4A1C40] mb-0.5">
-                  Your Name
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="Enter your name"
-                  value={quickName}
-                  onChange={(e) => setQuickName(e.target.value)}
-                  className="w-full px-2.5 py-1.5 text-xs bg-white border border-[#E5E0D8] rounded-md text-[#333333] focus:outline-hidden focus:border-[#C5A059]"
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-2">
+              <fieldset disabled={isLoading} className="space-y-2 border-0 p-0 m-0 min-w-0">
                 <div>
                   <label className="block text-[10px] font-bold uppercase tracking-wider text-[#4A1C40] mb-0.5">
-                    Event
-                  </label>
-                  <select
-                    value={quickEvent}
-                    onChange={(e) => setQuickEvent(e.target.value)}
-                    className="w-full px-2 py-1.5 text-xs bg-white border border-[#E5E0D8] rounded-md text-[#333333] focus:outline-hidden focus:border-[#C5A059]"
-                  >
-                    <option value="Wedding">Wedding</option>
-                    <option value="Reception">Reception</option>
-                    <option value="Conference">Conference</option>
-                    <option value="Birthday / Party">Birthday / Party</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-wider text-[#4A1C40] mb-0.5">
-                    Date
+                    Your Name
                   </label>
                   <input
-                    type="date"
-                    value={quickDate}
-                    onChange={(e) => setQuickDate(e.target.value)}
-                    className="w-full px-2 py-1.5 text-xs bg-white border border-[#E5E0D8] rounded-md text-[#333333] focus:outline-hidden focus:border-[#C5A059]"
+                    type="text"
+                    required
+                    placeholder="Enter your name"
+                    value={quickName}
+                    onChange={(e) => setQuickName(e.target.value)}
+                    className="w-full px-2.5 py-1.5 text-xs bg-white border border-[#E5E0D8] rounded-md text-[#333333] focus:outline-hidden focus:border-[#C5A059]"
                   />
                 </div>
-              </div>
 
-              <button
-                type="submit"
-                className="w-full py-2.5 px-3 bg-[#25D366] hover:bg-[#20ba59] active:scale-[0.98] text-white text-xs font-bold uppercase tracking-wider rounded-lg shadow-md flex items-center justify-center gap-2 cursor-pointer transition-all"
-              >
-                <WhatsAppIcon className="w-3.5 h-3.5 fill-white" />
-                <span>Send to WhatsApp ({WHATSAPP_PHONE})</span>
-              </button>
+                <div className="grid grid-cols-2 gap-2">
+                  <div>
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-[#4A1C40] mb-0.5">
+                      Event
+                    </label>
+                    <select
+                      value={quickEvent}
+                      onChange={(e) => setQuickEvent(e.target.value)}
+                      className="w-full px-2 py-1.5 text-xs bg-white border border-[#E5E0D8] rounded-md text-[#333333] focus:outline-hidden focus:border-[#C5A059]"
+                    >
+                      <option value="Wedding">Wedding</option>
+                      <option value="Reception">Reception</option>
+                      <option value="Conference">Conference</option>
+                      <option value="Birthday / Party">Birthday / Party</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-[#4A1C40] mb-0.5">
+                      Date
+                    </label>
+                    <input
+                      type="date"
+                      min={todayDateString}
+                      value={quickDate}
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        if (!val || val >= todayDateString) {
+                          setQuickDate(val);
+                        }
+                      }}
+                      className="w-full px-2 py-1.5 text-xs bg-white border border-[#E5E0D8] rounded-md text-[#333333] focus:outline-hidden focus:border-[#C5A059] cursor-pointer"
+                    />
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  aria-busy={isLoading}
+                  className={`w-full py-2.5 px-3 bg-[#25D366] hover:bg-[#20ba59] active:scale-[0.98] text-white text-xs font-bold uppercase tracking-wider rounded-lg shadow-md flex items-center justify-center gap-2 transition-all ${
+                    isLoading ? 'opacity-85 cursor-not-allowed' : 'cursor-pointer'
+                  }`}
+                >
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="w-3.5 h-3.5 animate-spin text-white" />
+                      <span>Generating WhatsApp Link...</span>
+                    </>
+                  ) : (
+                    <>
+                      <WhatsAppIcon className="w-3.5 h-3.5 fill-white" />
+                      <span>Send to WhatsApp ({WHATSAPP_PHONE})</span>
+                    </>
+                  )}
+                </button>
+              </fieldset>
             </form>
 
             <div className="pt-1 border-t border-[#E5E0D8] flex items-center justify-between text-[11px]">

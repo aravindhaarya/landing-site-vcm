@@ -169,83 +169,114 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
               <button
                 id="mobile-menu-toggle-btn"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 text-[#4A1C40] border border-[#C5A059]/40 rounded bg-[#F9F8F4] hover:bg-[#F1EBE4] flex items-center justify-center transition-colors"
+                className={`p-2 sm:p-2.5 text-[#4A1C40] border rounded-lg bg-[#F9F8F4] hover:bg-[#F1EBE4] active:scale-95 flex items-center justify-center transition-all duration-300 cursor-pointer ${
+                  mobileMenuOpen
+                    ? 'border-[#C5A059] ring-2 ring-[#C5A059]/40 bg-[#F1EBE4]'
+                    : 'border-[#C5A059]/40 hover:border-[#C5A059]'
+                }`}
                 aria-label="Toggle Navigation Menu"
+                aria-expanded={mobileMenuOpen}
               >
-                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                <div className="w-5 h-4 relative flex flex-col justify-between items-center" aria-hidden="true">
+                  <span
+                    className={`block h-0.5 w-5 bg-[#4A1C40] rounded-full transform transition-all duration-300 ease-in-out origin-center ${
+                      mobileMenuOpen ? 'rotate-45 translate-y-[7px] bg-[#C5A059]' : ''
+                    }`}
+                  />
+                  <span
+                    className={`block h-0.5 w-5 bg-[#4A1C40] rounded-full transition-all duration-200 ease-in-out ${
+                      mobileMenuOpen ? 'opacity-0 scale-x-0' : 'opacity-100 scale-x-100'
+                    }`}
+                  />
+                  <span
+                    className={`block h-0.5 w-5 bg-[#4A1C40] rounded-full transform transition-all duration-300 ease-in-out origin-center ${
+                      mobileMenuOpen ? '-rotate-45 -translate-y-[7px] bg-[#C5A059]' : ''
+                    }`}
+                  />
+                </div>
               </button>
             </div>
           </div>
         </div>
       </header>
 
-      {/* Mobile Drawer */}
-      {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 lg:hidden">
-          <div
-            className="fixed inset-0 bg-black/60"
-            onClick={() => setMobileMenuOpen(false)}
-          />
-          <div className="fixed top-0 right-0 bottom-0 w-4/5 max-w-sm bg-[#FFFFFF] border-l-2 border-[#C5A059] p-6 flex flex-col justify-between shadow-2xl overflow-y-auto">
-            <div>
-              <div className="flex items-center justify-between pb-4 border-b border-[#F1EBE4]">
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded bg-[#4A1C40] flex items-center justify-center text-[#C5A059] font-bold font-serif">
-                    V
-                  </div>
-                  <span className="font-serif text-sm font-bold text-[#4A1C40] line-clamp-1">
-                    Varathambal Chockalingam
-                  </span>
+      {/* Mobile Drawer with smooth slide and fade animations */}
+      <div
+        className={`fixed inset-0 z-50 lg:hidden transition-all duration-300 ${
+          mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+        aria-hidden={!mobileMenuOpen}
+      >
+        <div
+          className={`fixed inset-0 bg-black/60 transition-opacity duration-300 ease-in-out ${
+            mobileMenuOpen ? 'opacity-100' : 'opacity-0'
+          }`}
+          onClick={() => setMobileMenuOpen(false)}
+        />
+        <div
+          className={`fixed top-0 right-0 bottom-0 w-4/5 max-w-sm bg-[#FFFFFF] border-l-2 border-[#C5A059] p-6 flex flex-col justify-between shadow-2xl overflow-y-auto transform transition-transform duration-300 ease-out ${
+            mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
+        >
+          <div>
+            <div className="flex items-center justify-between pb-4 border-b border-[#F1EBE4]">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded bg-[#4A1C40] flex items-center justify-center text-[#C5A059] font-bold font-serif shadow-xs">
+                  V
                 </div>
-                <button
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="p-1.5 text-neutral-500 hover:text-black"
-                >
-                  <X className="w-5 h-5" />
-                </button>
+                <span className="font-serif text-sm font-bold text-[#4A1C40] line-clamp-1">
+                  Varathambal Chockalingam
+                </span>
               </div>
-
-              <div className="py-4 flex flex-col gap-1.5">
-                {navLinks.map((link) => (
-                  <button
-                    key={link.name}
-                    onClick={() => handleNavClick(link.href)}
-                    className="text-left py-2.5 px-3 text-xs font-semibold uppercase tracking-wider text-[#333333] hover:text-[#4A1C40] hover:bg-[#F9F8F4] flex items-center justify-between rounded"
-                  >
-                    <span>{link.name}</span>
-                    <ChevronRight className="w-4 h-4 text-[#C5A059]" />
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="pt-4 border-t border-[#F1EBE4] space-y-3">
-              <a
-                href={VENUE_INFO.telLink}
-                className="w-full py-2.5 px-4 bg-[#C5A059] text-[#4A1C40] font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 rounded shadow-xs"
-              >
-                <Phone className="w-4 h-4" />
-                <span>Call: {VENUE_INFO.phone}</span>
-              </a>
-
               <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenBooking();
-                }}
-                className="w-full py-2.5 px-4 bg-[#4A1C40] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow"
-                style={{
-                  borderTopLeftRadius: '14px',
-                  borderBottomRightRadius: '14px',
-                }}
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-1.5 text-neutral-500 hover:text-[#4A1C40] hover:rotate-90 transition-transform duration-300 cursor-pointer"
+                aria-label="Close menu"
               >
-                <WhatsAppIcon className="w-4 h-4 fill-emerald-400" />
-                <span>Open Request Form (WhatsApp)</span>
+                <X className="w-5 h-5" />
               </button>
             </div>
+
+            <div className="py-4 flex flex-col gap-1.5">
+              {navLinks.map((link) => (
+                <button
+                  key={link.name}
+                  onClick={() => handleNavClick(link.href)}
+                  className="group text-left py-2.5 px-3 text-xs font-semibold uppercase tracking-wider text-[#333333] hover:text-[#4A1C40] hover:bg-[#F9F8F4] flex items-center justify-between rounded hover:translate-x-1.5 transition-all duration-200 cursor-pointer"
+                >
+                  <span>{link.name}</span>
+                  <ChevronRight className="w-4 h-4 text-[#C5A059] group-hover:translate-x-1 transition-transform duration-200" />
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="pt-4 border-t border-[#F1EBE4] space-y-3">
+            <a
+              href={VENUE_INFO.telLink}
+              className="w-full py-2.5 px-4 bg-[#C5A059] text-[#4A1C40] font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 rounded shadow-xs hover:bg-[#b58f48] transition-colors"
+            >
+              <Phone className="w-4 h-4" />
+              <span>Call: {VENUE_INFO.phone}</span>
+            </a>
+
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenBooking();
+              }}
+              className="w-full py-2.5 px-4 bg-[#4A1C40] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow hover:bg-[#34122c] transition-colors cursor-pointer"
+              style={{
+                borderTopLeftRadius: '14px',
+                borderBottomRightRadius: '14px',
+              }}
+            >
+              <WhatsAppIcon className="w-4 h-4 fill-emerald-400" />
+              <span>Open Request Form (WhatsApp)</span>
+            </button>
           </div>
         </div>
-      )}
+      </div>
     </>
   );
 };

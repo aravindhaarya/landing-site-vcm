@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Phone, Calendar, Sparkles, MapPin, CheckCircle2, ShieldCheck, ArrowRight, Award, Clock, Send, Image as ImageIcon } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Phone, Calendar, Sparkles, MapPin, CheckCircle2, ShieldCheck, ArrowRight, Award, Clock, Send, Image as ImageIcon, Loader2 } from 'lucide-react';
 import { VENUE_INFO, EVENT_TYPES } from '../data/banquetData';
 import { WhatsAppIcon } from './WhatsAppIcon';
 import { WHATSAPP_PHONE, getWhatsAppBookingUrl, triggerWhatsAppRedirect } from '../utils/whatsapp';
@@ -15,23 +15,52 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
   const [heroDate, setHeroDate] = useState('');
   const [heroName, setHeroName] = useState('');
   const [heroPhone, setHeroPhone] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const loadingTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const todayDateString = (() => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  })();
+
+  useEffect(() => {
+    return () => {
+      if (loadingTimerRef.current) {
+        clearTimeout(loadingTimerRef.current);
+      }
+    };
+  }, []);
 
   const handleHeroQuickSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const ref = 'VCKM-' + Math.floor(100000 + Math.random() * 900000);
-    const targetUrl = getWhatsAppBookingUrl({
-      fullName: heroName || 'Valued Guest',
-      phone: heroPhone || 'Direct Inquiry',
-      eventType: selectedEvent,
-      selectedDate: heroDate,
-      timeSlot: 'Full Day',
-      guestsCount: '500 to 800',
-      roomsCount: '8 Rooms',
-      brahminPackage: selectedEvent === 'Wedding',
-      notes: 'Direct inquiry submitted from website homepage.',
-      referenceId: ref,
-    });
-    triggerWhatsAppRedirect(targetUrl);
+    if (isLoading) return;
+
+    setIsLoading(true);
+
+    if (loadingTimerRef.current) {
+      clearTimeout(loadingTimerRef.current);
+    }
+
+    loadingTimerRef.current = setTimeout(() => {
+      const ref = 'VCKM-' + Math.floor(100000 + Math.random() * 900000);
+      const targetUrl = getWhatsAppBookingUrl({
+        fullName: heroName || 'Valued Guest',
+        phone: heroPhone || 'Direct Inquiry',
+        eventType: selectedEvent,
+        selectedDate: heroDate,
+        timeSlot: 'Full Day',
+        guestsCount: '500 to 800',
+        roomsCount: '11 AC Rooms',
+        brahminPackage: selectedEvent === 'Wedding',
+        notes: 'Direct inquiry submitted from website homepage.',
+        referenceId: ref,
+      });
+      setIsLoading(false);
+      triggerWhatsAppRedirect(targetUrl);
+    }, 1500);
   };
 
   return (
@@ -77,7 +106,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
                 <div className="text-[11px] text-[#777777]">Dedicated Dining Seating</div>
               </div>
               <div className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors">
-                <div className="text-xs font-bold text-[#4A1C40]">8 AC Rooms</div>
+                <div className="text-xs font-bold text-[#4A1C40]">11 AC Rooms</div>
                 <div className="text-[11px] text-[#777777]">Bride &amp; Groom Suites</div>
               </div>
               <div className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors">
@@ -203,57 +232,78 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
 
               {/* Embedded Quick Request Form */}
               <form onSubmit={handleHeroQuickSubmit} className="space-y-3 pt-1">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                  <div>
-                    <label className="block text-[10px] font-bold uppercase tracking-wider text-[#4A1C40] mb-1">
-                      Preferred Date
-                    </label>
-                    <input
-                      type="date"
-                      value={heroDate}
-                      onChange={(e) => setHeroDate(e.target.value)}
-                      className="w-full px-2.5 py-1.5 text-xs bg-[#F9F8F4] border border-[#E5E0D8] rounded-lg text-[#333333] focus:outline-hidden focus:border-[#C5A059]"
-                    />
+                <fieldset disabled={isLoading} className="space-y-3 border-0 p-0 m-0 min-w-0">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    <div>
+                      <label className="block text-[10px] font-bold uppercase tracking-wider text-[#4A1C40] mb-1">
+                        Preferred Date
+                      </label>
+                      <input
+                        type="date"
+                        min={todayDateString}
+                        value={heroDate}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          if (!val || val >= todayDateString) {
+                            setHeroDate(val);
+                          }
+                        }}
+                        className="w-full px-2.5 py-1.5 text-xs bg-[#F9F8F4] border border-[#E5E0D8] rounded-lg text-[#333333] focus:outline-hidden focus:border-[#C5A059] cursor-pointer"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-[10px] font-bold uppercase tracking-wider text-[#4A1C40] mb-1">
+                        Your Full Name
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. Ramesh"
+                        value={heroName}
+                        onChange={(e) => setHeroName(e.target.value)}
+                        className="w-full px-2.5 py-1.5 text-xs bg-[#F9F8F4] border border-[#E5E0D8] rounded-lg text-[#333333] focus:outline-hidden focus:border-[#C5A059]"
+                      />
+                    </div>
                   </div>
 
                   <div>
                     <label className="block text-[10px] font-bold uppercase tracking-wider text-[#4A1C40] mb-1">
-                      Your Full Name
+                      Your WhatsApp Phone Number
                     </label>
                     <input
-                      type="text"
+                      type="tel"
                       required
-                      placeholder="e.g. Ramesh"
-                      value={heroName}
-                      onChange={(e) => setHeroName(e.target.value)}
+                      placeholder="+91 98765 43210"
+                      value={heroPhone}
+                      onChange={(e) => setHeroPhone(e.target.value)}
                       className="w-full px-2.5 py-1.5 text-xs bg-[#F9F8F4] border border-[#E5E0D8] rounded-lg text-[#333333] focus:outline-hidden focus:border-[#C5A059]"
                     />
                   </div>
-                </div>
 
-                <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-wider text-[#4A1C40] mb-1">
-                    Your WhatsApp Phone Number
-                  </label>
-                  <input
-                    type="tel"
-                    required
-                    placeholder="+91 98765 43210"
-                    value={heroPhone}
-                    onChange={(e) => setHeroPhone(e.target.value)}
-                    className="w-full px-2.5 py-1.5 text-xs bg-[#F9F8F4] border border-[#E5E0D8] rounded-lg text-[#333333] focus:outline-hidden focus:border-[#C5A059]"
-                  />
-                </div>
-
-                {/* Submit & Redirect to WhatsApp Button */}
-                <button
-                  type="submit"
-                  id="hero-whatsapp-submit-btn"
-                  className="w-full py-3 bg-[#25D366] hover:bg-[#20ba59] active:scale-[0.99] text-white text-xs font-bold uppercase tracking-wider shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer rounded-xl"
-                >
-                  <WhatsAppIcon className="w-4 h-4 fill-white" />
-                  <span>Send Request to WhatsApp ({WHATSAPP_PHONE})</span>
-                </button>
+                  {/* Submit & Redirect to WhatsApp Button */}
+                  <button
+                    type="submit"
+                    id="hero-whatsapp-submit-btn"
+                    disabled={isLoading}
+                    aria-busy={isLoading}
+                    className={`w-full py-3 bg-[#25D366] hover:bg-[#20ba59] active:scale-[0.99] text-white text-xs font-bold uppercase tracking-wider shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 rounded-xl ${
+                      isLoading ? 'opacity-85 cursor-not-allowed' : 'cursor-pointer'
+                    }`}
+                  >
+                    {isLoading ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin text-white" />
+                        <span>Generating WhatsApp Link...</span>
+                      </>
+                    ) : (
+                      <>
+                        <WhatsAppIcon className="w-4 h-4 fill-white" />
+                        <span>Send Request to WhatsApp ({WHATSAPP_PHONE})</span>
+                      </>
+                    )}
+                  </button>
+                </fieldset>
               </form>
 
               {/* Or Open Detailed Form */}
@@ -283,7 +333,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
                   <span className="text-[9px] text-[#888888]">400+ Dining</span>
                 </div>
                 <div className="flex flex-col items-center py-1 bg-[#F9F8F4] rounded border border-[#E5E0D8]/60">
-                  <span className="font-bold text-[#4A1C40]">8 AC Rooms</span>
+                  <span className="font-bold text-[#4A1C40]">11 AC Rooms</span>
                   <span className="text-[9px] text-[#888888]">Included</span>
                 </div>
                 <div className="flex flex-col items-center py-1 bg-[#F9F8F4] rounded border border-[#E5E0D8]/60">
