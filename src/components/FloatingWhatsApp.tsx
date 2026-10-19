@@ -50,7 +50,7 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({ onOpenBookin
         selectedDate: quickDate,
         timeSlot: 'Full Day',
         guestsCount: '500 to 800',
-        roomsCount: '11 AC Rooms',
+        roomsCount: '13 AC Rooms',
         brahminPackage: false,
         notes: 'Quick inquiry from website WhatsApp widget.',
         referenceId: 'VCKM-' + Math.floor(100000 + Math.random() * 900000),

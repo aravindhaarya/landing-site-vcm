@@ -44,7 +44,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   const [timeSlot, setTimeSlot] = useState<string>('Full Day');
   const [guestsCount, setGuestsCount] = useState<string>('500 to 800');
   const [brahminPackage, setBrahminPackage] = useState<boolean>(false);
-  const [roomsCount, setRoomsCount] = useState<string>('11 AC Rooms (All Rooms)');
+  const [roomsCount, setRoomsCount] = useState<string>('13 AC Rooms (All Rooms)');
   const [fullName, setFullName] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
   const [email, setEmail] = useState<string>('');
@@ -465,7 +465,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-[#4A1C40] mb-1.5">
-                    AC Rooms Needed (11 Available)
+                    AC Rooms Needed (13 Available)
                   </label>
                   <select
                     value={roomsCount}
@@ -474,7 +474,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                   >
                     <option value="2 Rooms (Bride & Groom)">2 Rooms (Bride &amp; Groom Suites)</option>
                     <option value="4 to 6 Rooms">4 to 6 Rooms</option>
-                    <option value="11 AC Rooms (All Rooms)">11 AC Rooms (All Rooms)</option>
+                    <option value="13 AC Rooms (All Rooms)">13 AC Rooms (All Rooms)</option>
                   </select>
                 </div>
               </div>

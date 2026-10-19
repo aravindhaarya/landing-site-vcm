@@ -53,7 +53,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
         selectedDate: heroDate,
         timeSlot: 'Full Day',
         guestsCount: '500 to 800',
-        roomsCount: '11 AC Rooms',
+        roomsCount: '13 AC Rooms',
         brahminPackage: selectedEvent === 'Wedding',
         notes: 'Direct inquiry submitted from website homepage.',
         referenceId: ref,
@@ -106,7 +106,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
                 <div className="text-[11px] text-[#777777]">Dedicated Dining Seating</div>
               </div>
               <div className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors">
-                <div className="text-xs font-bold text-[#4A1C40]">11 AC Rooms</div>
+                <div className="text-xs font-bold text-[#4A1C40]">13 AC Rooms</div>
                 <div className="text-[11px] text-[#777777]">Bride &amp; Groom Suites</div>
               </div>
               <div className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors">
@@ -333,7 +333,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
                   <span className="text-[9px] text-[#888888]">400+ Dining</span>
                 </div>
                 <div className="flex flex-col items-center py-1 bg-[#F9F8F4] rounded border border-[#E5E0D8]/60">
-                  <span className="font-bold text-[#4A1C40]">11 AC Rooms</span>
+                  <span className="font-bold text-[#4A1C40]">13 AC Rooms</span>
                   <span className="text-[9px] text-[#888888]">Included</span>
                 </div>
                 <div className="flex flex-col items-center py-1 bg-[#F9F8F4] rounded border border-[#E5E0D8]/60">

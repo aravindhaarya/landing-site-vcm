@@ -79,7 +79,7 @@ export const AboutStory: React.FC<AboutStoryProps> = ({ onOpenBooking }) => {
                     </p>
                   </div>
                   <p className="text-[11px] text-[#777777] max-w-xs mx-auto leading-relaxed">
-                    Spacious air-conditioned celebration hall with 1000+ seating (1500+ floating), 400+ dining, and 11 AC rooms.
+                    Spacious air-conditioned celebration hall with 1000+ seating (1500+ floating), 400+ dining, and 13 AC rooms.
                   </p>
                 </div>
 

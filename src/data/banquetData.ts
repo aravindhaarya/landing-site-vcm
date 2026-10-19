@@ -53,9 +53,9 @@ export const FACILITIES: Facility[] = [
   },
   {
     id: "f-rooms",
-    title: "11 AC Rooms Available (Including Bride and Groom)",
+    title: "13 AC Rooms Available (Including Bride and Groom)",
     iconImg: "https://lakshmihall.com/assets/laks-img/rooms.webp",
-    desc: "11 fully equipped AC rooms including exclusive bride & groom suites"
+    desc: "13 fully equipped AC rooms including exclusive bride & groom suites"
   },
   {
     id: "f-cars-valet",
@@ -223,7 +223,7 @@ export const FAQS = [
   },
   {
     q: "Are rooms provided for the bride, groom, and family?",
-    a: "Yes, 11 well-maintained air-conditioned rooms are available, including dedicated suites for the bride and groom."
+    a: "Yes, 13 well-maintained air-conditioned rooms are available, including dedicated suites for the bride and groom."
   },
   {
     q: "Is there vehicle parking and valet service?",

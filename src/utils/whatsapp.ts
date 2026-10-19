@@ -47,7 +47,7 @@ export function formatWhatsAppMessage(data: BookingInquiryData): string {
   parts.push(`• Preferred Date: ${data.selectedDate || 'To be decided / Flexible'}`);
   parts.push(`• Time Slot: ${data.timeSlot || 'Full Day'}`);
   parts.push(`• Expected Guests: ${data.guestsCount || '500 to 800'}`);
-  parts.push(`• AC Rooms Needed: ${data.roomsCount || '11 AC Rooms (All Rooms)'}`);
+  parts.push(`• AC Rooms Needed: ${data.roomsCount || '13 AC Rooms (All Rooms)'}`);
   parts.push(
     `• Brahmin Package (2½ Days): ${
       data.brahminPackage ? 'Yes (Requested 2½ Days Package)' : 'No (Standard Package)'
