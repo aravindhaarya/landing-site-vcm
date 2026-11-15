@@ -456,10 +456,10 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                     onChange={(e) => setGuestsCount(e.target.value)}
                     className="w-full px-3 py-2 text-xs border border-[#E5E0D8] rounded-lg bg-[#F9F8F4] text-[#333333] focus:outline-hidden focus:border-[#C5A059]"
                   >
-                    <option value="300 to 500">300 to 500 Guests</option>
-                    <option value="500 to 800">500 to 800 Guests</option>
-                    <option value="800 to 1000">800 to 1000 Guests</option>
-                    <option value="1000+ guests">1000+ Guests (Grand Capacity)</option>
+                    <option value="Up to 300">Up to 300 Guests</option>
+                    <option value="300 to 600">300 to 600 Guests (Seated Capacity)</option>
+                    <option value="600 to 1000">600 to 1000 Guests</option>
+                    <option value="1000 to 1500+">1000 to 1500+ Guests (Floating Capacity)</option>
                   </select>
                 </div>
 

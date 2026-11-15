@@ -8,6 +8,7 @@ import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { AboutStory } from './components/AboutStory';
 import { Amenities } from './components/Amenities';
+import { VideoTour } from './components/VideoTour';
 import { PhotoGallery } from './components/PhotoGallery';
 import { FAQAccordion } from './components/FAQAccordion';
 import { Footer } from './components/Footer';
@@ -68,12 +69,25 @@ export default function App() {
         {/* 17 Amenities matching attached content */}
         <Amenities />
 
-        {/* Boundary: Amenities (#FFFFFF) -> Moments Gallery (#F9F8F4) */}
+        {/* Boundary: Amenities (#FFFFFF) -> Virtual Video Tour (#1C091A) */}
         <SectionDivider
           fromBg="#FFFFFF"
+          toBg="#1C091A"
+          slope="down-right"
+          height={40}
+          withOrnament={true}
+          ornamentText="Video Tour"
+        />
+
+        {/* Centerpiece: Virtual Hall Video Tour (Cloudinary Stream) */}
+        <VideoTour onOpenBooking={() => handleOpenBooking()} />
+
+        {/* Boundary: Video Tour (#1C091A) -> Moments Gallery (#F9F8F4) */}
+        <SectionDivider
+          fromBg="#1C091A"
           toBg="#F9F8F4"
           slope="down-left"
-          height={38}
+          height={40}
           withOrnament={true}
           ornamentText="Moments"
         />

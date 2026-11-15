@@ -77,12 +77,12 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
             </div>
 
             <p id="footer-venue-description" className="text-neutral-400 text-xs leading-relaxed max-w-md">
-              An ideal venue for weddings and grand social gatherings, accommodating over 1000+ seated guests (1500+ floating) comfortably with 400+ dining, modern amenities, professional staff, and ample parking.
+              An ideal venue for weddings and grand social gatherings, accommodating over 600+ seated guests (1500+ floating) comfortably with 200+ dining, 100% generator power backup, wheelchair access, modern amenities, professional staff, and ample parking.
             </p>
 
             <div className="pt-2 flex flex-wrap gap-2 text-[11px] text-neutral-300">
-              <span className="bg-white/10 px-2.5 py-1 rounded">1000+ Seated (1500+ Floating)</span>
-              <span className="bg-white/10 px-2.5 py-1 rounded">400+ Dining Seating</span>
+              <span className="bg-white/10 px-2.5 py-1 rounded">600+ Seated (1500+ Floating)</span>
+              <span className="bg-white/10 px-2.5 py-1 rounded">200+ Dining Seating</span>
               <span className="bg-white/10 px-2.5 py-1 rounded">13 AC Rooms</span>
               <span className="bg-white/10 px-2.5 py-1 rounded">Cars &amp; Bikes Parking</span>
             </div>
@@ -116,6 +116,12 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
                 <a href="#amenities" className="hover:text-[#C5A059] transition-colors flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
                   <span>Amenities (17 Features)</span>
+                </a>
+              </li>
+              <li>
+                <a href="#video-tour" className="hover:text-[#C5A059] transition-colors flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
+                  <span>Virtual Video Tour</span>
                 </a>
               </li>
               <li>

@@ -1,5 +1,6 @@
-import React from 'react';
-import { Phone, Calendar, ArrowRight, ShieldCheck, Users, UtensilsCrossed, BedDouble, Car, Bike, Wind, Sparkles, ChevronsUp } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
+import { Phone, Calendar, ArrowRight, ShieldCheck, Users, UtensilsCrossed, BedDouble, Car, Bike, Wind, Sparkles, ChevronsUp, Zap, Accessibility, Maximize2, X, ArrowLeft } from 'lucide-react';
 import { VENUE_INFO, FACILITIES } from '../data/banquetData';
 import { SectionDivider } from './SectionDivider';
 import { FadeInUp } from './FadeInUp';
@@ -12,6 +13,8 @@ const FACILITY_ICON_MAP: Record<string, React.FC<{ className?: string }>> = {
   'f-seating': Users,
   'f-dining': UtensilsCrossed,
   'f-rooms': BedDouble,
+  'f-generator': Zap,
+  'f-wheelchair': Accessibility,
   'f-cars-valet': Car,
   'f-bikes': Bike,
   'f-ac': Wind,
@@ -20,10 +23,32 @@ const FACILITY_ICON_MAP: Record<string, React.FC<{ className?: string }>> = {
 };
 
 export const AboutStory: React.FC<AboutStoryProps> = ({ onOpenBooking }) => {
+  const [isStageModalOpen, setIsStageModalOpen] = useState(false);
+
+  // Keyboard navigation & lock scroll when modal is open
+  useEffect(() => {
+    if (!isStageModalOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsStageModalOpen(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [isStageModalOpen]);
+
   return (
     <div className="space-y-0">
       {/* About Us Section */}
-      <section id="about-us" className="py-20 bg-[#FFFFFF] relative overflow-hidden">
+      <section id="about-us" className="py-16 sm:py-20 bg-[#FFFFFF] relative overflow-hidden">
         {/* Background accent */}
         <div
           className="absolute -top-16 -left-16 w-80 h-80 rounded-full border border-[#C5A059]/15 pointer-events-none"
@@ -38,82 +63,58 @@ export const AboutStory: React.FC<AboutStoryProps> = ({ onOpenBooking }) => {
         />
 
         <FadeInUp duration={0.65} yOffset={28} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             
-            {/* Left: Venue Architecture Showcase / Photo Frame */}
-            <div className="lg:col-span-5 relative">
+            {/* Left: Venue Stage Showcase - 16:9 Full View without Crop */}
+            <div className="lg:col-span-6 relative">
               <div
-                className="w-full min-h-[360px] sm:min-h-[400px] bg-gradient-to-br from-[#FAF7F2] via-[#FFFFFF] to-[#F5EFE6] border-3 border-[#C5A059] shadow-xl overflow-hidden relative flex flex-col justify-between p-6 sm:p-8"
+                onClick={() => setIsStageModalOpen(true)}
+                className="w-full aspect-[16/9] border-3 border-[#C5A059] shadow-2xl overflow-hidden relative group bg-[#1C091A] cursor-pointer"
                 style={{
-                  borderTopRightRadius: '60px',
-                  borderBottomLeftRadius: '60px',
+                  aspectRatio: '16 / 9',
+                  borderTopRightRadius: '48px',
+                  borderBottomLeftRadius: '48px',
                 }}
+                title="Click to view full stage image"
               >
-                {/* Traditional Auspicious Corner Motifs */}
-                <div className="absolute top-3 left-3 w-8 h-8 border-t-2 border-l-2 border-[#C5A059]/60 pointer-events-none" />
-                <div className="absolute top-3 right-3 w-8 h-8 border-t-2 border-r-2 border-[#C5A059]/60 pointer-events-none" />
-                <div className="absolute bottom-3 left-3 w-8 h-8 border-b-2 border-l-2 border-[#C5A059]/60 pointer-events-none" />
-                <div className="absolute bottom-3 right-3 w-8 h-8 border-b-2 border-r-2 border-[#C5A059]/60 pointer-events-none" />
+                {/* Pure Stage Image - Complete 100% full view of stage screen & decorations */}
+                <img
+                  src="/gallery/about-stage.webp"
+                  alt="Varathambal Chockalingam Kalyana Mandapam Stage"
+                  loading="eager"
+                  className="w-full h-full object-cover transition-all duration-300"
+                />
 
-                {/* Top Badge */}
-                <div className="flex items-center justify-between">
-                  <div className="w-10 h-10 rounded-full bg-[#4A1C40] border border-[#C5A059] flex items-center justify-center text-[#C5A059] font-serif font-bold text-lg shadow-xs">
-                    V
-                  </div>
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-[#4A1C40] bg-[#C5A059]/15 border border-[#C5A059]/40 px-2.5 py-1 rounded-full">
-                    Madipakkam, Chennai
-                  </span>
-                </div>
+                {/* Soft Vignette Depth */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-40 group-hover:opacity-60 transition-opacity duration-300 pointer-events-none" />
 
-                {/* Center Content Placeholder */}
-                <div className="my-auto py-6 text-center space-y-3">
-                  <div className="w-16 h-16 mx-auto rounded-full bg-[#4A1C40]/5 border-2 border-dashed border-[#C5A059] flex items-center justify-center">
-                    <Sparkles className="w-7 h-7 text-[#C5A059]" />
-                  </div>
-                  <div className="space-y-1">
-                    <h3 className="font-serif font-bold text-lg sm:text-xl text-[#4A1C40]">
-                      Varathambal Chockalingam
-                    </h3>
-                    <p className="text-xs font-semibold uppercase tracking-wider text-[#C5A059]">
-                      Kalyana Mahal • Grand Hall &amp; Stage
-                    </p>
-                  </div>
-                  <p className="text-[11px] text-[#777777] max-w-xs mx-auto leading-relaxed">
-                    Spacious air-conditioned celebration hall with 1000+ seating (1500+ floating), 400+ dining, and 13 AC rooms.
-                  </p>
-                </div>
-
-                {/* Bottom Highlight Pills */}
-                <div className="grid grid-cols-2 gap-2 pt-3 border-t border-[#E5E0D8]">
-                  <div className="bg-white/80 p-2 rounded-lg border border-[#C5A059]/30 text-center">
-                    <div className="text-[11px] font-bold text-[#4A1C40]">1000+ Seated</div>
-                    <div className="text-[9px] text-[#777777]">1500+ Floating</div>
-                  </div>
-                  <div className="bg-white/80 p-2 rounded-lg border border-[#C5A059]/30 text-center">
-                    <div className="text-[11px] font-bold text-[#4A1C40]">400+ Dining</div>
-                    <div className="text-[9px] text-[#777777]">Traditional Feast</div>
+                {/* Hover Preview Badge */}
+                <div className="absolute inset-0 bg-[#4A1C40]/15 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+                  <div className="px-3.5 py-1.5 rounded-full bg-white/95 text-[#4A1C40] shadow-lg border border-[#C5A059]/50 flex items-center gap-1.5 transform scale-95 group-hover:scale-100 transition-all duration-300 backdrop-blur-xs">
+                    <Maximize2 className="w-3.5 h-3.5 text-[#C5A059]" />
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#4A1C40]">Full View</span>
                   </div>
                 </div>
               </div>
 
-              {/* Verified Badge */}
+              {/* 600+ Seated / 1500+ Floating Badge */}
               <div
-                className="absolute -bottom-4 -right-4 bg-[#4A1C40] text-white p-3.5 border-2 border-[#C5A059] shadow-lg hidden sm:flex items-center gap-2.5 z-10"
+                className="absolute -bottom-3.5 right-4 sm:-bottom-4 sm:right-6 bg-[#4A1C40] text-white py-2 px-3.5 sm:py-2.5 sm:px-4 border-2 border-[#C5A059] shadow-xl flex items-center gap-2.5 z-20 pointer-events-none"
                 style={{
-                  borderTopLeftRadius: '16px',
-                  borderBottomRightRadius: '16px',
+                  borderTopLeftRadius: '14px',
+                  borderBottomRightRadius: '14px',
                 }}
               >
-                <ShieldCheck className="w-5 h-5 text-[#C5A059]" />
+                <ShieldCheck className="w-5 h-5 text-[#C5A059] shrink-0" />
                 <div className="text-left">
-                  <div className="text-xs font-bold leading-tight">1000+ Seated</div>
+                  <div className="text-xs font-bold leading-tight">600+ Seated</div>
                   <div className="text-[10px] text-neutral-300">1500+ Floating</div>
                 </div>
               </div>
             </div>
 
             {/* Right: About Us Text */}
-            <div className="lg:col-span-7 space-y-6">
+            <div className="lg:col-span-6 space-y-6">
               <div className="space-y-2">
                 <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#F9F8F4] border border-[#C5A059] rounded-full text-xs font-bold text-[#4A1C40] uppercase tracking-wider">
                   About Us
@@ -221,6 +222,73 @@ export const AboutStory: React.FC<AboutStoryProps> = ({ onOpenBooking }) => {
 
         </FadeInUp>
       </section>
+
+      {/* Fullscreen Stage Lightbox Modal mounted via React Portal to document.body */}
+      {isStageModalOpen && typeof document !== 'undefined' && createPortal(
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Stage full view"
+          onClick={() => setIsStageModalOpen(false)}
+          className="fixed inset-0 z-[999999] bg-black/95 backdrop-blur-md flex flex-col justify-between select-none animate-in fade-in duration-150"
+        >
+          {/* Top Header Bar */}
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="p-3 sm:p-4 px-4 sm:px-8 flex items-center justify-between text-white border-b border-white/15 bg-black/80 backdrop-blur-md relative z-10 shrink-0"
+          >
+            {/* Back Button */}
+            <button
+              onClick={() => setIsStageModalOpen(false)}
+              aria-label="Back"
+              className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 hover:bg-[#C5A059] text-white hover:text-[#4A1C40] transition-all duration-200 cursor-pointer border border-white/25 hover:border-[#C5A059] shadow-md group"
+            >
+              <ArrowLeft className="w-4 h-4 text-[#E5C378] group-hover:text-[#4A1C40] transition-colors" />
+              <span className="text-xs font-bold uppercase tracking-wider">Back</span>
+            </button>
+
+            {/* Title */}
+            <div className="flex flex-col items-center justify-center px-2">
+              <span className="text-xs font-semibold text-[#E5C378]">Grand Stage &amp; Decoration</span>
+              <h4 className="text-xs sm:text-sm font-serif font-semibold text-white/95 max-w-sm sm:max-w-md truncate text-center">
+                Varathambal Chockalingam Kalyana Mandapam
+              </h4>
+            </div>
+
+            {/* Close (X) Button */}
+            <button
+              onClick={() => setIsStageModalOpen(false)}
+              aria-label="Close preview"
+              title="Close Preview (Esc)"
+              className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C5A059] hover:bg-white text-[#4A1C40] transition-all duration-200 cursor-pointer font-bold text-xs uppercase tracking-wider shadow-lg hover:scale-105 active:scale-95"
+            >
+              <span>Close</span>
+              <X className="w-4 h-4 stroke-[3]" />
+            </button>
+          </div>
+
+          {/* Center Main Stage Image */}
+          <div
+            onClick={() => setIsStageModalOpen(false)}
+            className="relative flex-1 flex items-center justify-center p-3 sm:p-6 overflow-hidden min-h-0"
+          >
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="flex flex-col items-center justify-center max-h-full max-w-full"
+            >
+              <img
+                src="/gallery/about-stage.webp"
+                alt="Varathambal Chockalingam Kalyana Mandapam Stage Full View"
+                className="max-h-[72vh] sm:max-h-[78vh] max-w-[94vw] sm:max-w-[88vw] object-contain rounded-lg shadow-2xl border border-white/10"
+              />
+              <p className="text-center text-xs sm:text-sm text-[#E5C378] font-medium mt-3 px-4 max-w-2xl">
+                Varathambal Chockalingam Kalyana Mandapam — Grand Air-Conditioned Stage with Luxury Floral Backdrop &amp; Maharaja Seating
+              </p>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
     </div>
   );
 };

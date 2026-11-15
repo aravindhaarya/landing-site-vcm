@@ -98,11 +98,11 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
             {/* Quick Feature Highlights as per content */}
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-1">
               <div className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors">
-                <div className="text-xs font-bold text-[#4A1C40]">1000+ Seating</div>
+                <div className="text-xs font-bold text-[#4A1C40]">600+ Seating</div>
                 <div className="text-[11px] text-[#777777]">Main AC Hall (1500+ Floating)</div>
               </div>
               <div className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors">
-                <div className="text-xs font-bold text-[#4A1C40]">400+ Dining</div>
+                <div className="text-xs font-bold text-[#4A1C40]">200+ Dining</div>
                 <div className="text-[11px] text-[#777777]">Dedicated Dining Seating</div>
               </div>
               <div className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors">
@@ -110,16 +110,16 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
                 <div className="text-[11px] text-[#777777]">Bride &amp; Groom Suites</div>
               </div>
               <div className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors">
+                <div className="text-xs font-bold text-[#4A1C40]">100% DG Generator</div>
+                <div className="text-[11px] text-[#777777]">Full Power Backup</div>
+              </div>
+              <div className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors">
+                <div className="text-xs font-bold text-[#4A1C40]">Wheelchair Friendly</div>
+                <div className="text-[11px] text-[#777777]">Ramps &amp; Lift Access</div>
+              </div>
+              <div className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors">
                 <div className="text-xs font-bold text-[#4A1C40]">Cars + Valet</div>
                 <div className="text-[11px] text-[#777777]">Bikes Can Be Parked</div>
-              </div>
-              <div className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors">
-                <div className="text-xs font-bold text-[#4A1C40]">100% AC Mahal</div>
-                <div className="text-[11px] text-[#777777]">Party Hall &amp; Dining</div>
-              </div>
-              <div className="bg-[#FFFFFF] p-3 rounded border border-[#C5A059]/30 shadow-xs hover:border-[#C5A059] transition-colors">
-                <div className="text-xs font-bold text-[#4A1C40]">Brahmin Package</div>
-                <div className="text-[11px] text-[#777777]">Specialized 2½ Days</div>
               </div>
             </div>
 

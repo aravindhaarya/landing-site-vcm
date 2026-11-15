@@ -21,10 +21,10 @@ export const VENUE_INFO = {
   address: "X59R+H25, junction, koot road, Defence Colony, Madipakkam, Moovarasampettai, Tamil Nadu 600091",
   landmark: "Defence Colony, Madipakkam, Moovarasampettai, Chennai",
   googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=X59R%2BH25%2C+junction%2C+koot+road%2C+Defence+Colony%2C+Madipakkam%2C+Moovarasampettai%2C+Tamil+Nadu+600091",
-  capacity: "1000+ Seated (1500+ Floating)",
-  diningCapacity: "400+ Dining Seating",
+  capacity: "600+ Seated (1500+ Floating)",
+  diningCapacity: "200+ Dining Seating",
   aboutHeading: "Book Varathambal Chockalingam Kalyana Mahal for Your Dream Celebration",
-  aboutText: "Varathambal Chockalingam Kalyana Mahal is an ideal venue for weddings and grand social gatherings, accommodating over 1000+ seated guests (1500+ floating) comfortably. With an expansive, elegant layout and 400+ dining hall seating capacity, it offers customizable seating arrangements to suit your event's needs. The hall is equipped with modern amenities and provides a blend of comfort and style, ensuring a memorable experience for all. Known for its professional staff and attention to detail, Varathambal Chockalingam Kalyana Mahal guarantees smooth event execution. Conveniently located with ample parking, it ensures easy access for guests. Varathambal Chockalingam Kalyana Mahal ambiance and excellent service make it a top choice for unforgettable celebrations.",
+  aboutText: "Varathambal Chockalingam Kalyana Mahal is an ideal venue for weddings and grand social gatherings, accommodating over 600+ seated guests (1500+ floating) comfortably. With an expansive, elegant layout and 200+ dining hall seating capacity, it offers customizable seating arrangements to suit your event's needs. The hall is equipped with modern amenities including 100% generator power backup, wheelchair accessible facilities, and provides a blend of comfort and style, ensuring a memorable experience for all. Known for its professional staff and attention to detail, Varathambal Chockalingam Kalyana Mahal guarantees smooth event execution. Conveniently located with ample parking, it ensures easy access for guests. Varathambal Chockalingam Kalyana Mahal ambiance and excellent service make it a top choice for unforgettable celebrations.",
   aboutImage: "",
   aboutImageAlt: "Varathambal Chockalingam Kalyana Mahal Grand Hall",
   heroImage: ""
@@ -41,21 +41,33 @@ export const EVENT_TYPES = [
 export const FACILITIES: Facility[] = [
   {
     id: "f-seating",
-    title: "1000+ Seating Capacity",
+    title: "600+ Seating Capacity",
     iconImg: "https://lakshmihall.com/assets/laks-img/seating-capacity.webp",
-    desc: "Grand air-conditioned hall with 1000+ seated capacity and 1500+ floating guests"
+    desc: "Grand air-conditioned hall with 600+ seated capacity and 1500+ floating guests"
   },
   {
     id: "f-dining",
-    title: "400+ Dining Seating",
+    title: "200+ Dining Seating",
     iconImg: "https://lakshmihall.com/assets/laks-img/dining-table.webp",
-    desc: "Dedicated traditional dining hall with 400+ seating capacity"
+    desc: "Dedicated traditional dining hall with 200+ seating capacity"
   },
   {
     id: "f-rooms",
     title: "13 AC Rooms Available (Including Bride and Groom)",
     iconImg: "https://lakshmihall.com/assets/laks-img/rooms.webp",
     desc: "13 fully equipped AC rooms including exclusive bride & groom suites"
+  },
+  {
+    id: "f-generator",
+    title: "100% Generator Power Backup",
+    iconImg: "https://lakshmihall.com/assets/laks-img/hours.webp",
+    desc: "Heavy-duty DG generator ensuring uninterrupted power for lights, AC, and lifts"
+  },
+  {
+    id: "f-wheelchair",
+    title: "Wheelchair Accessible & Ramp Facility",
+    iconImg: "https://lakshmihall.com/assets/laks-img/comfortable.webp",
+    desc: "Barrier-free entry, dedicated ramps, and elevator access for easy movement"
   },
   {
     id: "f-cars-valet",
@@ -91,6 +103,16 @@ export const FACILITIES: Facility[] = [
 
 export const AMENITIES: MahalAmenity[] = [
   {
+    id: "a-gen",
+    title: "100% Generator power backup ensuring uninterrupted celebrations (lights, AC & lifts)",
+    iconImg: "https://lakshmihall.com/assets/laks-img/hours.webp"
+  },
+  {
+    id: "a-wheelchair",
+    title: "Wheelchair accessible entry, ramps, and barrier-free movement for elders & guests",
+    iconImg: "https://lakshmihall.com/assets/laks-img/comfortable.webp"
+  },
+  {
     id: "a-1",
     title: "Dedicated Food/Good/Service Hydraulics lift and Passenger lift for your convenience",
     iconImg: "https://lakshmihall.com/assets/laks-img/hydraulics-lift.webp"
@@ -112,12 +134,12 @@ export const AMENITIES: MahalAmenity[] = [
   },
   {
     id: "a-5",
-    title: "Comfortable Party hall with great ambience having 1000+ seating capacity",
+    title: "Comfortable Party hall with great ambience having 600+ seating capacity (1500+ floating)",
     iconImg: "https://lakshmihall.com/assets/laks-img/comfortable.webp"
   },
   {
     id: "a-6",
-    title: "400+ Dining Seating",
+    title: "200+ Dining Seating",
     iconImg: "https://lakshmihall.com/assets/laks-img/dshining.webp"
   },
   {
@@ -180,46 +202,99 @@ export const AMENITIES: MahalAmenity[] = [
 export const MOMENTS_GALLERY: GalleryItem[] = [
   {
     id: "moment-1",
-    title: "Varathambal Chockalingam Kalyana Mahal Stage",
-    image: "",
-    caption: "Grand Mandapam & Stage Decoration"
+    page: 2,
+    title: "Grand Mahal Night Illumination & Royal Arch",
+    thumbnail: "/gallery/thumb-page-02.webp",
+    image: "/gallery/preview-page-02.webp",
+    caption: "Illuminated Facade & Entrance Mandapam",
+    category: "Facade"
   },
   {
     id: "moment-2",
-    title: "Varathambal Chockalingam Kalyana Mahal Grand Hall",
-    image: "",
-    caption: "Spacious Seating & Party Hall Ambiance"
+    page: 4,
+    title: "Majestic Exterior & Architecture",
+    thumbnail: "/gallery/thumb-page-04.webp",
+    image: "/gallery/preview-page-04.webp",
+    caption: "Classical Royal Architecture & Archway",
+    category: "Facade"
   },
   {
     id: "moment-3",
-    title: "Varathambal Chockalingam Kalyana Mahal Reception Setup",
-    image: "",
-    caption: "Traditional Ceremony & Illumination"
+    page: 5,
+    title: "Grand Entrance Foyer & Elephant Murals",
+    thumbnail: "/gallery/thumb-page-05.webp",
+    image: "/gallery/preview-page-05.webp",
+    caption: "Traditional Golden Relief Carvings",
+    category: "Lobby"
   },
   {
     id: "moment-4",
-    title: "Varathambal Chockalingam Kalyana Mahal Central Aisle",
-    image: "",
-    caption: "Aisle View Leading to Stage"
+    page: 6,
+    title: "Welcome Lobby & Lord Ganesha Glass Portal",
+    thumbnail: "/gallery/thumb-page-06.webp",
+    image: "/gallery/preview-page-06.webp",
+    caption: "Auspicious Entrance & Management Office",
+    category: "Lobby"
   },
   {
     id: "moment-5",
-    title: "Varathambal Chockalingam Kalyana Mahal Floral Backdrops",
-    image: "",
-    caption: "Celebration Stage & Floral Backdrops"
+    page: 10,
+    title: "Handcrafted Royal Peacock Wall Mural",
+    thumbnail: "/gallery/thumb-page-10.webp",
+    image: "/gallery/preview-page-10.webp",
+    caption: "Artistic Lotus & Royal Peacock Backdrop",
+    category: "Interior"
   },
   {
     id: "moment-6",
-    title: "Varathambal Chockalingam Kalyana Mahal Festivities",
-    image: "",
-    caption: "Traditional Festivities & Wedding Moments"
+    page: 11,
+    title: "Grand Marble Stairway & Chandelier",
+    thumbnail: "/gallery/thumb-page-11.webp",
+    image: "/gallery/preview-page-11.webp",
+    caption: "Illuminated Golden Railings & Hall Passage",
+    category: "Interior"
+  },
+  {
+    id: "moment-7",
+    page: 20,
+    title: "Air-Conditioned Grand Dining Hall",
+    thumbnail: "/gallery/thumb-page-20.webp",
+    image: "/gallery/preview-page-20.webp",
+    caption: "Spacious 200+ Dining Capacity",
+    category: "Dining"
+  },
+  {
+    id: "moment-8",
+    page: 29,
+    title: "Executive AC Guest Suite",
+    thumbnail: "/gallery/thumb-page-29.webp",
+    image: "/gallery/preview-page-29.webp",
+    caption: "Twin Beds & Modern Air-Conditioned Comfort",
+    category: "Rooms"
+  },
+  {
+    id: "moment-9",
+    page: 33,
+    title: "Luxury AC Bride & Groom Suite",
+    thumbnail: "/gallery/thumb-page-33.webp",
+    image: "/gallery/preview-page-33.webp",
+    caption: "Premium Suite with Dressing Area & Wardrobe",
+    category: "Rooms"
   }
 ];
 
 export const FAQS = [
   {
     q: "What is the guest seating and dining capacity?",
-    a: "Varathambal Chockalingam Kalyana Mahal comfortably accommodates 1000+ seated guests (up to 1500+ floating attendees) in the main air-conditioned hall, along with an expansive dedicated dining hall featuring 400+ dining seating capacity."
+    a: "Varathambal Chockalingam Kalyana Mahal comfortably accommodates 600+ seated guests (up to 1500+ floating attendees) in the main air-conditioned hall, along with an expansive dedicated dining hall featuring 200+ dining seating capacity."
+  },
+  {
+    q: "Is there generator power backup available?",
+    a: "Yes, 100% heavy-duty generator (DG) power backup is available, ensuring uninterrupted power for all lighting, centralized air conditioning, sound systems, and lifts."
+  },
+  {
+    q: "Is the venue wheelchair accessible?",
+    a: "Yes, Varathambal Chockalingam Kalyana Mahal is fully wheelchair friendly with dedicated entrance ramps, barrier-free access, and passenger elevators to reach all floors comfortably."
   },
   {
     q: "Are rooms provided for the bride, groom, and family?",

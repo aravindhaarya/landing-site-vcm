@@ -16,7 +16,10 @@ export interface GalleryItem {
   id: string;
   title: string;
   image: string;
+  thumbnail?: string;
   caption?: string;
+  page?: number;
+  category?: string;
 }
 
 export interface BookingFormData {
