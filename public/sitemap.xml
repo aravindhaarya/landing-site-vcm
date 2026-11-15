@@ -1,8 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+>
   <url>
     <loc>https://www.vckmahal.com/</loc>
+    <lastmod>2026-11-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://www.vckmahal.com/gallery/about-stage-decorated.jpg</image:loc>
+      <image:title>Varathambal Chockalingam Kalyana Mahal Grand Decorated Stage</image:title>
+      <image:caption>Air-conditioned wedding stage and mandapam seating in Madipakkam, Chennai</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.vckmahal.com/gallery/preview-page-02.webp</image:loc>
+      <image:title>Grand Mahal Night Illumination and Royal Arch</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.vckmahal.com/gallery/preview-page-04.webp</image:loc>
+      <image:title>Majestic Exterior and Classical Architecture</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.vckmahal.com/gallery/preview-page-05.webp</image:loc>
+      <image:title>Grand Entrance Foyer and Elephant Murals</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.vckmahal.com/gallery/preview-page-06.webp</image:loc>
+      <image:title>Welcome Lobby and Lord Ganesha Glass Portal</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.vckmahal.com/gallery/preview-page-10.webp</image:loc>
+      <image:title>Handcrafted Royal Peacock Wall Mural</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.vckmahal.com/gallery/preview-page-11.webp</image:loc>
+      <image:title>Grand Marble Stairway and Chandelier</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.vckmahal.com/gallery/preview-page-20.webp</image:loc>
+      <image:title>Air-Conditioned 200+ Seating Grand Dining Hall</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.vckmahal.com/gallery/preview-page-29.webp</image:loc>
+      <image:title>Executive AC Guest Suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.vckmahal.com/gallery/preview-page-33.webp</image:loc>
+      <image:title>Luxury AC Bride and Groom Suite</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.vckmahal.com/#about-us</loc>
+    <lastmod>2026-11-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.vckmahal.com/#facilities</loc>
+    <lastmod>2026-11-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.vckmahal.com/#amenities</loc>
+    <lastmod>2026-11-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.vckmahal.com/#moments</loc>
+    <lastmod>2026-11-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.vckmahal.com/#faq</loc>
+    <lastmod>2026-11-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.vckmahal.com/#contact</loc>
+    <lastmod>2026-11-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>

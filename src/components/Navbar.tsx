@@ -103,15 +103,19 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
             </a>
 
             {/* Desktop Navigation Links */}
-            <nav className="hidden lg:flex items-center gap-2.5 xl:gap-5 2xl:gap-6 flex-shrink-0">
+            <nav aria-label="Primary navigation" className="hidden lg:flex items-center gap-2.5 xl:gap-5 2xl:gap-6 flex-shrink-0">
               {navLinks.map((link) => (
-                <button
+                <a
                   key={link.name}
-                  onClick={() => handleNavClick(link.href)}
+                  href={link.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick(link.href);
+                  }}
                   className="text-[11px] xl:text-xs uppercase tracking-wider text-[#333333] hover:text-[#4A1C40] hover:border-b-2 hover:border-[#C5A059] pb-0.5 font-semibold transition-colors duration-150 cursor-pointer whitespace-nowrap"
                 >
                   {link.name}
-                </button>
+                </a>
               ))}
             </nav>
 
@@ -238,18 +242,22 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
               </button>
             </div>
 
-            <div className="py-4 flex flex-col gap-1.5">
+            <nav aria-label="Mobile navigation" className="py-4 flex flex-col gap-1.5">
               {navLinks.map((link) => (
-                <button
+                <a
                   key={link.name}
-                  onClick={() => handleNavClick(link.href)}
+                  href={link.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick(link.href);
+                  }}
                   className="group text-left py-2.5 px-3 text-xs font-semibold uppercase tracking-wider text-[#333333] hover:text-[#4A1C40] hover:bg-[#F9F8F4] flex items-center justify-between rounded hover:translate-x-1.5 transition-all duration-200 cursor-pointer"
                 >
                   <span>{link.name}</span>
                   <ChevronRight className="w-4 h-4 text-[#C5A059] group-hover:translate-x-1 transition-transform duration-200" />
-                </button>
+                </a>
               ))}
-            </div>
+            </nav>
           </div>
 
           <div className="pt-4 border-t border-[#F1EBE4] space-y-3">
