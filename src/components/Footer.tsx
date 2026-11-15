@@ -25,7 +25,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
               Book Varathambal Chockalingam Kalyana Mahal
             </h2>
             <p className="text-neutral-300 text-xs sm:text-sm mt-1 max-w-xl">
-              Accommodating 1000+ seated guests (1500+ floating) with 400+ dining seating, 13 AC rooms, and modern amenities in Madipakkam, Chennai.
+              Accommodating 1000+ seated guests (1500+ floating) with 200+ dining seating, 13 AC rooms, and modern amenities in Madipakkam, Chennai.
             </p>
           </div>
 
@@ -115,13 +115,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
               <li>
                 <a href="#amenities" className="hover:text-[#C5A059] transition-colors flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
-                  <span>Amenities (17 Features)</span>
-                </a>
-              </li>
-              <li>
-                <a href="#video-tour" className="hover:text-[#C5A059] transition-colors flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
-                  <span>Virtual Video Tour</span>
+                  <span>Amenities</span>
                 </a>
               </li>
               <li>

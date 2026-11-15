@@ -1,3 +1,5 @@
+export type AmenityCategory = 'hall' | 'comfort' | 'services' | 'safety';
+
 export interface Facility {
   id: string;
   title: string;
@@ -8,8 +10,10 @@ export interface Facility {
 export interface MahalAmenity {
   id: string;
   title: string;
+  category: AmenityCategory;
   iconImg: string;
-  badge?: string;
+  desc?: string;
+  availability?: string;
 }
 
 export interface GalleryItem {

@@ -41,161 +41,150 @@ export const EVENT_TYPES = [
 export const FACILITIES: Facility[] = [
   {
     id: "f-seating",
-    title: "600+ Seating Capacity",
+    title: "600+ Main Hall Seating",
     iconImg: "https://lakshmihall.com/assets/laks-img/seating-capacity.webp",
-    desc: "Grand air-conditioned hall with 600+ seated capacity and 1500+ floating guests"
+    desc: "Grand air-conditioned main hall accommodating 600+ seated guests and 1,500+ floating attendees"
   },
   {
     id: "f-dining",
-    title: "200+ Dining Seating",
+    title: "200+ Dining Hall Seating",
     iconImg: "https://lakshmihall.com/assets/laks-img/dining-table.webp",
-    desc: "Dedicated traditional dining hall with 200+ seating capacity"
+    desc: "Dedicated traditional dining hall with spacious seating for over 200 guests per batch"
   },
   {
     id: "f-rooms",
-    title: "13 AC Rooms Available (Including Bride and Groom)",
+    title: "13 AC Guest & Bridal Suites",
     iconImg: "https://lakshmihall.com/assets/laks-img/rooms.webp",
-    desc: "13 fully equipped AC rooms including exclusive bride & groom suites"
-  },
-  {
-    id: "f-generator",
-    title: "100% Generator Power Backup",
-    iconImg: "https://lakshmihall.com/assets/laks-img/hours.webp",
-    desc: "Heavy-duty DG generator ensuring uninterrupted power for lights, AC, and lifts"
-  },
-  {
-    id: "f-wheelchair",
-    title: "Wheelchair Accessible & Ramp Facility",
-    iconImg: "https://lakshmihall.com/assets/laks-img/comfortable.webp",
-    desc: "Barrier-free entry, dedicated ramps, and elevator access for easy movement"
-  },
-  {
-    id: "f-cars-valet",
-    title: "Cars + Valet Drivers Available",
-    iconImg: "https://lakshmihall.com/assets/laks-img/valet-drivers.webp",
-    desc: "Comfortable car parking with courteous valet drivers"
-  },
-  {
-    id: "f-bikes",
-    title: "Bikes Can Be Parked",
-    iconImg: "https://lakshmihall.com/assets/laks-img/motorcycle.webp",
-    desc: "Secure, designated parking area for two-wheelers"
+    desc: "13 fully equipped air-conditioned rooms including exclusive bride & groom dressing suites"
   },
   {
     id: "f-ac",
-    title: "Fully Air-Conditioned Mahal",
+    title: "100% Centralized Air-Conditioning",
     iconImg: "https://lakshmihall.com/assets/laks-img/air-conditioner.webp",
-    desc: "100% centralized air-conditioning covering all floors"
-  },
-  {
-    id: "f-brahmin-package",
-    title: "Specialized Brahmin Package Available (2½ Days)",
-    iconImg: "https://lakshmihall.com/assets/laks-img/temple.webp",
-    desc: "Tailored 2.5-day traditional Brahmin ceremony arrangement"
+    desc: "Full climate control covering the party hall, dining hall, suites, common areas, and passages"
   },
   {
     id: "f-lift",
-    title: "Lift is available for all floors",
+    title: "Passenger & Hydraulic Lifts",
     iconImg: "https://lakshmihall.com/assets/laks-img/hydraulics-lift.webp",
-    desc: "Safety & style: Hydraulics and passenger lifts for all floors"
+    desc: "Dedicated passenger elevator plus separate food and goods hydraulic lift serving all floors"
+  },
+  {
+    id: "f-generator",
+    title: "100% DG Power Backup",
+    iconImg: "https://lakshmihall.com/assets/laks-img/hours.webp",
+    desc: "Heavy-duty generator ensuring uninterrupted power for hall lighting, AC, audio, and lifts"
+  },
+  {
+    id: "f-parking",
+    title: "Car, Bike & Valet Parking",
+    iconImg: "https://lakshmihall.com/assets/laks-img/valet-drivers.webp",
+    desc: "Dedicated parking zones for cars and two-wheelers supported by courteous valet drivers"
+  },
+  {
+    id: "f-brahmin-package",
+    title: "2½-Day Brahmin Package",
+    iconImg: "https://lakshmihall.com/assets/laks-img/temple.webp",
+    desc: "Tailored 2.5-day traditional ceremony arrangement supporting authentic Vedic rituals"
   }
 ];
 
 export const AMENITIES: MahalAmenity[] = [
   {
-    id: "a-gen",
-    title: "100% Generator power backup ensuring uninterrupted celebrations (lights, AC & lifts)",
-    iconImg: "https://lakshmihall.com/assets/laks-img/hours.webp"
+    id: "a-conference",
+    title: "Conference Room & Business Center",
+    category: "hall",
+    availability: "Available",
+    iconImg: "https://lakshmihall.com/assets/laks-img/conference.webp",
+    desc: "Dedicated meeting space equipped with a high-end audio system and large-screen projectors for corporate events and briefings"
+  },
+  {
+    id: "a-kitchen",
+    title: "Client-Accessible Kitchen Facility",
+    category: "hall",
+    availability: "Included",
+    iconImg: "https://lakshmihall.com/assets/laks-img/kitchen.webp",
+    desc: "Spacious, well-equipped kitchen infrastructure available for client and external caterer usage"
+  },
+  {
+    id: "a-av",
+    title: "Studio-Quality Audio & Visual Systems",
+    category: "hall",
+    availability: "Included",
+    iconImg: "https://lakshmihall.com/assets/laks-img/visual.webp",
+    desc: "State-of-the-art sound reinforcement, microphones, and visual equipment for clear speeches and ceremonies"
+  },
+  {
+    id: "a-music",
+    title: "Whole-Building Background Music",
+    category: "comfort",
+    availability: "Included",
+    iconImg: "https://lakshmihall.com/assets/laks-img/building.webp",
+    desc: "Soothing ambient music coverage extending smoothly across halls, corridors, and common lounges"
+  },
+  {
+    id: "a-wifi",
+    title: "Multi-Gigabit High-Speed Wi-Fi",
+    category: "comfort",
+    availability: "On Request",
+    iconImg: "https://lakshmihall.com/assets/laks-img/gigabit.webp",
+    desc: "High-speed fiber internet and venue-wide Wi-Fi ideal for livestreaming rituals and guest connectivity"
+  },
+  {
+    id: "a-housekeeping",
+    title: "24-Hour Dedicated Housekeeping",
+    category: "comfort",
+    availability: "24/7",
+    iconImg: "https://lakshmihall.com/assets/laks-img/keeping.webp",
+    desc: "Round-the-clock on-site housekeeping staff keeping halls, dining spaces, suites, and restrooms spotless"
+  },
+  {
+    id: "a-catering",
+    title: "Bespoke Catering Services",
+    category: "services",
+    availability: "On Request",
+    iconImg: "https://lakshmihall.com/assets/laks-img/catering.webp",
+    desc: "Traditional South Indian banana-leaf feasts and customizable vegetarian menus coordinated for your guest count"
+  },
+  {
+    id: "a-decor",
+    title: "Custom Staging & Floral Decoration",
+    category: "services",
+    availability: "Available",
+    iconImg: "https://lakshmihall.com/assets/laks-img/digital.webp",
+    desc: "Tailored mandapam staging, floral backdrops, and entrance decor crafted to match your celebration"
+  },
+  {
+    id: "a-photo",
+    title: "Photo & Video Coverage",
+    category: "services",
+    availability: "On Request",
+    iconImg: "https://lakshmihall.com/assets/laks-img/video.webp",
+    desc: "Experienced candid and traditional photography and videography teams available on request"
+  },
+  {
+    id: "a-welcome",
+    title: "Traditional Welcome Hostesses",
+    category: "services",
+    availability: "On Request",
+    iconImg: "https://lakshmihall.com/assets/laks-img/girls.webp",
+    desc: "Courteous welcome hostesses to greet and guide arriving guests with traditional warmth at the foyer"
   },
   {
     id: "a-wheelchair",
-    title: "Wheelchair accessible entry, ramps, and barrier-free movement for elders & guests",
-    iconImg: "https://lakshmihall.com/assets/laks-img/comfortable.webp"
+    title: "Wheelchair Accessible & Barrier-Free Ramps",
+    category: "safety",
+    availability: "Included",
+    iconImg: "https://lakshmihall.com/assets/laks-img/comfortable.webp",
+    desc: "Step-free entryways and gentle ramps ensuring comfortable movement for elders and guests with mobility needs"
   },
   {
-    id: "a-1",
-    title: "Dedicated Food/Good/Service Hydraulics lift and Passenger lift for your convenience",
-    iconImg: "https://lakshmihall.com/assets/laks-img/hydraulics-lift.webp"
-  },
-  {
-    id: "a-2",
-    title: "24 Hours complete site surveillance by 4K cameras for your safety",
-    iconImg: "https://lakshmihall.com/assets/laks-img/hours.webp"
-  },
-  {
-    id: "a-3",
-    title: "Car parking available",
-    iconImg: "https://lakshmihall.com/assets/laks-img/parking.webp"
-  },
-  {
-    id: "a-4",
-    title: "100% Air conditioned covering Party Hall, Dining hall, Rooms, Common Areas and Passages.",
-    iconImg: "https://lakshmihall.com/assets/laks-img/conditioned.webp"
-  },
-  {
-    id: "a-5",
-    title: "Comfortable Party hall with great ambience having 600+ seating capacity (1500+ floating)",
-    iconImg: "https://lakshmihall.com/assets/laks-img/comfortable.webp"
-  },
-  {
-    id: "a-6",
-    title: "200+ Dining Seating",
-    iconImg: "https://lakshmihall.com/assets/laks-img/dshining.webp"
-  },
-  {
-    id: "a-7",
-    title: "Multi-Gigabit High speed Internet & Wi-Fi (available on request)",
-    iconImg: "https://lakshmihall.com/assets/laks-img/gigabit.webp"
-  },
-  {
-    id: "a-8",
-    title: "State of the art Studio quality Audio & Visual equipments.",
-    iconImg: "https://lakshmihall.com/assets/laks-img/visual.webp"
-  },
-  {
-    id: "a-9",
-    title: "Entire building covered by soothing background music",
-    iconImg: "https://lakshmihall.com/assets/laks-img/building.webp"
-  },
-  {
-    id: "a-10",
-    title: "Valet parking (available)",
-    iconImg: "https://lakshmihall.com/assets/laks-img/valet.webp"
-  },
-  {
-    id: "a-11",
-    title: "Welcome girls (available on request)",
-    iconImg: "https://lakshmihall.com/assets/laks-img/girls.webp"
-  },
-  {
-    id: "a-12",
-    title: "24 Hours House Keeping",
-    iconImg: "https://lakshmihall.com/assets/laks-img/keeping.webp"
-  },
-  {
-    id: "a-13",
-    title: "Conference Room/Business Center with High end dedicated audio system,Large screen projectors",
-    iconImg: "https://lakshmihall.com/assets/laks-img/conference.webp"
-  },
-  {
-    id: "a-14",
-    title: "Staging/Decoration service (available)",
-    iconImg: "https://lakshmihall.com/assets/laks-img/digital.webp"
-  },
-  {
-    id: "a-15",
-    title: "Photo/Video services (on request)",
-    iconImg: "https://lakshmihall.com/assets/laks-img/video.webp"
-  },
-  {
-    id: "a-16",
-    title: "Catering services (On request)",
-    iconImg: "https://lakshmihall.com/assets/laks-img/catering.webp"
-  },
-  {
-    id: "a-17",
-    title: "Kitchen facility available for client usage",
-    iconImg: "https://lakshmihall.com/assets/laks-img/kitchen.webp"
+    id: "a-cctv",
+    title: "24/7 4K CCTV Site Surveillance",
+    category: "safety",
+    availability: "24/7",
+    iconImg: "https://lakshmihall.com/assets/laks-img/hours.webp",
+    desc: "Continuous high-definition camera monitoring across entrances, halls, passages, and parking areas"
   }
 ];
 

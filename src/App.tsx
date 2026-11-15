@@ -3,12 +3,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { AboutStory } from './components/AboutStory';
 import { Amenities } from './components/Amenities';
-import { VideoTour } from './components/VideoTour';
 import { PhotoGallery } from './components/PhotoGallery';
 import { FAQAccordion } from './components/FAQAccordion';
 import { Footer } from './components/Footer';
@@ -19,6 +18,26 @@ import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 export default function App() {
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
   const [bookingEventType, setBookingEventType] = useState<string | undefined>();
+
+  useEffect(() => {
+    const currentUrl = window.location.origin + window.location.pathname;
+
+    let canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.rel = 'canonical';
+      document.head.appendChild(canonical);
+    }
+    canonical.href = currentUrl;
+
+    let ogUrl = document.querySelector<HTMLMetaElement>('meta[property="og:url"]');
+    if (!ogUrl) {
+      ogUrl = document.createElement('meta');
+      ogUrl.setAttribute('property', 'og:url');
+      document.head.appendChild(ogUrl);
+    }
+    ogUrl.content = currentUrl;
+  }, []);
 
   const handleOpenBooking = (eventType?: string) => {
     setBookingEventType(eventType);
@@ -66,25 +85,12 @@ export default function App() {
           ornamentText="Amenities"
         />
 
-        {/* 17 Amenities matching attached content */}
+        {/* Categorized Amenities */}
         <Amenities />
 
-        {/* Boundary: Amenities (#FFFFFF) -> Virtual Video Tour (#1C091A) */}
+        {/* Boundary: Amenities (#FFFFFF) -> Moments Gallery (#F9F8F4) */}
         <SectionDivider
           fromBg="#FFFFFF"
-          toBg="#1C091A"
-          slope="down-right"
-          height={40}
-          withOrnament={true}
-          ornamentText="Video Tour"
-        />
-
-        {/* Centerpiece: Virtual Hall Video Tour (Cloudinary Stream) */}
-        <VideoTour onOpenBooking={() => handleOpenBooking()} />
-
-        {/* Boundary: Video Tour (#1C091A) -> Moments Gallery (#F9F8F4) */}
-        <SectionDivider
-          fromBg="#1C091A"
           toBg="#F9F8F4"
           slope="down-left"
           height={40}

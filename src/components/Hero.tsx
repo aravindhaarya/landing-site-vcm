@@ -87,9 +87,9 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
 
             {/* Main Title */}
             <div>
-              <p id="hero-title" className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#4A1C40] tracking-tight leading-tight">
+              <h1 id="hero-title" className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#4A1C40] tracking-[-0.01em] leading-tight [text-wrap:balance]">
                 Varathambal Chockalingam Kalyana Mahal
-              </p>
+              </h1>
               <p id="hero-tagline" className="mt-3 text-base sm:text-lg text-[#555555] font-normal leading-relaxed">
                 The Perfect Destination for all your occasions.
               </p>
@@ -330,7 +330,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
               <div className="pt-2 border-t border-[#F1EBE4] grid grid-cols-3 gap-1.5 text-center text-[10px] text-[#666666]">
                 <div className="flex flex-col items-center py-1 bg-[#F9F8F4] rounded border border-[#E5E0D8]/60">
                   <span className="font-bold text-[#4A1C40]">1000+ Seated</span>
-                  <span className="text-[9px] text-[#888888]">400+ Dining</span>
+                  <span className="text-[9px] text-[#888888]">200+ Dining</span>
                 </div>
                 <div className="flex flex-col items-center py-1 bg-[#F9F8F4] rounded border border-[#E5E0D8]/60">
                   <span className="font-bold text-[#4A1C40]">13 AC Rooms</span>

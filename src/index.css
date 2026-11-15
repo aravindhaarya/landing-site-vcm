@@ -1,9 +1,14 @@
 @import "tailwindcss";
 
+@theme {
+  --font-serif: 'Lora', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
 @layer base {
   :root {
-    --font-serif: 'Playfair Display', Georgia, serif;
-    --font-sans: 'Lato', system-ui, -apple-system, sans-serif;
+    --font-serif: 'Lora', Georgia, serif;
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     
     /* Theme color palette from Banquet Wedding Hall */
     --color-accent: #4A1C40;      /* Signature deep plum / burgundy accent */

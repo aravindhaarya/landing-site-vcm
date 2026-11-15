@@ -28,7 +28,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
     { name: 'About Us', href: '#about-us' },
     { name: 'Facilities', href: '#facilities' },
     { name: 'Amenities', href: '#amenities' },
-    { name: 'Video Tour', href: '#video-tour' },
     { name: 'Moments', href: '#moments' },
     { name: 'Contact', href: '#contact' },
   ];
@@ -44,10 +43,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
   return (
     <>
       {/* Top Header Bar with Call Now CTA verbatim from user content */}
-      <div className="bg-[#4A1C40] text-white text-xs border-b border-[#C5A059]/30 relative z-50 w-full overflow-hidden">
+      <div data-nosnippet className="bg-[#4A1C40] text-white text-xs border-b border-[#C5A059]/30 relative z-50 w-full overflow-hidden">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2 flex flex-wrap items-center justify-between gap-2 sm:gap-3">
           {/* Direct Call Now Action */}
-          <div className="flex items-center gap-2 sm:gap-4 text-xs font-semibold tracking-wide min-w-0">
+          <div className="flex items-center gap-2 sm:gap-3 text-xs font-semibold tracking-wide min-w-0">
             <a
               id="top-call-now-btn"
               href={VENUE_INFO.telLink}
@@ -56,6 +55,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
               <Phone className="w-3 sm:w-3.5 h-3 sm:h-3.5 fill-[#4A1C40]" />
               <span>Call Now: {VENUE_INFO.phone}</span>
             </a>
+            <span className="hidden md:inline text-neutral-400" aria-hidden="true"> · </span>
             <span className="hidden md:inline text-neutral-300 text-[11px] truncate">
               Madipakkam, Moovarasampettai, Chennai
             </span>
